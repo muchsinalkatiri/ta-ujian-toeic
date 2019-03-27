@@ -58,7 +58,7 @@ class login extends CI_Controller {
 				// Set message
 				$this->session->set_flashdata('login_failed', 'Login invalid');
 
-				redirect('home');
+				redirect('login/admin');
 			}		
 		}
 	}

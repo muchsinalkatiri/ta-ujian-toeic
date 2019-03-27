@@ -181,5 +181,47 @@ class mahasiswa_terdaftar extends CI_Controller {
 
 		}
 	}
+	public function delete($id)
+	{
+
+		$data['page_title'] = 'Delete mahasiswa terdaftar';
+
+		// Get data dari model berdasarkan $id
+		$data['mahasiswa_terdaftar'] = $this->mahasiswa_terdaftar_model->get_data_by_id($id);
+
+		// Jika id kosong atau tidak ada id yg dimaksud, lempar user ke halaman blog
+		if ( empty($id) || !$data['mahasiswa_terdaftar'] ) show_404();
+
+		// Kita simpan dulu nama file yang lama
+		$old_image = $data['mahasiswa_terdaftar']->foto;
+
+    	// Hapus file image yang lama jika ada
+		if( !empty($old_image) ) {
+			if ( file_exists( './uploads/img-user/'.$old_image ) ){
+				unlink( './uploads/img-user/'.$old_image );
+			} 
+			// else {
+			// 	echo 'File tidak ditemukan.';
+			// }
+		}
+
+		// Hapus data sesuai id-nya
+		$where = array('id_mahasiswa_terdaftar' => $id);
+		$delete = $this->mahasiswa_terdaftar_model->delete($where,'data_mahasiswa_terdaftar');
+		if ($delete) {
+			$this->session->set_flashdata('msg',
+				'<div class="alert alert-success">
+				<h5> <span class=" fa fa-check" ></span> Data Berhasil Dihapus.</h5>
+			</div>');    
+			redirect('admin/mahasiswa_terdaftar');
+
+		}else{
+			$this->session->set_flashdata('msg',
+				'<div class="alert alert-danger">
+				<h5> <span class=" fa fa-cross" ></span> Data Gagal Dihapus.</h5>
+			</div>');    
+			redirect('admin/mahasiswa_terdaftar');
+		}
+	}
 
 }

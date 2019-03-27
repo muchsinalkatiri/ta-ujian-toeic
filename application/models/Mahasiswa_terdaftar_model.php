@@ -12,9 +12,15 @@ class Mahasiswa_terdaftar_model extends CI_Model {
   	return $this->db->get('data_mahasiswa_terdaftar');
   }
 
-    public function get_update_data_by_nim($where,$table){      
-        return $this->db->get_where($table,$where);
-    }
+  public function get_data_by_id($id)
+  {
+         // Inner Join dengan table Categories
+    $this->db->get('data_mahasiswa_terdaftar');
+
+    $query = $this->db->get_where('data_mahasiswa_terdaftar', array('data_mahasiswa_terdaftar.id_mahasiswa_terdaftar' => $id));
+
+    return $query->row();
+  }
 
   public function create($table, $data){
     if ($this->db->insert($table,$data)) {
@@ -25,12 +31,12 @@ class Mahasiswa_terdaftar_model extends CI_Model {
   }
 
   public function update($where,$data,$table){
-        if($this->db->update($table, $data, $where)){
-          return true;
-        }else{
-          return false;
-        }
-    } 
+    if($this->db->update($table, $data, $where)){
+      return true;
+    }else{
+      return false;
+    }
+  } 
 
   public function delete($where,$table){
     $this->db->where($where);

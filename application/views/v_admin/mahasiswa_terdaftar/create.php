@@ -88,10 +88,10 @@ $this->load->view('v_admin/v_admin_header');
 								Tambahkan
 							</button>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-4 ">
 							<center>
 								<h2 >Foto</h2>
-								<img id="gambar_nodin"  alt="Preview Gambar" style='width:300px;height:300px; border-radius: 50%;  ' src="<?php echo base_url()."assets/img/default-user.png"?>"> 
+								<img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:300px;height:300px; border-radius: 50%;  ' src="<?php echo base_url()."assets/img/default-user.png"?>"> 
 							</center>
 						</div>
 					</div>
