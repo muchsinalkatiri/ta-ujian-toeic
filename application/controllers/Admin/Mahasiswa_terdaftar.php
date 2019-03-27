@@ -55,7 +55,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 				));
 		$this->form_validation->set_rules('angkatan','Angkatan','required|numeric|exact_length[4]',
 			array(
-				'required'=>'Form Nim Tanggal Lahir di isi.',
+				'required'=>'Form Angkatan Tanggal Lahir di isi.',
 				'exact_length'=>'Masukan Tahun Masuk Polinema',
 				'numeric'=>'Masukan Tahun Masuk Polinema',
 				));
@@ -73,7 +73,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 				));
 		$this->form_validation->set_rules('confirm_password','Konfirmasi Password','required|matches[password]',
 			array(
-				'required'=>'Form Alamat Wajib di isi.',
+				'required'=>'Form Konfirmasi Password Wajib di isi.',
 				'matches'=>'Konfirmasi Password anda tidak sama dengan password'
 				));
 		if (empty($_FILES['foto']['name']))
@@ -89,42 +89,46 @@ class mahasiswa_terdaftar extends CI_Controller {
 		}
 		else{
 			// Apakah user upload gambar?
-			if ( isset($_FILES['thumbnail']) && $_FILES['thumbnail']['size'] > 0 )
+			if ( isset($_FILES['foto']) && $_FILES['foto']['size'] > 0 )
 			{
     			// Konfigurasi folder upload & file yang diijinkan
     			// Jangan lupa buat folder uploads di dalam ci3-course
-				$config['upload_path']          = './uploads/';
-				$config['allowed_types']        = 'gif|jpg|png';
-				$config['max_size']             = 100;
+				$config['upload_path']          = './uploads/img-user/';
+				$config['allowed_types']        = 'jpg|png';
+				$config['max_size']             = 1024;
 				$config['max_width']            = 1024;
 				$config['max_height']           = 768;
+				$config['file_name'] 			= $this->input->post('nim').'-img-user';
 
     	        // Load library upload
 				$this->load->library('upload', $config);
 
     	        // Apakah file berhasil diupload?
-				if ( ! $this->upload->do_upload('thumbnail'))
+				if ( ! $this->upload->do_upload('foto'))
 				{
 					$data['upload_error'] = $this->upload->display_errors();
 
-					$post_image = '';
-
     	        	// Kita passing pesan error upload ke view supaya user mencoba upload ulang
-					$this->load->view('templates/header');
-					$this->load->view('blogs/blog_create', $data);
-					$this->load->view('templates/footer'); 
+
+					$this->session->set_flashdata('msg',
+						'<div class="alert alert-danger">
+						<span class=" fa fa-ban" ></span> '.$this->upload->display_errors().'
+					</div>');
+					redirect('admin/mahasiswa_terdaftar/create');
 
 				} else {
 
     	        	// Simpan nama file-nya jika berhasil diupload
 					$img_data = $this->upload->data();
 					$post_image = $img_data['file_name'];
-					
+
 				}
 			} else {
-
-    			// User tidak upload gambar, jadi kita kosongkan field ini
-				$post_image = '';
+				$this->session->set_flashdata('msg',
+					'<div class="alert alert-danger">
+					<span class=" fa fa-ban" ></span> silahkan memasukan gambar terlebih dahulu
+				</div>');
+				redirect('admin/mahasiswa_terdaftar/create');
 			}
 
 			$nim= $this->input->post('nim');
@@ -132,40 +136,45 @@ class mahasiswa_terdaftar extends CI_Controller {
 			$notlp2 = $this->input->post('notlp2');
 			$angkatan = $this->input->post('angkatan');
 			$email = $this->input->post('email');
+			$password = $this->input->post('password');
 
 			$query = $this->db->get_where('data_mahasiswa', array('nim' => $nim));
 			$check = $query->num_rows();
 
-			if ($check != 0){//jika nim sudah ada di data_mahasiswa
-				$data = array(
-					'nim'=>$nim,
-					'username' => $username,
-					'notlp2' => $notlp2,
-					'angkatan'=> $angkatan,
-					'email' => $email,
-					'tanggal_pendaftaran'=> date("Y-m-d H:i:s"),
-					'foto' => 'default-user.png'
-					);
-				$insert = $this->mahasiswa_terdaftar_model->create('data_mahasiswa_terdaftar',$data);
+			$data = array(
+				'nim'=>$nim,
+				'username' => $username,
+				'notlp2' => $notlp2,
+				'angkatan'=> $angkatan,
+				'email' => $email,
+				'password' => $password,
+				'tanggal_pendaftaran'=> date("Y-m-d H:i:s"),
+				'foto' => $post_image
+				);
 
-				if ($insert) {
-					$this->session->set_flashdata('msg',
-						'<div class="alert alert-success">
-						<h5> <span class=" fa fa-check" ></span> '.$nim.' berhasil ditambahkan.</h5>
-					</div>');    
-					redirect('admin/mahasiswa_terdaftar');
-				}else{
-					$this->session->set_flashdata('msg',
-						'<div class="alert alert-danger">
-						<h5> <span class=" fa fa-cross" ></span> '.$nim.' gagal ditambahkan.</h5>
-					</div>');    
-					redirect('admin/mahasiswa_terdaftar');
-				}	
+			if ($check != 0){//jika nim sudah ada di data_mahasiswa
+				if( empty($data['upload_error']) ) {
+					$insert = $this->mahasiswa_terdaftar_model->create('data_mahasiswa_terdaftar',$data);
+
+					if ($insert) {
+						$this->session->set_flashdata('msg',
+							'<div class="alert alert-success">
+							<h5> <span class=" fa fa-check" ></span> '.$nim.' berhasil ditambahkan.</h5>
+						</div>');    
+						redirect('admin/mahasiswa_terdaftar');
+					}else{
+						$this->session->set_flashdata('msg',
+							'<div class="alert alert-danger">
+							<h5> <span class=" fa fa-cross" ></span> '.$nim.' gagal ditambahkan.</h5>
+						</div>');    
+						redirect('admin/mahasiswa_terdaftar');
+					}	
+				}
 			}
 			else{//jika nim belum ada di data_mahasiswa
 				$this->session->set_flashdata('msg',
 					'<div class="alert alert-danger">
-					<h5> <span class=" fa fa-ban" ></span> '.$nim.' ini belum terdaftar di sistem, silahkan daftarkan dahulu di data mahasiswa.</h5>
+					<span class=" fa fa-ban" ></span>NIM '.$nim.' ini belum terdaftar di sistem, silahkan daftarkan dahulu di data mahasiswa.
 				</div>');
 				redirect('admin/mahasiswa_terdaftar/create');
 			}

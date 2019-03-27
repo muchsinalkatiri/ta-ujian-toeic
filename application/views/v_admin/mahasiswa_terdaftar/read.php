@@ -55,7 +55,7 @@
                     <strong>TANGGAL PENDAFTARAN</strong> : <?php echo $data_mahasiswa_terdaftar->tanggal_pendaftaran; ?><br>
                     <strong>ANGKATAN</strong> : <?php echo $data_mahasiswa_terdaftar->angkatan; ?><br>
                     <strong>EMAIL</strong> : <?php echo $data_mahasiswa_terdaftar->email; ?><br>
-                    <strong>FOTO</strong> : <?php echo $data_mahasiswa_terdaftar->email; ?><br>
+                    <strong>FOTO</strong> : <?php echo $data_mahasiswa_terdaftar->foto; ?><br>
                   </div>
                   <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

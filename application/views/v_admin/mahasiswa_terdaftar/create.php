@@ -12,7 +12,7 @@ $this->load->view('v_admin/v_admin_header');
 			<div class="card-body">
 				<form class="user" action="<?php echo base_url('admin/mahasiswa_terdaftar/create') ?>" method="post" enctype="multipart/form-data">
 					<div class="row">
-						<div class="col-sm-8" >
+						<div class="col-sm-12" >
 							<div id="notifications">
 								<?php echo $this->session->flashdata('msg'); ?>
 							</div>
@@ -63,7 +63,8 @@ $this->load->view('v_admin/v_admin_header');
 									<input type="text"  name="email" id="email" class=" form-control form-control-user" value="<?php echo set_value('email'); ?>"  placeholder="Email" />
 								</div>
 								<div class="col-sm-6 ">
-									<input type="file"  name="foto" id="foto" class=" form-control form-control-user"  />
+									<a style="text-decoration: none;" id="btnFile" class="text-gray-600 form-control form-control-user" href="#" onclick="return false;" >Foto</a>
+									<input style="display:none" type="file"  name="foto" id="inputFile"  class=" form-control form-control-user"  />
 								</div>
 							</div>
 							<div class="row" id="notifications5"> <!-- open validasi -->
@@ -76,7 +77,7 @@ $this->load->view('v_admin/v_admin_header');
 							</div> <!-- tutup validasi -->
 							<div class="form-group row">
 								<div class="col-sm-6 mb-3 mb-sm-0">
-									<input type="password"  name="password" id="password" class=" form-control form-control-user" value="<?php echo set_value('password'); ?>"  placeholder="Passowrd" />
+									<input type="password"  name="password" id="password" class=" form-control form-control-user" value="<?php echo set_value('password'); ?>"  placeholder="Password" />
 								</div>
 								<div class="col-sm-6 ">
 									<input type="password"  name="confirm_password" id="confirm_password" class=" form-control form-control-user"   placeholder="Konfirmasi Passowrd" />
@@ -90,7 +91,7 @@ $this->load->view('v_admin/v_admin_header');
 						<div class="col-sm-4">
 							<center>
 								<h2 >Foto</h2>
-								<img style='width:300px;height:300px; border-radius: 50%;  ' src="<?php echo base_url()."assets/img/default-user.png"?>"> 
+								<img id="gambar_nodin"  alt="Preview Gambar" style='width:300px;height:300px; border-radius: 50%;  ' src="<?php echo base_url()."assets/img/default-user.png"?>"> 
 							</center>
 						</div>
 					</div>
@@ -98,44 +99,52 @@ $this->load->view('v_admin/v_admin_header');
 			</div>
 		</div>
 	</div>
-<!-- 	<div class="col-lg-4 ">
-		<div class="card shadow mb-7">
-			<div class="card-header py-3 ">
-				<h6 class="m-0 font-weight-bold text-gray-900">Foto</h6>
-			</div>
-			<div class="card-body">
-				<div class="form-group row">
-					<div class="col-sm-12">	
-						<img style='width:100px;height:100px; border-radius: 50%;  ' src="<?php echo base_url()."assets/img/default-user.png"?>"> 
-					</div>
-						<input type="file"  name="email" id="email"  value="<?php echo set_value('email'); ?>"  placeholder="Email" />
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
 
 
-<?php 
-$this->load->view('v_admin/v_admin_footer');
-?>
+	<?php 
+	$this->load->view('v_admin/v_admin_footer');
+	?>
 
 
-<script src="<?php echo base_url(); ?>assets/vendor/datetimepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('.tanggal').datepicker({
-			format: "dd-mm-yyyy",
-			autoclose:true
+	<script src="<?php echo base_url(); ?>assets/vendor/datetimepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.tanggal').datepicker({
+				format: "dd-mm-yyyy",
+				autoclose:true
+			});
 		});
-	});
-</script>
+	</script>
 
-<script>   
-	$('#notifications').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications3').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications4').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications5').slideDown('slow').delay(5000).slideUp('slow');
-</script>
+	<script>   
+		$('#notifications').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications3').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications4').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications5').slideDown('slow').delay(5000).slideUp('slow');
+
+		function bacaGambar(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#gambar_nodin').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		$("#inputFile").change(function(){
+			bacaGambar(this);
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(e) {
+			$('#btnFile').click(function(){
+				$('#inputFile').click();
+			});
+
+		});
+	</script>
