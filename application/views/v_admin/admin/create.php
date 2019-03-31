@@ -70,6 +70,7 @@ $this->load->view('v_admin/v_admin_header');
 							<center>
 								<h2 >Foto</h2>
 								<img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:300px;height:300px; border-radius: 50%;  ' src="<?php echo base_url()."assets/img/default-user.png"?>"> 
+								<h7>Max Size 1 mb</h7>
 							</center>
 						</div>
 					</div>

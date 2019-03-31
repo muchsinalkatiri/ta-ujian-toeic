@@ -21,7 +21,7 @@ class login extends CI_Controller {
 			redirect('mahasiswa/dashboard');
 		}
 
-		$this->load->view('v_login');
+		$this->load->view('v_users/v_login');
 	}
 	public function do_login(){
 
@@ -37,7 +37,7 @@ class login extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		if($this->form_validation->run() === FALSE){
-			$this->load->view('v_login');
+			$this->load->view('v_users/v_login');
 		} else {
 			
 			// Get username
@@ -53,6 +53,7 @@ class login extends CI_Controller {
 						'id_admin' => $apps->id_admin,
 						'username' => $apps->username,
 						'password' => $apps->password,
+						'foto' => $apps->foto,
 						'level' => '2',
 						'logged_in' => true,
 						);
@@ -83,7 +84,7 @@ class login extends CI_Controller {
 			redirect('mahasiswa/dashboard');
 		}
 
-		$this->load->view('v_login_admin');
+		$this->load->view('v_users/v_login_admin');
 	}
 
 	public function do_login_admin(){
@@ -100,7 +101,7 @@ class login extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		if($this->form_validation->run() === FALSE){
-			$this->load->view('v_login_admin');
+			$this->load->view('v_users/v_login_admin');
 		} else {
 			
 			// Get username
@@ -116,6 +117,7 @@ class login extends CI_Controller {
 						'id_admin' => $apps->id_admin,
 						'username' => $apps->username,
 						'password' => $apps->password,
+						'foto' => $apps->foto,
 						'level' => $apps->level,
 						'logged_in' => true,
 						);

@@ -13,6 +13,6 @@ class error extends CI_Controller {
 	{
 
 		$data['page_title'] = '';
-		$this->load->view('error404.php',$data);
+		$this->load->view('errors/error404.php',$data);
 	}
 }

@@ -6,23 +6,22 @@ class User_model extends CI_Model {
         parent::__construct();
     }
 
+    public function get_data_by_id($id)
+    {
+         // Inner Join dengan table Categories
+        $this->db->get('data_admin');
 
-    // Proses login user
-    public function login($table, $username, $password){
-        // Validasi
-        $this->db->select('*');
-        $this->db->from($table);
-        $this->db->where($username);
-        $this->db->where($password);
+        $query = $this->db->get_where('data_admin', array('data_admin.id_admin' => $id));
 
-        $result = $this->db->get();
-
-
-        if($result->num_rows() == 0){
-            return false;
-        } else {
-            return $result->result();
-        }
+        return $query->row();
     }
 
+    public function update($where,$data,$table){
+        if($this->db->update($table, $data, $where)){
+          return true;
+      }
+      else{
+          return false;
+      }
+    }
 }

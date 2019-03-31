@@ -68,7 +68,7 @@ class register extends CI_Controller {
 				));
 
 		if ($this->form_validation->run() == FALSE){
-			$this->load->view('v_register',$data);
+			$this->load->view('v_users/v_register',$data);
 		}
 		else{
 			$nim= $this->input->post('nim');
@@ -116,7 +116,7 @@ class register extends CI_Controller {
 					'<div class="alert alert-danger">
 					<span class=" fa fa-ban" ></span> NIM '.$nim.' ini belum terdaftar di sistem, silahkan hubungi admin untuk mendaftarkan.
 				</div>');
-			$this->load->view('v_register',$data);
+			$this->load->view('v_users/v_register',$data);
 			}
 
 		}

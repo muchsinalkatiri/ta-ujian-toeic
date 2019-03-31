@@ -27,7 +27,11 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar">
+    <?php if($this->session->userdata('level')=='0') { ?>
+    <ul class="navbar-nav  bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar">
+    <?php }elseif($this->session->userdata('level')=='1'){ ?>
+    <ul class="navbar-nav  bg-gray-700 sidebar sidebar-dark accordion" id="accordionSidebar">
+    <?php } ?>
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('admin/dashboard') ?>">
@@ -125,7 +129,7 @@
               </div>
 
               <!-- Nav Item - Soal Menu -->
-              <li class="nav-item">
+              <li class="nav-item ">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                   <i class="fas fa-fw fa-question"></i>
                   <span>Data Soal</span>
@@ -181,7 +185,11 @@
                       <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
+                        <?php if($this->session->userdata('level')=='0') { ?>
                           <button class="btn bg-gray-900 text-gray-100" type="button">
+                        <?php }elseif($this->session->userdata('level')=='1') { ?>
+                          <button class="btn bg-gray-700 text-gray-100" type="button">
+                        <?php } ?>
                             <i class="fas fa-search fa-sm"></i>
                           </button>
                         </div>
@@ -322,11 +330,11 @@
                       <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('username') ?></span>
-                          <img class="img-profile rounded-circle" src="<?php echo base_url(); ?>assets/img/default-user.png">
+                          <img class="img-profile rounded-circle" src="<?php echo base_url()."uploads/img-user/admin/".$this->session->userdata('foto') ?>">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                          <a class="dropdown-item" href="#">
+                          <a class="dropdown-item" href="<?php echo base_url('admin/user'); ?>">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                           </a>

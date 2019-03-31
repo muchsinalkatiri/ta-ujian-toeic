@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="bg-gray-900">
+<body class="bg-gradient-info">
 
   <div class="container">
 
@@ -36,15 +36,15 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login Admin</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
                   <?php echo $this->session->flashdata('msg'); ?>
-                  <form class="user" action="<?php echo base_url('login/do_login_admin') ?>" method="post" enctype="multipart/form-data" >
+                  <form class="user" action="<?php echo base_url('login/do_login') ?>" method="post" enctype="multipart/form-data" >
                     <div class="row" id="notifications1"> <!-- open validasi -->
                       <div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('username'); ?></div>
                     </div> <!-- tutup validasi -->
                     <div class="form-group">
-                      <input  type="text" class="form-control form-control-user" id="username" name="username"  placeholder="Enter Username...">
+                      <input type="text" class="form-control form-control-user" id="username" name="username"  placeholder="Enter Username...">
                     </div>
                     <div class="row" id="notifications2"> <!-- open validasi -->
                       <div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('password'); ?></div>
@@ -54,13 +54,17 @@
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <input type="checkbox" class="custom-control-input" onclick="myFunction()"" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Show Password</label>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                       Login
                     </button>
+                    <hr>
+                    <a href="<?php echo base_url('register') ?>" class="btn btn-google btn-user btn-block">
+                      Create an Account!
+                    </a>
                   </form>
                   <hr>
                 </div>
@@ -92,4 +96,14 @@
   $('#notifications').slideDown('slow').delay(5000).slideUp('slow');
   $('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
   $('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
+</script>
+<script type="text/javascript">
+ function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
 </script>
