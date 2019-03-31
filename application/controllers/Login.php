@@ -15,16 +15,86 @@ class login extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('logged_in') || $this->session->userdata('level') == '0'|| $this->session->userdata('level') == '1' ){ 
+			redirect('admin/dashboard');
+		}elseif ($this->session->userdata('logged_in') || $this->session->userdata('level') == '2') {
+			redirect('mahasiswa/dashboard');
+		}
+
 		$this->load->view('v_login');
 	}
+	public function do_login(){
 
+		if($this->session->userdata('logged_in') || $this->session->userdata('level') == '0'|| $this->session->userdata('level') == '1' ){ 
+			redirect('admin/dashboard');
+		}elseif ($this->session->userdata('logged_in') || $this->session->userdata('level') == '2') {
+			redirect('mahasiswa/dashboard');
+		}
+
+		$data['page_title'] = 'Log In Mahasiswa';
+
+		$this->form_validation->set_rules('username', 'username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+
+		if($this->form_validation->run() === FALSE){
+			$this->load->view('v_login');
+		} else {
+			
+			// Get username
+			$username = $this->input->post('username');
+			// Get & encrypt password
+			$password = md5($this->input->post('password'));
+
+			// Login user
+			$cek_user = $this->login_model->login('data_mahasiswa_terdaftar', array('username' => $username), array('password' => $password));
+			if($cek_user != FALSE){
+				foreach ($cek_user as $apps) {
+					$session_data = array(
+						'id_admin' => $apps->id_admin,
+						'username' => $apps->username,
+						'password' => $apps->password,
+						'level' => '2',
+						'logged_in' => true,
+						);
+					$this->session->set_userdata($session_data);
+					redirect('mahasiswa/dashboard');
+				}
+			}
+
+			else {
+				// Set message
+				$this->session->set_flashdata('msg','
+					<div class="col-sm-12" >
+						<div id="notifications">
+							<div  class="text-xs font-weight-bold text-danger text-uppercase mb-1">Username atau Password yang anda masukan salah</div>
+						</div>
+					</div>');    
+
+				redirect('login');
+			}		
+		}
+	}
 	public function admin()
 	{
+
+		if($this->session->userdata('logged_in') || $this->session->userdata('level') == '0'|| $this->session->userdata('level') == '1' ){ 
+			redirect('admin/dashboard');
+		}elseif ($this->session->userdata('logged_in') || $this->session->userdata('level') == '2') {
+			redirect('mahasiswa/dashboard');
+		}
+
 		$this->load->view('v_login_admin');
 	}
 
 	public function do_login_admin(){
-		$data['page_title'] = 'Log In';
+
+		if($this->session->userdata('logged_in') || $this->session->userdata('level') == '0'|| $this->session->userdata('level') == '1' ){ 
+			redirect('admin/dashboard');
+		}elseif ($this->session->userdata('logged_in') || $this->session->userdata('level') == '2') {
+			redirect('mahasiswa/dashboard');
+		}
+
+		$data['page_title'] = 'Log In Admin';
 
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -56,7 +126,13 @@ class login extends CI_Controller {
 
 			else {
 				// Set message
-				$this->session->set_flashdata('login_failed', 'Login invalid');
+				$this->session->set_flashdata('msg','
+					<div class="col-sm-12" >
+						<div id="notifications">
+							<div  class="text-xs font-weight-bold text-danger text-uppercase mb-1">Username atau Password yang anda masukan salah</div>
+						</div>
+					</div>
+					');    
 
 				redirect('login/admin');
 			}		
@@ -64,12 +140,7 @@ class login extends CI_Controller {
 	}
 	public	function logout(){
 		$this->session->sess_destroy();
-		redirect('home');
-	}
-
-	public function register()
-	{
-		$this->load->view('v_register');
+		redirect();
 	}
 
 }

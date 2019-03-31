@@ -60,11 +60,23 @@
         </div>
 
         <!-- Nav Item - Admin -->
-        <li class="nav-item">
-          <a class="nav-link" href="#">
+        <?php 
+        if($this->session->userdata('level')=='0'){
+          if($page_title == 'Data Admin' || $page_title == 'Tambah Data Admin' || $page_title == 'Edit Data Admin'){?>
+          <li class="nav-item active">
+          <?php }elseif($page_title != 'Data Admin') { 
+          ?>
+          <li class="nav-item">
+          <?php  
+          }
+          ?>
+          <a class="nav-link" href="<?php echo base_url('admin/admin') ?>">
             <i class="fas fa-fw fa-user"></i>
             <span>Admin</span></a>
           </li>
+        <?php
+        }
+        ?>
 
           <!-- Nav Item - Pages USER -->
           <?php if($page_title == 'Data Mahasiswa' || $page_title == 'Tambah Data Mahasiswa' || $page_title == 'Edit Data Mahasiswa' || $page_title == 'Data Mahasiswa Terdaftar' || $page_title == 'Tambah Data Mahasiswa Terdaftar' || $page_title == 'Edit Data Mahasiswa Terdaftar'){?>

@@ -38,12 +38,19 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login Admin</h1>
                   </div>
+                  <?php echo $this->session->flashdata('msg'); ?>
                   <form class="user" action="<?php echo base_url('login/do_login_admin') ?>" method="post" enctype="multipart/form-data" >
+                    <div class="row" id="notifications1"> <!-- open validasi -->
+                      <div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('username'); ?></div>
+                    </div> <!-- tutup validasi -->
                     <div class="form-group">
-                      <input required type="text" class="form-control form-control-user" id="username" name="username"  placeholder="Enter Username...">
+                      <input  type="text" class="form-control form-control-user" id="username" name="username"  placeholder="Enter Username...">
                     </div>
+                    <div class="row" id="notifications2"> <!-- open validasi -->
+                      <div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('password'); ?></div>
+                    </div> <!-- tutup validasi -->
                     <div class="form-group">
-                      <input required type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                      <input  type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -81,3 +88,8 @@
 </body>
 
 </html>
+<script>   
+  $('#notifications').slideDown('slow').delay(5000).slideUp('slow');
+  $('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
+  $('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
+</script>

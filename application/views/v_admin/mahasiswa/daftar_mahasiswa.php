@@ -30,11 +30,11 @@
                         <td><?php echo $data_mahasiswa->alamat ?></td>
           							<td><?php echo $data_mahasiswa->ttl ?></td>
           							<td><?php echo $data_mahasiswa->notlp ?></td>
-          							<td>
+          							<td><center>
                           <a href="#" class="btn btn-success btn-circle" data-toggle="modal" data-target="#ModalDetail<?php echo $data_mahasiswa->nim; ?>" ><i class="fa fa-info"></i></a>
           								<a href="<?php echo base_url(). 'admin/mahasiswa/update/' . $data_mahasiswa->nim ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
           								<a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#ModalHapus<?php echo $data_mahasiswa->nim; ?>" ><i class="fa fa-trash"></i></a>
-          							</td>
+          							</center></td>
           						</tr>
 
 
