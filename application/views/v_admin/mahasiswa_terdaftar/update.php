@@ -10,7 +10,7 @@ $this->load->view('v_admin/v_admin_header');
 				<h6 class="m-0 font-weight-bold text-gray-900">Edit Mahasiswa Terdaftar</h6>
 			</div>
 			<div class="card-body">
-				<form class="user" action="<?php echo base_url('admin/mahasiswa/update/' . $mahasiswa_terdaftar->id_mahasiswa_terdaftar); ?>" method="post" enctype="multipart/form-data">
+				<form class="user" action="<?php echo base_url('admin/mahasiswa_terdaftar/update/' . $mahasiswa_terdaftar->id_mahasiswa_terdaftar); ?>" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-sm-12" >
 							<div id="notifications">

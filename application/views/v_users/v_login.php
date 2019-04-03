@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ujian Toeic - Login</title>
+  <title>Ujian Toeic - Login Mahasiswa</title>
 
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
   <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
-
+<?php echo $this->session->flashdata('msg1'); ?>
 <body class="bg-gradient-info">
 
   <div class="container">
@@ -36,10 +36,10 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Login - Mahasiswa</h1>
                   </div>
                   <?php echo $this->session->flashdata('msg'); ?>
-                  <form class="user" action="<?php echo base_url('login/do_login') ?>" method="post" enctype="multipart/form-data" >
+                  <form class="user" action="<?php echo base_url('user/login') ?>" method="post" enctype="multipart/form-data" >
                     <div class="row" id="notifications1"> <!-- open validasi -->
                       <div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('username'); ?></div>
                     </div> <!-- tutup validasi -->
@@ -58,15 +58,18 @@
                         <label class="custom-control-label" for="customCheck">Show Password</label>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn bg-gradient-info text-gray-100 btn-user btn-block">
                       Login
                     </button>
                     <hr>
-                    <a href="<?php echo base_url('register') ?>" class="btn btn-google btn-user btn-block">
+                    <a href="<?php echo base_url('user/register') ?>" class="btn bg-gradient-danger text-gray-100 btn-user btn-block">
                       Create an Account!
                     </a>
                   </form>
                   <hr>
+                  <div class="text-center">
+                    <a class="small" href="<?php echo base_url('user/forgotpassword') ?>">Forgot Password?</a>
+                  </div>
                 </div>
               </div>
             </div>

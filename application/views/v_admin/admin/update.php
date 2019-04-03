@@ -46,6 +46,16 @@ $this->load->view('v_admin/v_admin_header');
 									<input style="display:none" type="file"  name="foto" id="inputFile"  class=" form-control form-control-user"  />
 								</div>
 							</div>
+							<div class="row" id="notifications2"> <!-- open validasi -->
+								<div class="col-sm-12">
+									<div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('email'); ?></div>
+								</div>
+							</div> <!-- tutup validasi -->
+							<div class="form-group row">
+								<div class="col-sm-12 mb-3 mb-sm-0">
+									<input type="text" class="form-control form-control-user" value="<?php echo set_value('email', $admin->email) ?>" id="email" placeholder="Email" name="email">
+								</div>
+							</div>
 							<div class="row" id="notifications5"> <!-- open validasi -->
 								<div class="col-sm-6">
 									<div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger  text-uppercase mb-1"><?php echo form_error('password'); ?></div>

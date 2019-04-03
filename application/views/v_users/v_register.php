@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="bg-gradient-info">
+<body class="bg-gradient-danger">
 
   <div class="container">
 
@@ -34,7 +34,7 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Register</h1>
               </div>
-              <form class="user" action="<?php echo base_url('register') ?>" method="post" enctype="multipart/form-data">
+              <form class="user" action="<?php echo base_url('user/register') ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-sm-12" >
                     <div id="notifications">
@@ -101,11 +101,11 @@
                       </div>
                     </div>
                     <hr>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn bg-gradient-danger text-gray-100 btn-user btn-block">
                       Register Account
                     </button>
                     <hr>
-                    <a href="<?php echo base_url('login') ?>" class="btn btn-google btn-user btn-block">
+                    <a href="<?php echo base_url('user/login') ?>" class="btn text-gray-100 bg-gradient-info btn-user btn-block">
                       Already have an account? Login!
                     </a>
                   </div>

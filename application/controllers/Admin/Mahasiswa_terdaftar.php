@@ -18,7 +18,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 		$data['page_title'] = 'Data Mahasiswa Terdaftar';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		$data['mahasiswa_terdaftar']=$this->mahasiswa_terdaftar_model->get_all_mahasiswa_terdaftar()->result();
 
@@ -31,7 +31,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 		$data['page_title'] = 'Tambah Data Mahasiswa Terdaftar';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		//rule validasi
 		$this->form_validation->set_rules('nim','Nim','required|numeric|exact_length[10]|is_unique[data_mahasiswa_terdaftar.nim]',
@@ -39,7 +39,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 				'required'=>'Form Nim Wajib di isi.',
 				'numeric'=>'nim harus diisi dengan angka',
 				'exact_length'=>'nim harus berjumlah 10 angka',
-				'is_unique' =>'Nim %s sudah ada')
+				'is_unique' =>'Nim ini sudah ada')
 			);
 		$this->form_validation->set_rules('username','Username','required|min_length[3]',
 			array(
@@ -59,10 +59,11 @@ class mahasiswa_terdaftar extends CI_Controller {
 				'exact_length'=>'Masukan Tahun Masuk Polinema',
 				'numeric'=>'Masukan Tahun Masuk Polinema',
 				));
-		$this->form_validation->set_rules('email','Email','required|valid_email',
+		$this->form_validation->set_rules('email','Email','required|valid_email|is_unique[data_mahasiswa_terdaftar.email]',
 			array(
 				'required'=>'Form email Wajib di isi.',
 				'valid_email'=>'Masukan email yang benar',
+				'is_unique' =>'Email ini sudah ada'
 				));
 		$this->form_validation->set_rules('password','Password','required|alpha_numeric|min_length[6]|max_length[12]',
 			array(
@@ -186,7 +187,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 		$data['page_title'] = 'Edit Data Mahasiswa Terdaftar';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		// Get data dari model berdasarkan $id
 		$data['mahasiswa_terdaftar'] = $this->mahasiswa_terdaftar_model->get_data_by_id($id);
@@ -198,10 +199,16 @@ class mahasiswa_terdaftar extends CI_Controller {
 		if ( empty($id) || !$data['mahasiswa_terdaftar'] ) redirect('admin/mahasiswa_terdaftar');
 
 		//rule validasi
-		$this->form_validation->set_rules('username','Username','required|min_length[3]',
+		if($this->input->post('username') != $data['mahasiswa_terdaftar']->username) {
+			$is_unique =  '|is_unique[data_mahasiswa_terdaftar.username]';
+		} else {
+			$is_unique =  '';
+		}
+		$this->form_validation->set_rules('username','Username','required|min_length[3]'.$is_unique,
 			array(
 				'required'=>'Form Username Wajib di isi.',
 				'min_length'=>'Username yang anda masukan kurang panjang.',
+				'is_unique' => 'Username ini sudah terdaftar.'
 				));
 		$this->form_validation->set_rules('notlp2','No Telepon','required|numeric|min_length[3]|max_length[15]',
 			array(
@@ -216,11 +223,18 @@ class mahasiswa_terdaftar extends CI_Controller {
 				'exact_length'=>'Masukan Tahun Masuk Polinema',
 				'numeric'=>'Masukan Tahun Masuk Polinema',
 				));
-		$this->form_validation->set_rules('email','Email','required|valid_email',
+		if($this->input->post('email') != $data['mahasiswa_terdaftar']->email) {
+			$is_unique =  '|is_unique[data_mahasiswa_terdaftar.email]';
+		} else {
+			$is_unique =  '';
+		}
+		$this->form_validation->set_rules('email','Email','required|valid_email'.$is_unique,
 			array(
 				'required'=>'Form email Wajib di isi.',
 				'valid_email'=>'Masukan email yang benar',
+				'is_unique' =>'Email ini sudah ada'
 				));
+
 		$this->form_validation->set_rules('password','Password','required|alpha_numeric|min_length[6]|max_length[12]',
 			array(
 				'required'=>'Form Password Wajib di isi.',
@@ -354,7 +368,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 	public function delete($id=null)
 	{
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		$data['page_title'] = 'Delete mahasiswa terdaftar';
 

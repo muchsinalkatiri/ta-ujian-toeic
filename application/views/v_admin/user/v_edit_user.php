@@ -10,7 +10,7 @@ $this->load->view('v_admin/v_admin_header');
 				<h6 class="m-0 font-weight-bold text-gray-900">Admin</h6>
 			</div>
 			<div class="card-body">
-				<form class="user" action="<?php echo base_url('admin/user/edit/'.$data_user->id_admin); ?>" method="post" enctype="multipart/form-data">
+				<form class="user" action="<?php echo base_url('admin/user/edit/'); ?>" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-sm-12" >
 							<div id="notifications">
@@ -44,6 +44,16 @@ $this->load->view('v_admin/v_admin_header');
 								<div class="col-sm-6 ">
 									<a style="text-decoration: none;" id="btnFile" class="text-gray-600 form-control form-control-user" href="#" onclick="return false;" >Foto</a>
 									<input style="display:none" type="file"  name="foto" id="inputFile"  class=" form-control form-control-user"  />
+								</div>
+							</div>
+							<div class="row" id="notifications2"> <!-- open validasi -->
+								<div class="col-sm-12">
+									<div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('email'); ?></div>
+								</div>
+							</div> <!-- tutup validasi -->
+							<div class="form-group row">
+								<div class="col-sm-12 mb-3 mb-sm-0">
+									<input type="text" class="form-control form-control-user" value="<?php echo set_value('email', $data_user->email) ?>" id="email" placeholder="Email" name="email">
 								</div>
 							</div>
 							<div class="row" id="notifications5"> <!-- open validasi -->

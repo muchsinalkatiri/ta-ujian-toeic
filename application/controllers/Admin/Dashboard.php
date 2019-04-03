@@ -16,7 +16,7 @@ class dashboard extends CI_Controller {
 		$data['page_title'] = 'Dashboard';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		$this->load->view('v_admin/v_db',$data);
 	}

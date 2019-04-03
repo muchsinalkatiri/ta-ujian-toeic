@@ -18,7 +18,7 @@ class mahasiswa extends CI_Controller {
 		$data['page_title'] = 'Data Mahasiswa';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		$data['mahasiswa']=$this->mahasiswa_model->get_all_mahasiswa()->result();
 
@@ -30,7 +30,7 @@ class mahasiswa extends CI_Controller {
 		$data['page_title'] = 'Tambah Data Mahasiswa';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		//rule validasi
 		$this->form_validation->set_rules('nim','Nim','required|numeric|exact_length[10]|is_unique[data_mahasiswa.nim]',
@@ -115,7 +115,7 @@ class mahasiswa extends CI_Controller {
 		$data['page_title'] = 'Edit Data Mahasiswa';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
 		$where = array('nim' => $nim);
 		$data['mahasiswa'] = $this->mahasiswa_model->get_update_data_by_nim($where,'data_mahasiswa')->result();
@@ -199,7 +199,7 @@ class mahasiswa extends CI_Controller {
 
 	public function delete($nim=null){
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 		
 		$where = array('nim' => $nim);
 		$delete = $this->mahasiswa_model->delete($where,'data_mahasiswa');

@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ujian Toeic - Login</title>
+  <title>Ujian Toeic - Login admin</title>
 
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
   <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
-
+<?php echo $this->session->flashdata('msg1'); ?>
 <body class="bg-gray-900">
 
   <div class="container">
@@ -39,7 +39,7 @@
                     <h1 class="h4 text-gray-900 mb-4">Login Admin</h1>
                   </div>
                   <?php echo $this->session->flashdata('msg'); ?>
-                  <form class="user" action="<?php echo base_url('login/do_login_admin') ?>" method="post" enctype="multipart/form-data" >
+                  <form class="user" action="<?php echo base_url('user/login/admin') ?>" method="post" enctype="multipart/form-data" >
                     <div class="row" id="notifications1"> <!-- open validasi -->
                       <div style="padding-left: 15px; " class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('username'); ?></div>
                     </div> <!-- tutup validasi -->
@@ -58,11 +58,14 @@
                         <label class="custom-control-label" onclick="myFunction()" for="customCheck">Show Password</label>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn bg-gray-900 text-gray-100 btn-user btn-block">
                       Login
                     </button>
                   </form>
                   <hr>
+                  <div class="text-center">
+                    <a class="small" href="<?php echo base_url('user/forgot_password') ?>">Lupa Password?</a>
+                  </div>
                 </div>
               </div>
             </div>

@@ -82,6 +82,7 @@
         }
         ?>
 
+
           <!-- Nav Item - Pages USER -->
           <?php if($page_title == 'Data Mahasiswa' || $page_title == 'Tambah Data Mahasiswa' || $page_title == 'Edit Data Mahasiswa' || $page_title == 'Data Mahasiswa Terdaftar' || $page_title == 'Tambah Data Mahasiswa Terdaftar' || $page_title == 'Edit Data Mahasiswa Terdaftar'){?>
             <li class="nav-item active">
@@ -118,7 +119,25 @@
                 </div>
               </li>
               <?php } ?>
-
+              
+        <!-- Nav Item - Data Lupa Passworrd-->
+        <?php 
+        if($this->session->userdata('level')=='0'){
+          if($page_title == 'Data Lupa Password' ){?>
+          <li class="nav-item active">
+          <?php }elseif($page_title != 'Data Lupa Password') { 
+          ?>
+          <li class="nav-item">
+          <?php  
+          }
+          ?>
+          <a class="nav-link" href="<?php echo base_url('admin/data_lupa_password') ?>">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Data Lupa Password</span></a>
+          </li>
+        <?php
+        }
+        ?>
 
               <!-- Divider -->
               <hr class="sidebar-divider">

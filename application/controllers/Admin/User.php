@@ -16,9 +16,9 @@ class user extends CI_Controller {
 	public function index()
 	{
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('login/admin');
+			redirect('user/login/admin');
 
-		$data['page_title'] = '';
+		$data['page_title'] = 'Profile User';
 
 		$id = $this->session->userdata('id_admin');
 		$data['data_user'] = $this->user_model->get_data_by_id($id);
@@ -31,7 +31,7 @@ class user extends CI_Controller {
 		$data['page_title'] = 'Edit User';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ){ 
-			redirect('login/admin');
+			redirect('user/login/admin');
 		}
 
 		$id = $this->session->userdata('id_admin');
@@ -49,10 +49,16 @@ class user extends CI_Controller {
 				'required'=>'Form Nama Wajib di isi.',
 				'min_length'=>'Nama yang anda masukan kurang panjang.',
 				));
-		$this->form_validation->set_rules('username','Username','required|min_length[3]',
+		if($this->input->post('username') != $data['data_user']->username) {
+			$is_unique =  '|is_unique[data_admin.username]';
+		} else {
+			$is_unique =  '';
+		}
+		$this->form_validation->set_rules('username','Username','required|min_length[3]'.$is_unique,
 			array(
 				'required'=>'Form Username Wajib di isi.',
-				'min_length'=>'Username yang anda masukan kurang panjang.'
+				'min_length'=>'Username yang anda masukan kurang panjang.',
+				'is_unique' => 'Username ini sudah terdaftar.'
 				));
 		$this->form_validation->set_rules('password','Password','required|alpha_numeric|min_length[6]|max_length[12]',
 			array(
@@ -61,6 +67,18 @@ class user extends CI_Controller {
 				'min_length'=>'password yang anda masukan terlalu pendek.',
 				'max_length'=>'password yang anda masukan terlalu panjang.'
 				));
+		if($this->input->post('email') != $data['data_user']->email) {
+			$is_unique =  '|is_unique[data_admin.email]';
+		} else {
+			$is_unique =  '';
+		}
+		$this->form_validation->set_rules('email','Email','required|valid_email'.$is_unique,
+			array(
+				'required'=>'Form email Wajib di isi.',
+				'valid_email'=>'Masukan email yang benar',
+				'is_unique' =>'Email ini sudah ada'
+				));
+
 		$this->form_validation->set_rules('confirm_password','Konfirmasi Password','required|matches[password]',
 			array(
 				'required'=>'Form Konfirmasi Password Wajib di isi.',
@@ -76,6 +94,7 @@ class user extends CI_Controller {
 			$username = $this->input->post('username');
 			$nama = $this->input->post('nama');
 			$password = md5($this->input->post('password'));
+			$email = $this->input->post('email');
 
 			// Apakah user upload gambar?
 			if ( isset($_FILES['foto']) && $_FILES['foto']['size'] > 0 ){//jika upload file
@@ -118,7 +137,8 @@ class user extends CI_Controller {
 						'username' => $username,
 						'nama' => $nama,
 						'password' => $password,
-						'foto' => $post_image
+						'foto' => $post_image,
+						'email' =>$email
 						);
 			//jika tidak ada error error
 					if( empty($data['upload_error']) ) {
@@ -158,7 +178,8 @@ class user extends CI_Controller {
 				$data = array(
 					'username' => $username,
 					'nama' => $nama,
-					'password' => $password
+					'password' => $password,
+					'email' =>$email
 					);
 			//jika tidak ada error error
 				if( empty($data['upload_error']) ) {

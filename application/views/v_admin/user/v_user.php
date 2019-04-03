@@ -36,6 +36,10 @@ $this->load->view('v_admin/v_admin_header');
 								<td><strong>Tanggal Pendaftaran</strong></td>
 								<td><?php echo $data_user->tanggal_pendaftaran ?></td>
 							</tr>
+							<tr>
+								<td><strong>Email</strong></td>
+								<td><?php echo $data_user->email ?></td>
+							</tr>
 							<tr> 
 								<td><strong>Level</strong></td>
 								<td><?php echo $level ?></td>

@@ -11,7 +11,7 @@
           <div class="card shadow mb-4">
           	<div class="card-body">
           		<div class="table-responsive">
-          			<table class="table table-bordered" id="dataTable"  cellspacing="0">
+          			<table class="table table-bordered text-center" id="dataTable"  cellspacing="0">
           				<thead>
           					<tr>
           						<th>FOTO</th>
@@ -67,6 +67,7 @@
                     <strong>TANGGAL PENDAFTARAN</strong> : <?php echo $data_admin->tanggal_pendaftaran; ?><br>
                     <strong>PASSWORD</strong> : <?php echo $data_admin->password; ?><br>
                     <strong>LEVEL</strong> : <?php echo $level; ?><br>
+                    <strong>EMAIL</strong> : <?php echo $data_admin->email; ?><br>
                     <strong>PASSWORD</strong> : <?php echo $password ?><br><br>  
                     <center><img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:180px;height:180px; border-radius: 50%;  ' src="<?php echo base_url()."uploads/img-user/admin/".$data_admin->foto; ?>"> </center>
                   </div>
