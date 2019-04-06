@@ -57,10 +57,6 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                  <?php 
-                  $cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
-                  $password= rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $data_admin->password), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0"); 
-                  ?>
                     <strong>ID</strong> : <?php echo $data_admin->id_admin; ?><br>
                     <strong>USERNAME</strong> : <?php echo $data_admin->username; ?><br>
                     <strong>NAMA</strong> : <?php echo $data_admin->nama; ?><br>
@@ -68,7 +64,6 @@
                     <strong>PASSWORD</strong> : <?php echo $data_admin->password; ?><br>
                     <strong>LEVEL</strong> : <?php echo $level; ?><br>
                     <strong>EMAIL</strong> : <?php echo $data_admin->email; ?><br>
-                    <strong>PASSWORD</strong> : <?php echo $password ?><br><br>  
                     <center><img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:180px;height:180px; border-radius: 50%;  ' src="<?php echo base_url()."uploads/img-user/admin/".$data_admin->foto; ?>"> </center>
                   </div>
                   <div class="modal-footer">

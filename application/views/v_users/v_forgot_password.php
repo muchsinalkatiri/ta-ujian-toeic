@@ -58,12 +58,18 @@
                     </button>
                   </form>
                   <hr>
+                  <?php if ($page_title == 'Lupa Password - Admin') { ?>
                   <div class="text-center">
+                    <a class="small" href="<?php echo base_url('user/login/admin') ?>">Login!</a>
+                  </div>
+                  <?php }elseif ($page_title == 'Lupa Password - Mahasiswa') { ?>
+                    <div class="text-center">
                     <a class="small" href="<?php echo base_url('user/register') ?>">Buat Akun! (Khusus Akun Mahasiswa)</a>
                   </div>
                   <div class="text-center">
                     <a class="small" href="<?php echo base_url('user/login') ?>">Sudah Punya akun (mahasiswa)? Login!</a>
                   </div>
+                  <?php } ?>
                 </div>
               </div>
             </div>

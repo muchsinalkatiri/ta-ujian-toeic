@@ -132,7 +132,7 @@
           }
           ?>
           <a class="nav-link" href="<?php echo base_url('admin/data_lupa_password') ?>">
-            <i class="fas fa-fw fa-user"></i>
+            <i class="fas fa-fw fa-key"></i>
             <span>Data Lupa Password</span></a>
           </li>
         <?php

@@ -31,7 +31,7 @@
                         <td><?php echo $data_lp->id_user ?></td>
                         <td><?php echo $data_lp->tanggal_pembuatan ?></td>
                         <td><?php echo $data_lp->status_reset ?></td>
-                        <td>
+                        <td><center>
                           <a href="#" class="btn btn-success btn-circle" data-toggle="modal" data-target="#ModalDetail<?php echo $data_lp->id_token; ?>" ><i class="fa fa-info"></i></a>
                           <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#ModalHapus<?php echo $data_lp->id_token; ?>" ><i class="fa fa-trash"></i></a>
                         </center></td>

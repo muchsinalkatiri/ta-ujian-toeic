@@ -49,17 +49,12 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                  <?php 
-                  $cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
-                  $password= rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $data_mahasiswa_terdaftar->password), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0"); 
-                  ?>
                     <strong>NIM</strong> : <?php echo $data_mahasiswa_terdaftar->nim; ?><br>
                     <strong>USERNAME</strong> : <?php echo $data_mahasiswa_terdaftar->username; ?><br>
                     <strong>NOTLP2</strong> : <?php echo $data_mahasiswa_terdaftar->notlp2; ?><br>
                     <strong>TANGGAL PENDAFTARAN</strong> : <?php echo $data_mahasiswa_terdaftar->tanggal_pendaftaran; ?><br>
                     <strong>ANGKATAN</strong> : <?php echo $data_mahasiswa_terdaftar->angkatan; ?><br>
                     <strong>EMAIL</strong> : <?php echo $data_mahasiswa_terdaftar->email; ?><br>
-                    <strong>PASSWORD</strong> : <?php echo $password ?><br><br>  
                     <center><img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:180px;height:180px; border-radius: 50%;  ' src="<?php echo base_url()."uploads/img-user/".$data_mahasiswa_terdaftar->foto; ?>"> </center>
                   </div>
                   <div class="modal-footer">
