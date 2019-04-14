@@ -148,24 +148,20 @@
               </div>
 
               <!-- Nav Item - Soal Menu -->
-              <li class="nav-item ">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                  <i class="fas fa-fw fa-question"></i>
-                  <span>Data Soal</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                  <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Listening</h6>
-                    <a class="collapse-item" href="#">1</a>
-                    <a class="collapse-item" href="#">2</a>
-                    <a class="collapse-item" href="#">3</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Reading</h6>
-                    <a class="collapse-item" href="#">1</a>
-                    <a class="collapse-item" href="#">2</a>
-                  </div>
-                </div>
-              </li>
+        <?php 
+          if($page_title == 'Data Paket Soal' || $page_title == 'Update Data Paket Soal' ){?>
+          <li class="nav-item active">
+          <?php }elseif($page_title != 'Data Paket Soal' || $page_title != 'Update Data Paket Soal') { 
+          ?>
+          <li class="nav-item">
+          <?php  
+          }
+          ?>
+          <a class="nav-link" href="<?php echo base_url('admin/soal/paket_soal') ?>">
+            <i class="fas fa-fw fa-question"></i>
+            <span>Data Soal</span></a>
+          </li>
+ 
 
               <!-- Nav Item - Jawaban -->
               <li class="nav-item">

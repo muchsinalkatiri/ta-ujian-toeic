@@ -7,7 +7,6 @@ $this->load->view('v_admin/v_admin_header');
 	<div class="col-lg-8 ">
 		<div class="card shadow mb-7">
 			<div class="card-header py-3 ">
-				<h6 class="m-0 font-weight-bold text-gray-900">Mahasiswa</h6>
 			</div>
 			<div class="card-body">
 				<form class="user" action="<?php echo base_url('admin/mahasiswa/create') ?>" method="post" enctype="multipart/form-data">

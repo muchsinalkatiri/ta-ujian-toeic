@@ -6,6 +6,13 @@
             <a href="<?php echo base_url('admin/admin/create') ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
           </div> <!-- TUTUP HEADER -->
 
+  <nav aria-label="breadcrumb"> <!-- buka breadcumb -->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard') ?>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data Admin</li>
+  </ol>
+</nav> <!-- tutup breadcumb -->
+
           <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 
           <div class="card shadow mb-4">

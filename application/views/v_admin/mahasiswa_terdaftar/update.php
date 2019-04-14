@@ -3,11 +3,19 @@ $this->load->view('v_admin/v_admin_header');
 ?> 
 <link href="<?php echo base_url(); ?>assets/vendor/datetimepicker/css/bootstrap-datepicker.css" rel="stylesheet">
 </div> <!-- TUTUP HEADER -->
+
+<nav aria-label="breadcrumb"> <!-- buka breadcumb -->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard') ?>">Home</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo base_url('admin/mahasiswa_terdaftar') ?>">Data Mahasiswa Terdaftar</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Data Mahasiswa Terdaftar</li>
+  </ol>
+</nav> <!-- tutup breadcumb -->
+
 <div class="row ">
 	<div class="col-lg-12">
 		<div class="card shadow mb-7">
 			<div class="card-header py-3 ">
-				<h6 class="m-0 font-weight-bold text-gray-900">Edit Mahasiswa Terdaftar</h6>
 			</div>
 			<div class="card-body">
 				<form class="user" action="<?php echo base_url('admin/mahasiswa_terdaftar/update/' . $mahasiswa_terdaftar->id_mahasiswa_terdaftar); ?>" method="post" enctype="multipart/form-data">

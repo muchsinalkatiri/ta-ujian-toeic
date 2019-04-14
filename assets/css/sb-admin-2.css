@@ -12026,3 +12026,13 @@ width: 150px;
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+#player {
+    position:relative;
+    top:10px;
+    width:260px;
+    overflow: hidden;
+    direction: ltl;
+    border-top-right-radius: 0.5em 0.5em;
+    border-bottom-right-radius: 1em 0.7em;
+}
