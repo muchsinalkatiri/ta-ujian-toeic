@@ -8,29 +8,29 @@ $this->load->view('v_admin/v_admin_header');
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard') ?>">Home</a></li>
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/paket_soal') ?>">Data Paket Soal</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Part Soal : Listening</li>
+    <li class="breadcrumb-item active" aria-current="page">Data Part Soal : Reading</li>
   </ol>
 </nav> <!-- tutup breadcumb -->
 
 <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 <div class="card shadow mb-4">
   <div class="card-header py-2 ">
-    <h6 class="m-0 font-weight-bold text-gray-900">Penjelasan Listening</h6>
+    <h6 class="m-0 font-weight-bold text-gray-900">Penjelasan Reading</h6>
   </div>
   <div class="card-body">
-    <form class="user" action="<?php echo base_url('admin/soal/part_soal/listening/'.$paket_soal->nama_paket) ?>" method="post" enctype="multipart/form-data">
+    <form class="user" action="<?php echo base_url('admin/soal/part_soal/reading/'.$paket_soal->nama_paket) ?>" method="post" enctype="multipart/form-data">
       <div class="row" > <!-- open validasi -->
         <div class="col-sm-6">
-          <div id="notifications1" class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('penjelasan_listening'); ?></div> 
+          <div id="notifications1" class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('penjelasan_reading'); ?></div> 
         </div> 
       </div> <!-- tutup validasi -->
       <div class="form-group row">
         <div class="col-sm-6 mb-3 mb-sm-0">
-          <textarea rows="5" type="text" class="form-control" id="penjelasan_listening" placeholder="Tulis Penjelasan Listening Untuk Paket ini disini" name="penjelasan_listening"><?php echo set_value('penjelasan_listening', $paket_soal->penjelasan_listening) ?></textarea>
+          <textarea rows="5" type="text" class="form-control" id="penjelasan_reading" placeholder="Tulis Penjelasan Reading Untuk Paket ini disini" name="penjelasan_reading"><?php echo set_value('penjelasan_reading', $paket_soal->penjelasan_reading) ?></textarea>
         </div>
         <div  class="col-sm-6 ">
-          <?php if($paket_soal->penjelasan_listening != ""){ ?>
-            <textarea rows="5" readonly="" class="form-control" ><?php echo $paket_soal->penjelasan_listening; ?></textarea>
+          <?php if($paket_soal->penjelasan_reading != ""){ ?>
+            <textarea rows="5" readonly="" class="form-control" ><?php echo $paket_soal->penjelasan_reading; ?></textarea>
             <?php } ?>
           </div>
         </div>
@@ -51,7 +51,7 @@ $this->load->view('v_admin/v_admin_header');
 
       <div class="card shadow mb-4">
         <div class="card-header py-2 ">
-          <h6 class="m-0 font-weight-bold text-gray-900">Data Part Soal Listening (1-100)</h6>
+          <h6 class="m-0 font-weight-bold text-gray-900">Data Part Soal Reading (101-200)</h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -67,10 +67,12 @@ $this->load->view('v_admin/v_admin_header');
             </thead>
             <tbody>
               <?php foreach ($part_soal as $data_part_soal ) {
-                if($data_part_soal->nama_part == 'Photograps'){
-                  $max_soal = 10;
-                }elseif($data_part_soal->nama_part == 'Question-Response' || $data_part_soal->nama_part == 'Conversation' || $data_part_soal->nama_part == 'Short Talks'){
-                  $max_soal = 30;
+                if($data_part_soal->nama_part == 'Incomplete Sentences'){
+                  $max_soal = 40;
+                }elseif($data_part_soal->nama_part == 'Text Completion'){
+                  $max_soal = 12;
+                }elseif($data_part_soal->nama_part == 'Reading Comprehension'){
+                  $max_soal = 48;
                 }
                 $total_persen = ($data_part_soal->jumlah_soal * 100)/$max_soal;
                 ?>

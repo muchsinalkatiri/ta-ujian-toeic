@@ -21,11 +21,11 @@ class Part_soal_model extends CI_Model {
     return $this->db->get_where('data_part_soal', array('data_part_soal.jenis_soal' => 'reading', 'nama_paket' => $nama_paket));
   }
   
-  public function get_data_by_id($id)
+  public function get_data_by_id($id_part)
   {
     $this->db->get('data_part_soal');
 
-    $query = $this->db->get_where('data_part_soal', array('data_part_soal.id_part' => $id));
+    $query = $this->db->get_where('data_part_soal', array('data_part_soal.id_part' => $id_part));
 
     return $query->row();
   }

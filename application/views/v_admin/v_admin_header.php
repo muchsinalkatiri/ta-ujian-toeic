@@ -17,6 +17,9 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+<!--   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/bootstrap/css/bootstrap.css">
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.js"></script> -->
 
 
 </head>
@@ -149,9 +152,9 @@
 
               <!-- Nav Item - Soal Menu -->
         <?php 
-          if($page_title == 'Data Paket Soal' || $page_title == 'Update Data Paket Soal' ){?>
+          if($page_title == 'Data Paket Soal' || $page_title == 'Update Data Paket Soal' || $page_title == 'Data Part Soal : Listening' || $page_title == 'Data Part Soal : Reading '){?>
           <li class="nav-item active">
-          <?php }elseif($page_title != 'Data Paket Soal' || $page_title != 'Update Data Paket Soal') { 
+          <?php }elseif($page_title != 'Data Paket Soal' || $page_title != 'Update Data Paket Soal' || $page_title != 'Data Part Soal : Listening' || $page_title != 'Data Part Soal : Reading') { 
           ?>
           <li class="nav-item">
           <?php  

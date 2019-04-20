@@ -94,7 +94,7 @@ class Paket_soal extends CI_Controller {
 				);
 			$data2=array(
 				array('nama_paket' => $nama_paket,'untuk_soal_nomor' => '1-10','nama_part'=>'Photograps','jenis_soal'=> 'listening'),
-				array('nama_paket' => $nama_paket,'untuk_soal_nomor' => '11-20','nama_part'=>'Question-Response','jenis_soal'=> 'listening'),
+				array('nama_paket' => $nama_paket,'untuk_soal_nomor' => '11-40','nama_part'=>'Question-Response','jenis_soal'=> 'listening'),
 				array('nama_paket' => $nama_paket,'untuk_soal_nomor' => '41-70','nama_part'=>'Conversation','jenis_soal'=> 'listening'),
 				array('nama_paket' => $nama_paket,'untuk_soal_nomor' => '71-100','nama_part'=>'Short Talks','jenis_soal'=> 'listening'),
 				array('nama_paket' => $nama_paket,'untuk_soal_nomor' => '101-140','nama_part'=>'Incomplete Sentences','jenis_soal'=> 'reading'),
