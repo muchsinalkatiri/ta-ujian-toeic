@@ -10,7 +10,6 @@ class Part_soal extends CI_Controller {
 		$this->load->model('Soal/part_soal_model');
 		$this->load->model('Soal/paket_soal_model');
 		$this->load->library('form_validation');
-		$this->config->set_item('global_xss_filtering', FALSE);
 		// $this->load->helper('MY');
 
 	}
@@ -103,13 +102,13 @@ class Part_soal extends CI_Controller {
 					'<div class="alert alert-success">
 					<h5> <span class=" fa fa-check" ></span> Penjelasan Reading berhasil simpan.</h5>
 				</div>');    
-				redirect('admin/soal/part_soal/listening/'.$nama_paket);
+				redirect('admin/soal/part_soal/reading/'.$nama_paket);
 			}else{
 				$this->session->set_flashdata('msg',
 					'<div class="alert alert-danger">
 					// <h5> <span class=" fa fa-cross" ></span> Penjelasan Reading gagal simpan.</h5>
 				</div>');    
-				redirect('admin/soal/part_soal/listening/'.$nama_paket);
+				redirect('admin/soal/part_soal/reading/'.$nama_paket);
 			}
 		}
 	}

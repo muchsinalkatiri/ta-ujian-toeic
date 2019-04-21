@@ -51,7 +51,7 @@ $this->load->view('v_admin/v_admin_header');
 
       <div class="card shadow mb-4">
         <div class="card-header py-2 ">
-          <h6 class="m-0 font-weight-bold text-gray-900">Data Part Soal Listening (1-100)</h6>
+          <h6 class="m-0 font-weight-bold text-gray-900">Paket Soal : <?php echo $paket_soal->nama_paket ?> (Soal 1-100)</h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -69,8 +69,16 @@ $this->load->view('v_admin/v_admin_header');
               <?php foreach ($part_soal as $data_part_soal ) {
                 if($data_part_soal->nama_part == 'Photograps'){
                   $max_soal = 10;
-                }elseif($data_part_soal->nama_part == 'Question-Response' || $data_part_soal->nama_part == 'Conversation' || $data_part_soal->nama_part == 'Short Talks'){
+                  $nama_part = 'photograps';
+                }elseif($data_part_soal->nama_part == 'Question-Response'){
                   $max_soal = 30;
+                  $nama_part = 'question_response';
+                }elseif($data_part_soal->nama_part == 'Conversation'){
+                  $max_soal = 30;
+                  $nama_part = 'conversation';
+                }elseif($data_part_soal->nama_part == 'Short Talks'){
+                  $max_soal = 30;
+                  $nama_part = 'short_talks';
                 }
                 $total_persen = ($data_part_soal->jumlah_soal * 100)/$max_soal;
                 ?>
@@ -96,7 +104,7 @@ $this->load->view('v_admin/v_admin_header');
                   <div class="mr-1 font-weight-bold text-gray-800"><?php echo $total_persen.'% ('.$data_part_soal->jumlah_soal.'/'.$max_soal.')' ;?></div>
                 </td> 
                 <td>
-                 <a  href="#" class="mb-1 text-xs btn btn-danger btn-icon-split">
+                 <a  href="<?php echo base_url(). 'admin/soal/' . $nama_part.'/data_soal/'.$data_part_soal->nama_paket.'4_5'.$data_part_soal->id_part ?>" class="mb-1 text-xs btn btn-danger btn-icon-split">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus fa-sm"></i>
                   </span>

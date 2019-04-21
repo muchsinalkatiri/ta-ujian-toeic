@@ -27,7 +27,7 @@ $this->load->view('v_admin/v_admin_header');
       <div class="col-lg-11">
         <div class="card shadow mb-4">
          <div class="card-header py-2 ">
-           <h6 class="m-0 font-weight-bold text-gray-900">Directios For : <?php echo $part_soal->nama_part ?></h6>
+           <h6 class="m-0 font-weight-bold text-gray-900">Directions Paket Soal : <?php echo $part_soal->nama_paket ?> (<?php echo $part_soal->nama_part ?>)</h6>
          </div>
          <div class="card-body">
           <form class="user" action="<?php echo base_url('admin/soal/part_soal/directions/'.$part_soal->id_part) ?>" method="post" enctype="multipart/form-data">
@@ -65,7 +65,7 @@ $this->load->view('v_admin/v_admin_header');
       <div class="col-lg-11">
         <div class="card shadow mb-4">
          <div class="card-header py-2 ">
-           <h6 class="m-0 font-weight-bold text-gray-900">Example For : <?php echo $part_soal->nama_part ?></h6>
+           <h6 class="m-0 font-weight-bold text-gray-900">Example Paket Soal : <?php echo $part_soal->nama_paket ?> (<?php echo $part_soal->nama_part ?>)</h6>
          </div>
          <div class="card-body">
           <form class="user" action="<?php echo base_url('admin/soal/part_soal/example/'.$part_soal->id_part) ?>" method="post" enctype="multipart/form-data">
@@ -95,51 +95,51 @@ $this->load->view('v_admin/v_admin_header');
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL detail -->
+  <div  class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalDetail">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Directions & Example</h5>
+        </div>
+        <div class="modal-body">
+          <strong>Directions :</strong><br>
+          <?php echo $part_soal->directions; ?><br>
+          <strong>Example :</strong><br>
+          <?php echo $part_soal->example; ?><br>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
+  </div>
+  <!--END MODAL detail-->
 
-    <!-- MODAL detail -->
-    <div  class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalDetail">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Directions & Example</h5>
-          </div>
-          <div class="modal-body">
-            <strong>Directions :</strong><br>
-            <?php echo $part_soal->directions; ?><br>
-            <strong>Example :</strong><br>
-            <?php echo $part_soal->example; ?><br>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--END MODAL detail-->
-
-    <?php 
-    $this->load->view('v_admin/v_admin_footer');
-    ?>
-    <script src="<?php echo base_url(); ?>/assets/vendor/summernote/summernote.js"></script>
-    <script type="text/javascript">
-      $('#notifications').slideDown('slow').delay(5000).slideUp('slow');
-      $('#example ,#directions' ).summernote({
-       toolbar: [    
-       ['fontname',['fontname']],
-       ['fontsize', ['fontsize']],
-       ['style', ['bold', 'italic', 'underline', 'clear']],
-       ['color', ['color']],
-       ['para', ['ul', 'ol', 'paragraph']],       
-       ['table',['table']],
-       ['insert',['picture']],
-       ['height',['height']],
-       ['link',['link']],
-       ['undo',['undo']],
-       ['redo',['redo']],
-       ],
-       popover: {image: [],link: [],air: []}
-     });
-   </script>
+  <?php 
+  $this->load->view('v_admin/v_admin_footer');
+  ?>
+  <script src="<?php echo base_url(); ?>/assets/vendor/summernote/summernote.js"></script>
+  <script type="text/javascript">
+    $('#notifications').slideDown('slow').delay(5000).slideUp('slow');
+    $('#example ,#directions' ).summernote({
+     toolbar: [    
+     ['fontname',['fontname']],
+     ['fontsize', ['fontsize']],
+     ['style', ['bold', 'italic', 'underline', 'clear']],
+     ['color', ['color']],
+     ['para', ['ul', 'ol', 'paragraph']],       
+     ['table',['table']],
+     ['insert',['picture']],
+     ['height',['height']],
+     ['link',['link']],
+     ['undo',['undo']],
+     ['redo',['redo']],
+     ],
+     popover: {image: [],link: [],air: []}
+   });
+ </script>

@@ -152,9 +152,9 @@
 
               <!-- Nav Item - Soal Menu -->
         <?php 
-          if($page_title == 'Data Paket Soal' || $page_title == 'Update Data Paket Soal' || $page_title == 'Data Part Soal : Listening' || $page_title == 'Data Part Soal : Reading '){?>
+          if( $this->uri->segment('2') == 'soal' ){?>
           <li class="nav-item active">
-          <?php }elseif($page_title != 'Data Paket Soal' || $page_title != 'Update Data Paket Soal' || $page_title != 'Data Part Soal : Listening' || $page_title != 'Data Part Soal : Reading') { 
+          <?php }elseif($this->uri->segment('2') != 'soal' ) { 
           ?>
           <li class="nav-item">
           <?php  

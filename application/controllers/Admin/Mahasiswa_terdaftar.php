@@ -153,7 +153,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 				'foto' => $post_image
 				);
 
-			if ($check != 0){//jika nim sudah ada di data_mahasiswa
+			if ($check != 0){//jika nim tidak ada di data_mahasiswa
 				if( empty($data['upload_error']) ) {
 					$insert = $this->mahasiswa_terdaftar_model->create('data_mahasiswa_terdaftar',$data);
 
@@ -177,7 +177,7 @@ class mahasiswa_terdaftar extends CI_Controller {
 					'<div class="alert alert-danger">
 					<span class=" fa fa-ban" ></span>NIM '.$nim.' ini belum terdaftar di sistem, silahkan daftarkan dahulu di data mahasiswa.
 				</div>');
-				$this->load->view('v_admin/mahasiswa_terdaftar/create',$data);
+				redirect('admin/mahasiswa_terdaftar/create');
 			}
 
 		}

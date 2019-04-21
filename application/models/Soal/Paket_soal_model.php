@@ -22,10 +22,7 @@ class Paket_soal_model extends CI_Model {
   }  
   public function get_data_by_nama($nama_paket)
   {
-    // $this->db->get('data_paket');
-
     $query = $this->db->get_where('data_paket', array('data_paket.nama_paket' => $nama_paket));
-
     return $query->row();
   }
 

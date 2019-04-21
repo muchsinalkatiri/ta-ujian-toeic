@@ -51,7 +51,7 @@ $this->load->view('v_admin/v_admin_header');
 
       <div class="card shadow mb-4">
         <div class="card-header py-2 ">
-          <h6 class="m-0 font-weight-bold text-gray-900">Data Part Soal Reading (101-200)</h6>
+          <h6 class="m-0 font-weight-bold text-gray-900">Paket Soal : <?php echo $paket_soal->nama_paket ?> (Soal 101-200)</h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">
