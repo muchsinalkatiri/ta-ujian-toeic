@@ -266,6 +266,7 @@ class Paket_soal extends CI_Controller {
 
 		// Get data dari model berdasarkan $id
 		$data['data_paket'] = $this->paket_soal_model->get_data_by_id($id);
+		$nama_paket = $data['data_paket']->nama_paket;
 
 		// Jika id kosong atau tidak ada id yg dimaksud, lempar user ke halaman blog
 		if ( empty($id) || !$data['data_paket'] ) show_404();
@@ -281,9 +282,12 @@ class Paket_soal extends CI_Controller {
 		}
 
 		// Hapus data sesuai id-nya
+		$where2 = array('nama_paket' => $nama_paket);
+		$delete2 = $this->paket_soal_model->delete($where2,'kelompok_soal');
+
 		$where = array('id_paket' => $id);
 		$delete = $this->paket_soal_model->delete($where,'data_paket');
-		if ($delete) {
+		if ($delete2 && $delete) {
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-success">
 				<h5> <span class=" fa fa-check" ></span> Data Berhasil Dihapus.</h5>

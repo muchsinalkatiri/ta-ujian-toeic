@@ -43,8 +43,8 @@ $this->load->view('v_admin/v_admin_header');
               <th>SOAL NOMOR</th>
               <th>ISI SOAL</th>
               <th>JAWABAN SOAL</th>
-              <th>TIPE SOAL</th>
               <th>TANGGAL DIBUAT</th>
+              <th>TIPE SOAL</th>
               <th>ACTION</th>
             </tr>
           </thead>
@@ -57,8 +57,9 @@ $this->load->view('v_admin/v_admin_header');
                 <td><?php echo $soal->jawaban ?></td>
                 <td><?php echo $soal->tanggal_dibuat ?></td>
                 <td>
-                <?php if($soal->id_kelompok_soal == 0) {echo 'individu';}  ?>
-                  
+                <?php if($soal->id_kelompok_soal == 0) {echo 'Individu';}else{  ?>
+                  <a href="<?php echo base_url().'admin/soal/photograps/data_kelompok_soal/'.$soal->nama_paket.'4_5'.$soal->id_part.'4_5'.$soal->id_kelompok_soal ?>">Kelompok</a>
+                  <?php } ?>
                 </td>
                 <td><center>
                   <a href="<?php echo base_url(). 'admin/soal/photograps/edit/' . $soal->id_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>

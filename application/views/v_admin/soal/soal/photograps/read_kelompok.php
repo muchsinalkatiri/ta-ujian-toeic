@@ -36,8 +36,8 @@ $this->load->view('v_admin/v_admin_header');
           <th>SOAL NOMOR</th>
           <th>ISI SOAL</th>
           <th>JAWABAN SOAL</th>
-          <th>TIPE SOAL</th>
           <th>TANGGAL DIBUAT</th>
+          <th>TIPE SOAL</th>
           <th>ACTION</th>
         </tr>
       </thead>
@@ -50,64 +50,65 @@ $this->load->view('v_admin/v_admin_header');
             <td><?php echo $soal->jawaban ?></td>
             <td><?php echo $soal->tanggal_dibuat ?></td>
             <td>
-              <?php if($soal->id_kelompok_soal == 0) {echo 'individu';}  ?>
+              <?php if($soal->id_kelompok_soal == 0) {echo 'Individu';}else{  ?>
+                <a href="<?php echo base_url().'admin/soal/photograps/data_kelompok_soal/'.$soal->nama_paket.'4_5'.$soal->id_part.'4_5'.$soal->id_kelompok_soal ?>">Kelompok</a>
+                <?php } ?>
+              </td>
+              <td><center>
+                <a href="<?php echo base_url(). 'admin/soal/photograps/edit/' . $soal->id_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
+                <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#ModalHapus<?php echo $soal->id_soal; ?>" ><i class="fa fa-trash"></i></a>
+              </center></td>
+            </tr>
 
-            </td>
-            <td><center>
-              <a href="<?php echo base_url(). 'admin/soal/photograps/edit/' . $soal->id_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
-              <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#ModalHapus<?php echo $soal->id_soal; ?>" ><i class="fa fa-trash"></i></a>
-            </center></td>
-          </tr>
-
-          <!-- MODAL Hapus -->
-          <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalHapus<?php echo $soal->id_soal; ?>">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Delete this data?</h5>
-                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div class="modal-body">Apakah kamu yakin ingin menghapus data ini ?</div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a href="<?php echo base_url(). 'admin/soal/photograps/delete/' . $soal->id_soal?>" class="btn btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-trash"></i>
-                    </span>
-                    <span class="text">Delete</span>
-                  </a>
+            <!-- MODAL Hapus -->
+            <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalHapus<?php echo $soal->id_soal; ?>">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete this data?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">Apakah kamu yakin ingin menghapus data ini ?</div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a href="<?php echo base_url(). 'admin/soal/photograps/delete/' . $soal->id_soal?>" class="btn btn-danger btn-icon-split">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                      <span class="text">Delete</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!--END MODAL Hapus-->
+            <!--END MODAL Hapus-->
 
-          <?php } ?>
-        </tbody>
-      </table>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <?php 
-  $this->load->view('v_admin/v_admin_footer');
-  ?>
+    <?php 
+    $this->load->view('v_admin/v_admin_footer');
+    ?>
 
 
-  <script src="<?php echo base_url(); ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/vendor/summernote/summernote.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#dataTable').DataTable({
+    <script src="<?php echo base_url(); ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/vendor/summernote/summernote.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#dataTable').DataTable({
+        });
       });
-    });
 
 
-    $('#notifications').slideDown('slow').delay(5000).slideUp('slow');
-    $('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
-    $('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
-    $('#notifications3').slideDown('slow').delay(5000).slideUp('slow');
-    $('#notifications4').slideDown('slow').delay(5000).slideUp('slow');
+      $('#notifications').slideDown('slow').delay(5000).slideUp('slow');
+      $('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
+      $('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
+      $('#notifications3').slideDown('slow').delay(5000).slideUp('slow');
+      $('#notifications4').slideDown('slow').delay(5000).slideUp('slow');
 
-  </script>
+    </script>

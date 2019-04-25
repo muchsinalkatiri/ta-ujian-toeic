@@ -74,14 +74,16 @@ class Photograps extends CI_Controller {
 			// Apakah user upload gambar?
 			if ($nomer_soal < 1 || $nomer_soal >10) { //cek nomer soal bener ta gak
 				$this->session->set_flashdata('nomer_soal_msg','nomer soal harus antara 1-10');    
-				redirect('admin/soal/photograps/tambah/'.$nama_paket.'4_5'.$id_part);
+				if($id_kelompok_soal == 0){redirect('admin/soal/question_response/data_soal/'.$nama_paket.'4_5'.$id_part);}
+				else{redirect('admin/soal/question_response/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 			}
 			else{//nomer soal bener
 				$query = $this->db->get_where('data_soal', array('nomer_soal' => $nomer_soal,'part_soal'=> $nama_part, 'nama_paket' => $nama_paket, 'id_part'=> $id_part));
 				$check = $query->num_rows();
 				if($check != 0){ //cek nomer soal di paket itu sudah ada apa belum
 					$this->session->set_flashdata('nomer_soal_msg','nomer soal ' .$nomer_soal.' sudah ada ');    
-					redirect('admin/soal/photograps/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
+					if($id_kelompok_soal == 0){redirect('admin/soal/question_response/data_soal/'.$nama_paket.'4_5'.$id_part);}
+					else{redirect('admin/soal/question_response/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 				}
 				else{//nomer soal di paket belum ada
 					if ( isset($_FILES['gambar_soal']) && $_FILES['gambar_soal']['size'] > 0 )//cek gambar dimasukan ndak
@@ -349,6 +351,7 @@ class Photograps extends CI_Controller {
 			'nama_paket' => $nama_paket,
 			'id_part' => $id_part,
 			'bacaan' => $bacaan,
+			'jenis_soal' => 'listening',
 			'tanggal_dibuat'=> date("Y-m-d")
 			);
 		$insert = $this->soal_model->create('kelompok_soal',$data);
