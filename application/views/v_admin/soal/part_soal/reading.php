@@ -68,10 +68,13 @@ $this->load->view('v_admin/v_admin_header');
             <tbody>
               <?php foreach ($part_soal as $data_part_soal ) {
                 if($data_part_soal->nama_part == 'Incomplete Sentences'){
+                  $nama_part = 'incomplete_sentences';
                   $max_soal = 40;
                 }elseif($data_part_soal->nama_part == 'Text Completion'){
+                  $nama_part = 'text_completion';
                   $max_soal = 12;
                 }elseif($data_part_soal->nama_part == 'Reading Comprehension'){
+                  $nama_part = 'reading_comprehension';
                   $max_soal = 48;
                 }
                 $total_persen = ($data_part_soal->jumlah_soal * 100)/$max_soal;
@@ -98,7 +101,7 @@ $this->load->view('v_admin/v_admin_header');
                   <div class="mr-1 font-weight-bold text-gray-800"><?php echo $total_persen.'% ('.$data_part_soal->jumlah_soal.'/'.$max_soal.')' ;?></div>
                 </td> 
                 <td>
-                 <a  href="#" class="mb-1 text-xs btn btn-danger btn-icon-split">
+                 <a  href="<?php echo base_url(). 'admin/soal/' . $nama_part.'/data_soal/'.$data_part_soal->nama_paket.'4_5'.$data_part_soal->id_part ?>" class="mb-1 text-xs btn btn-danger btn-icon-split">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus fa-sm"></i>
                   </span>

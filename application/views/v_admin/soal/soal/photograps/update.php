@@ -10,7 +10,7 @@ $this->load->view('v_admin/v_admin_header');
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/paket_soal') ?>">Data Paket Soal</a></li>
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/part_soal/'.$soal->jenis_soal).'/'.$soal->nama_paket ?>">Data Part Soal</a></li>
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/'.$this->uri->segment('3').'/data_soal/'.$soal->nama_paket.'4_5'.$soal->id_part)  ?>">Data Soal</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Tambah Data Soal</li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Data Soal</li>
   </ol>
 </nav> <!-- tutup breadcumb -->
 
