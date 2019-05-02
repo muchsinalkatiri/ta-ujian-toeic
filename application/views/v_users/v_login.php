@@ -19,7 +19,7 @@
 
 </head>
 <?php echo $this->session->flashdata('msg1'); ?>
-<body class="bg-gradient-info">
+<body class="bg-gray-900">
 
   <div class="container">
 
@@ -58,11 +58,11 @@
                         <label class="custom-control-label" for="customCheck">Show Password</label>
                       </div>
                     </div>
-                    <button type="submit" class="btn bg-gradient-info text-gray-100 btn-user btn-block">
+                    <button type="submit" class="btn bg-gray-900 text-gray-100 btn-user btn-block">
                       Login
                     </button>
                     <hr>
-                    <a href="<?php echo base_url('user/register') ?>" class="btn bg-gradient-danger text-gray-100 btn-user btn-block">
+                    <a href="<?php echo base_url('user/register') ?>" class="btn bg-gray-400 text-gray-900 btn-user btn-block">
                       Create an Account!
                     </a>
                   </form>

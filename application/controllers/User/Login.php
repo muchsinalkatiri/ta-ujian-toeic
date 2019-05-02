@@ -40,7 +40,7 @@ class login extends CI_Controller {
 			if($cek_user != FALSE){
 				foreach ($cek_user as $apps) {
 					$session_data = array(
-						'id_admin' => $apps->id_admin,
+						'id_mahasiswa_terdaftar' => $apps->id_mahasiswa_terdaftar,
 						'username' => $apps->username,
 						'password' => $apps->password,
 						'foto' => $apps->foto,

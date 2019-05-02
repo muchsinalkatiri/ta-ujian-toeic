@@ -10811,6 +10811,9 @@ a:focus {
   justify-content: center;
 }
 
+.border-left-gray-800 {
+  border-left: 0.25rem solid #5a5c69 !important;
+}
 .border-left-primary {
   border-left: 0.25rem solid #4e73df !important;
 }
@@ -12036,3 +12039,4 @@ width: 150px;
     border-top-right-radius: 0.5em 0.5em;
     border-bottom-right-radius: 1em 0.7em;
 }
+

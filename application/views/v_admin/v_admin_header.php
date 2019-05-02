@@ -165,12 +165,18 @@
             <span>Data Soal</span></a>
           </li>
  
+              <!-- Divider -->
+              <hr class="sidebar-divider">
 
+              <!-- Heading -->
+              <div class="sidebar-heading">
+                Ujian
+              </div>
               <!-- Nav Item - Jawaban -->
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?php echo base_url('admin/sesi_ujian') ?>">
                   <i class="fas fa-fw fa-reply"></i>
-                  <span>Data Jawaban</span></a>
+                  <span>Sesi Ujian</span></a>
                 </li>
 
                 <!-- Divider -->
