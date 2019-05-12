@@ -109,10 +109,18 @@ $this->load->view('v_admin/v_admin_header');
   <script src="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/vendor/summernote/summernote.js"></script>
   <script type="text/javascript">
-    $(document).ready(function() {
-      $('#dataTable').DataTable({
-      });
-    });
+        $(document).ready(function() {
+          $('#dataTable').DataTable({
+            columnDefs: [ {
+              targets: [1],
+              render: function ( data, type, row ) {
+                return data.length > 5 ?
+                data.substr( 0, 5 ) +'…' :
+                data;
+              }
+            } ]
+          });
+        });
 
 
     $('#notifications').slideDown('slow').delay(5000).slideUp('slow');

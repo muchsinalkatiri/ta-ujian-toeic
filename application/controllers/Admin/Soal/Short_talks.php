@@ -302,7 +302,7 @@ class Short_talks extends CI_Controller {
 
 		list($nama_paket, $id_part, $id_kelompok_soal) = explode('4_5', $nama_paket_id_part, 3); //split
 		$nama_paket = str_replace('%20', ' ', $nama_paket); //replace
-		$nama_part = 'Conversation';
+		$nama_part = 'Short Talks';
 
 		$bacaan = $this->input->post('bacaan', FALSE);
 

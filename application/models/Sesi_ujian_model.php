@@ -8,8 +8,14 @@ class Sesi_ujian_model extends CI_Model {
 
 
   function get_all_data() { //ambil data mahasiswa dari table barang yang akan di generate ke datatable
-
-  	return $this->db->get('sesi_ujian');
+// SELECT id_sesi_ujian, nama_sesi_ujian, waktu_dimulai, waktu_berakhir, durasi, status, nama as nama_admin
+// FROM
+// sesi_ujian sj
+// LEFT JOIN data_admin da on sj.id_admin = da.id_admin
+    $this->db->select('id_sesi_ujian, nama_sesi_ujian, waktu_dimulai, waktu_berakhir, durasi, status, nama as nama_admin');
+    $this->db->from('sesi_ujian sj');
+    $this->db->join('data_admin da', 'sj.id_admin = da.id_admin', 'left');
+  	return $this->db->get();
   }
 
     public function get_update_data_by_id($where,$table){      

@@ -76,7 +76,7 @@ $this->load->view('v_admin/v_admin_header');
                 <th>NAMA SESI</th>
                 <th>WAKTU DIMULAI</th>
                 <th>WAKTU BERAKHIR</th>
-                <th>ID ADMIN</th>
+                <th>NAMA ADMIN</th>
                 <th>STATUS</th>
                 <th>ACTION</th>
               </tr>
@@ -86,10 +86,12 @@ $this->load->view('v_admin/v_admin_header');
                 if ($sesi->status == 'dihentikan') {
                   $status = 'dihentikan';
                 }else{                  
-                  if ($sesi->waktu_berakhir > date('Y-m-d H:i:s')) {
+                  if ($sesi->waktu_berakhir > date('Y-m-d H:i:s') && $sesi->waktu_dimulai < date('Y-m-d H:i:s')) {
                     $status = 'tersedia';
-                  }elseif ($sesi->waktu_berakhir < date('Y-m-d H:i:s')){
+                  }elseif ($sesi->waktu_berakhir < date('Y-m-d H:i:s') ){
                     $status = 'berakhir';
+                  }elseif ($sesi->waktu_dimulai > date('Y-m-d H:i:s')){
+                    $status = 'belum dibuka';
                   }
                 }
                 ?>
@@ -97,7 +99,7 @@ $this->load->view('v_admin/v_admin_header');
                   <td><?php echo $sesi->nama_sesi_ujian ?></td>
                   <td><?php echo $sesi->waktu_dimulai ?></td>
                   <td><?php echo $sesi->waktu_berakhir ?></td>
-                  <td><?php echo $sesi->id_admin ?></td>
+                  <td><?php echo $sesi->nama_admin ?></td>
                   <td><?php echo $status ?></td>
                   <td><center>
                     <?php if($sesi->status != 'dihentikan'){ ?>
@@ -119,7 +121,7 @@ $this->load->view('v_admin/v_admin_header');
                             <span aria-hidden="true">×</span>
                           </button>
                         </div>
-                        <div class="modal-body">Apakah kamu yakin ingin hentikan sesi <?php echo $sesi->id_sesi_ujian; ?> ?</div>
+                        <div class="modal-body">Apakah kamu yakin ingin hentikan sesi <?php echo $sesi->nama_sesi_ujian; ?> ?</div>
                         <div class="modal-footer">
                           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                           <a href="<?php echo base_url(). 'admin/sesi_ujian/berhenti/'.$sesi->id_sesi_ujian?>" class="btn btn-danger btn-icon-split">

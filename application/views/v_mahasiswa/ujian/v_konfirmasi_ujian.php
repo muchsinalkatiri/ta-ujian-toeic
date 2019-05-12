@@ -9,8 +9,8 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
 
   </div>
   <div class="col-md-6">
-    <h1 class="h3 mb-4 text-gray-800"><?php echo $page_title ?></h1>
-    <div class="card shadow mb-4">
+    <h3 class="mb-2 text-gray-800"><?php echo $page_title ?></h3>
+    <div class="card shadow mb-2">
       <div class="card-body">
         <strong>UJIAN TOEIC ONLINE JTI</strong><br>
         <hr>
@@ -22,7 +22,8 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
         <strong>Jumlah Soal Reading :</strong> 100 Soal <br>
         <strong>Jumlah Soal Listening :</strong> 100 Soal <br>
         <strong>Jumlah Soal :</strong> 200 Soal <br>
-        <br><br>
+        <br>
+        <p class="text-small" style="border:1px; border-style:solid; border-color:gray; border-radius: 10px; padding: 5px;">Ujian akan dimulai dengan pemutaran audio untuk sesi listening. Audio akan langsung diputar saat anda menekan tombol kerjakan.</p><br>
         <form class="user" action="<?php echo base_url('mahasiswa/ujian/create_ujian') ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" value="<?php echo $sesi->id_sesi_ujian?>" name="id_sesi_ujian">
         <button type="submit" class="btn btn-primary btn-icon-split btn-sm"><span class="text">Kerjakan</span></button>

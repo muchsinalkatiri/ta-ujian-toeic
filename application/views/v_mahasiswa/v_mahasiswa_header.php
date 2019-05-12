@@ -19,7 +19,7 @@
 	<link href="<?php echo base_url(); ?>assets/css/sb-admin-2.css" rel="stylesheet">
 </head>
 
-<body id="page-top">
+<body id="page-top" class="bg-gray-100">
 
 
 	<div id="content-wrapper" class="d-flex flex-column">

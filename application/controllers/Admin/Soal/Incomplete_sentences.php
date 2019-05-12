@@ -337,7 +337,7 @@ class Incomplete_sentences extends CI_Controller {
 
 		$data['page_title'] = 'Edit Kelompok soal';
 
-		$nama_part = 'Short Talks';
+		$nama_part = 'Incomplete Sentences';
 		// Get data dari model berdasarkan $id
 		$data['kelompok'] = $this->soal_model->get_data_kelompok_by_id($id_kelompok_soal, $nama_part);
 		$id_part = $data['kelompok']->id_part;

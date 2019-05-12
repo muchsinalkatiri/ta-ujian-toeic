@@ -24,10 +24,12 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
               if ($sesi->status == 'dihentikan') {
                 $status = 'dihentikan';
               }else{                  
-                if ($sesi->waktu_berakhir > date('Y-m-d H:i:s')) {
+                if ($sesi->waktu_berakhir > date('Y-m-d H:i:s') && $sesi->waktu_dimulai < date('Y-m-d H:i:s')) {
                   $status = 'tersedia';
-                }elseif ($sesi->waktu_berakhir < date('Y-m-d H:i:s')){
+                }elseif ($sesi->waktu_berakhir < date('Y-m-d H:i:s') ){
                   $status = 'berakhir';
+                }elseif ($sesi->waktu_dimulai > date('Y-m-d H:i:s')){
+                  $status = 'belum dibuka';
                 }
               }
               ?>
@@ -47,7 +49,7 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
                       $data_ujian = $query->result();
                       $id_data_ujian = $data_ujian[0]->id_data_ujian;
                       $status_pengerjaan = $data_ujian[0]->status_pengerjaan;
-                      if($status_pengerjaan == 'mengerjakan'){
+                      if($status_pengerjaan == 'mengerjakan' &&  $data_ujian[0]->waktu_berakhir > date('Y-m-d H:i:s')){
                         ?>
                         <a href="<?php echo base_url(). 'mahasiswa/ujian/pengerjaan/' . $id_data_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-secondary text-gray-100 shadow-sm"  ><i class="fas fa-angle-double-right  text-white-50"></i> Lanjutkan Ujian</a>
                         <?php } ?>
