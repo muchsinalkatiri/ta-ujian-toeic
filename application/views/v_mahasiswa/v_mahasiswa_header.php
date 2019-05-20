@@ -19,10 +19,10 @@
 	<link href="<?php echo base_url(); ?>assets/css/sb-admin-2.css" rel="stylesheet">
 </head>
 
-<body id="page-top" class="bg-gray-100">
+<body id="page-top"  class="bg-gray-100">
 
 
-	<div id="content-wrapper" class="d-flex flex-column">
+	<div id="content-wrapper" style="min-height: 600px; " class="d-flex flex-column">
 		<nav class="navbar navbar-expand navbar-light bg-gray-900 text-white topbar mb-4 static-top shadow">
 			<ul class="nav navbar-nav">
 				<li class="nav-item ">
@@ -64,4 +64,6 @@
 				</li>
 			</ul>
 		</nav>
-                  <div class="container-fluid ">
+                  <div class="container-fluid"  ">
+                  <!-- <div  style="min-height: 470px;">  -->
+                  

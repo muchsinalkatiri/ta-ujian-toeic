@@ -13,12 +13,7 @@ class dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$data['page_title'] = 'Dashboard Mahasiswa';
-		// Must login
-		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') != '2' ) 
-			redirect('user/login');
-
-		$this->load->view('v_mahasiswa/v_db',$data);
+		redirect('mahasiswa/ujian');
 	}
 	
 }

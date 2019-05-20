@@ -15,6 +15,8 @@
 						<?php if($soal->nomer_soal == 1 ){ ?> <!-- untuk soal nomer 1, khusus, pembukaan section listening  -->
 							<h3 class="text-center" style=" font-weight: bold; ">Section 1</h3>
 							<h1  class="text-center" style=" font-weight: 800; border-bottom: solid 3px; ">Listening Test</h1>
+						<?php } ?> <!-- tutup -->
+						<?php if(!empty($paket->penjelasan_listening) && $soal->nomer_soal == 1 ){ ?> <!-- penjelasan  -->
 							<p class="text-justify mb-3" style="border:1px; border-style:solid; border-color:gray; border-radius: 5px; padding: 3px;"><?php echo $paket->penjelasan_listening; ?></p>
 						<?php } ?> <!-- tutup -->
 						<?php if($soal->nomer_soal == 1 || $soal->nomer_soal == 11 || $soal->nomer_soal == 41 || $soal->nomer_soal == 71 ){ ?> <!-- untuk soal pembukaan part  -->
@@ -97,27 +99,35 @@
 								<input type=hidden name=nomer_soal value=<?php echo $soal->nomer_soal; ?>>
 								<input type=hidden name=id_data_ujian value=<?php echo $ujian->id_data_ujian; ?>>
 								<center>
-						            <button type="submit" class="mt-5 btn bg-gray-900 text-gray-100" formaction="<?php echo base_url('mahasiswa/ujian/masukan_jawaban/1') ?>">
+									<?php if($soal->nomer_soal != 1){ ?>
+						            <button type="submit" class="mt-2 btn bg-gray-900 text-gray-100" formaction="<?php echo base_url('mahasiswa/ujian/masukan_jawaban/1') ?>">
 						              <i class="fa fa-arrow-circle-left"></i> Previous
 	            					</button>
-						            <button type="submit" class="mt-5 btn bg-gray-900 text-gray-100 " formaction="<?php echo base_url('mahasiswa/ujian/masukan_jawaban/0') ?>">
+									<?php } ?> <!-- tutup -->
+						            <button type="submit" class="mt-2 btn bg-gray-900 text-gray-100 " formaction="<?php echo base_url('mahasiswa/ujian/masukan_jawaban/0') ?>">
 						              Confirm
 	            					</button>
-						            <button type="submit"  class="mt-5 btn bg-gray-900 text-gray-100 " formaction="<?php echo base_url('mahasiswa/ujian/masukan_jawaban/2') ?>">
+									<?php if($soal->nomer_soal != 100){ ?>
+						            <button type="submit"  class="mt-2 btn bg-gray-900 text-gray-100 " formaction="<?php echo base_url('mahasiswa/ujian/masukan_jawaban/2') ?>">
 						              Next <i class="fa fa-arrow-circle-right"></i> 
 	            					</button>
+									<?php } ?> <!-- tutup -->
             					</center>
 							</form>
 					<?php }else{ ?> <!-- jika nomer soal kosong -->
 						Soal Tidak Tersedia
 						<?php $next = $nomer_soal +1; $prev=$nomer_soal-1; ?>
 						<center>
+							<?php if($nomer_soal != 1){ ?>
 							<a type="submit"  class="mt-5 btn bg-gray-900 text-gray-100 " href="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$id_data_ujian.'4_5'.$prev); ?>">
 				              <i class="fa fa-arrow-circle-left"></i> Previous  
 	    					</a>
+							<?php } ?> <!-- tutup -->
+							<?php if($nomer_soal != 100){ ?>
 							<a type="submit"  class="mt-5 btn bg-gray-900 text-gray-100 " href="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$id_data_ujian.'4_5'.$next); ?>">
 				              Next <i class="fa fa-arrow-circle-right"></i> 
 	    					</a>
+							<?php } ?> <!-- tutup -->
     					</center>
 					<?php } ?> <!-- tutup -->
 					</div>

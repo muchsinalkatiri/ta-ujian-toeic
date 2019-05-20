@@ -72,11 +72,12 @@ $this->load->view('v_admin/v_admin_header');
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable"  cellspacing="0">
             <thead>
-              <tr>
+              <tr class="text-xs ">
                 <th>NAMA SESI</th>
                 <th>WAKTU DIMULAI</th>
                 <th>WAKTU BERAKHIR</th>
                 <th>NAMA ADMIN</th>
+                <th>PESERTA</th>
                 <th>STATUS</th>
                 <th>ACTION</th>
               </tr>
@@ -96,10 +97,11 @@ $this->load->view('v_admin/v_admin_header');
                 }
                 ?>
                 <tr>
-                  <td><?php echo $sesi->nama_sesi_ujian ?></td>
+                  <td><a href="<?php echo base_url(). 'admin/sesi_ujian/peserta/' . $sesi->id_sesi_ujian?>" class="btn-sm text-gray-100 bg-gray-900" ><?php echo $sesi->nama_sesi_ujian ?></a></td>
                   <td><?php echo $sesi->waktu_dimulai ?></td>
                   <td><?php echo $sesi->waktu_berakhir ?></td>
                   <td><?php echo $sesi->nama_admin ?></td>
+                  <td><?php echo $sesi->jumlah_peserta ?></td>
                   <td><?php echo $status ?></td>
                   <td><center>
                     <?php if($sesi->status != 'dihentikan'){ ?>

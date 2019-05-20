@@ -4,7 +4,7 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
 
 
 <!-- Page Heading -->
-<div class="container">
+<div class="container" >
 	<div class="container">
 		<h1 class="h3 mb-4 text-gray-800"><?php echo $page_title ?></h1>
 		<div class="row">

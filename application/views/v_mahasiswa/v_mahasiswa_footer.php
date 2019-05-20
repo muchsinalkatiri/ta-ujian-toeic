@@ -1,13 +1,14 @@
 </div>
-<!-- 
-		<footer class="sticky-footer  bg-white">
+<!-- </div>
+
+		<footer  class="sticky-footer  bg-gray-100">
 			<div class="content-wrap my-auto">
 				<div class="copyright text-center my-auto">
 					<span>Copyright &copy; Muchsin & Istna</span>
 				</div>
 			</div>
-		</footer> -->
-	</div>
+		</footer>
+	</div> -->
 
 	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top">

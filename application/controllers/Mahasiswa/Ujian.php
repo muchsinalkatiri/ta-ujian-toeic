@@ -106,7 +106,7 @@ class Ujian extends CI_Controller {
 		$id_mahasiswa_terdaftar = $this->session->userdata('id_mahasiswa_terdaftar');
 
 		$data['ujian']=$this->ujian_model->get_data_ujian_by_id_mahasiswa_and_id_ujian($id_data_ujian,$id_mahasiswa_terdaftar);
-		if ( empty($data['ujian']) || empty($id_data_ujian) || $data['ujian']->waktu_berakhir < date("Y-m-d H:i:s")  ) redirect('mahasiswa/ujian');
+		if ( empty($data['ujian']) || empty($id_data_ujian) || $data['ujian']->waktu_berakhir < date("Y-m-d H:i:s") || $data['ujian']->status_pengerjaan != 'mengerjakan'  ) redirect('mahasiswa/ujian');
 
 		$nama_paket = $data['ujian']->nama_paket;
 		$data['paket']=$this->ujian_model->get_data_paket_by_nama_paket($nama_paket);
@@ -149,8 +149,13 @@ class Ujian extends CI_Controller {
 		$nama_paket =  $data['ujian']->nama_paket;
 		$data['paket']=$this->ujian_model->get_data_paket_by_nama_paket($nama_paket);
 		$data['soal']=$this->ujian_model->get_data_soal_by_nama_paket_n_nomer_soal($nama_paket,$nomer_soal);
-		$id_part = $data['soal']->id_part;
-		$data['part']=$this->ujian_model->get_data_part_by_id_part($id_part);
+		$data['jawaban']=$this->ujian_model->get_jawabanmahasiswa_by_id_data_ujian_and_nomer_soal($id_data_ujian,$nomer_soal);
+		if(!empty($data['soal'])){
+			$id_part = $data['soal']->id_part;
+			$data['part']=$this->ujian_model->get_data_part_by_id_part($id_part);
+			$id_kelompok_soal = $data['soal']->id_kelompok_soal;
+			$data['kelompok']=$this->ujian_model->get_data_kelompok_by_id_kelompok($id_kelompok_soal);
+		}
 		$this->load->view('v_mahasiswa/ujian/v_frameujian_reading', $data);
 	}
 	public function masukan_jawaban($redirect=null){
@@ -189,7 +194,7 @@ class Ujian extends CI_Controller {
 					$insert = $this->ujian_model->insert_jawaban('jawaban_mahasiswa',$data);
 				}
 			}
-			redirect('mahasiswa/ujian/frameujian_listening/'.$id_data_ujian."4_5".$rdr);	
+			redirect('mahasiswa/ujian/frameujian_'.$jenis_soal.'/'.$id_data_ujian."4_5".$rdr);	
 		}else{
 			$where = array(
 				'id_data_ujian' => $id_data_ujian,
@@ -203,7 +208,7 @@ class Ujian extends CI_Controller {
 					$update = $this->ujian_model->update($where,$data2,'jawaban_mahasiswa');
 				}
 			}
-			redirect('mahasiswa/ujian/frameujian_listening/'.$id_data_ujian."4_5".$rdr);
+			redirect('mahasiswa/ujian/frameujian_'.$jenis_soal.'/'.$id_data_ujian."4_5".$rdr);
 		}
 	}
 	public function penilaian(){

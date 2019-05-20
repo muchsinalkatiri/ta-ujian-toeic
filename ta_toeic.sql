@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2019 at 05:03 PM
+-- Generation Time: May 20, 2019 at 05:27 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -1427,12 +1427,38 @@ INSERT INTO `data_mahasiswa_terdaftar` (`id_mahasiswa_terdaftar`, `username`, `p
 
 CREATE TABLE `data_nilai` (
   `id_data_nilai` int(11) NOT NULL,
-  `score_reading` int(50) NOT NULL,
-  `score_listening` int(50) NOT NULL,
-  `level_of_competen` varchar(100) NOT NULL,
-  `total_score` int(50) NOT NULL,
-  `id_mahasisa_terdaftar` int(11) NOT NULL
+  `id_mahasiswa_terdaftar` int(11) NOT NULL,
+  `id_data_ujian` int(11) NOT NULL,
+  `terjawab_listening` int(11) NOT NULL,
+  `terjawab_reading` int(11) NOT NULL,
+  `benar_listening` int(11) NOT NULL,
+  `benar_reading` int(11) NOT NULL,
+  `score_listening` int(11) NOT NULL,
+  `score_reading` int(11) NOT NULL,
+  `total_score` int(11) NOT NULL,
+  `level_of_competent` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `data_nilai`
+--
+
+INSERT INTO `data_nilai` (`id_data_nilai`, `id_mahasiswa_terdaftar`, `id_data_ujian`, `terjawab_listening`, `terjawab_reading`, `benar_listening`, `benar_reading`, `score_listening`, `score_reading`, `total_score`, `level_of_competent`) VALUES
+(11, 1, 62, 0, 0, 0, 0, 5, 5, 10, 'Beginner 1'),
+(12, 1, 63, 0, 0, 0, 0, 5, 5, 10, 'Beginner 1');
+
+--
+-- Triggers `data_nilai`
+--
+DELIMITER $$
+CREATE TRIGGER `TG_UPDATE_DATA_UJIAN` BEFORE INSERT ON `data_nilai` FOR EACH ROW BEGIN
+	UPDATE data_ujian SET status_pengerjaan = 'selesai', waktu_selesai = now() WHERE id_data_ujian = new.id_data_ujian;
+    
+    DELETE FROM jawaban_mahasiswa WHERE id_data_ujian = new.id_data_ujian;
+    
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1457,8 +1483,8 @@ CREATE TABLE `data_paket` (
 --
 
 INSERT INTO `data_paket` (`id_paket`, `nama_paket`, `tanggal_dibuat`, `file_audio`, `jumlah_soal_listening`, `jumlah_soal_reading`, `jumlah_soal`, `penjelasan_listening`, `penjelasan_reading`) VALUES
-(30, 'paket 1', '2019-04-24', 'paket_1-listening.mp3', 12, 0, 12, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet, tellus vel bibendum facilisis, arcu augue blandit libero, quis fermentum nulla dui non augue. Sed pulvinar lacus eget tellus commodo, sed vulputate lacus tincidunt. Aliquam mattis in libero a laoreet. Duis ac varius tellus. Sed ipsum nisl, pellentesque ut velit vel, lacinia dignissim elit. In bibendum faucibus leo, vel sollicitudin dolor lacinia id. Sed fermentum vestibulum lectus, sit amet dictum nulla condimentum a. Praesent dapibus quam ut imperdiet sagittis. Sed purus felis, mattis id tempus ac, tempor in neque. Cras mollis est vel neque egestas pharetra.', ''),
-(31, 'mmmmmmm', '2019-04-26', 'mmmmmmm-listening.mp3', 8, 2, 10, 'nnnnnnnnaaa', '');
+(30, 'paket 1', '2019-04-24', 'paket_1-listening1.mp3', 12, 2, 14, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet, tellus vel bibendum facilisis, arcu augue blandit libero, quis fermentum nulla dui non augue. Sed pulvinar lacus eget tellus commodo, sed vulputate lacus tincidunt. Aliquam mattis in libero a laoreet. Duis ac varius tellus. Sed ipsum nisl, pellentesque ut velit vel, lacinia dignissim elit. In bibendum faucibus leo, vel sollicitudin dolor lacinia id. Sed fermentum vestibulum lectus, sit amet dictum nulla condimentum a. Praesent dapibus quam ut imperdiet sagittis. Sed purus felis, mattis id tempus ac, tempor in neque. Cras mollis est vel neque egestas pharetra.', 'penjelasan listening'),
+(31, 'Paket 2', '2019-04-26', 'mmmmmmm-listening.mp3', 8, 2, 10, 'nnnnnnnnaaa', '');
 
 -- --------------------------------------------------------
 
@@ -1487,16 +1513,16 @@ INSERT INTO `data_part_soal` (`id_part`, `untuk_soal_nomor`, `nama_part`, `direc
 (63, '11-40', 'Question-Response', 'aaaa', '<p>looo</p>', 'listening', 4, 'paket 1'),
 (64, '41-70', 'Conversation', 'bbb', '', 'listening', 3, 'paket 1'),
 (65, '71-100', 'Short Talks', '', '', 'listening', 3, 'paket 1'),
-(66, '101-140', 'Incomplete Sentences', '', '', 'reading', 0, 'paket 1'),
+(66, '101-140', 'Incomplete Sentences', '', '', 'reading', 2, 'paket 1'),
 (67, '141-152', 'Text Completion', '', '', 'reading', 0, 'paket 1'),
 (68, '153-200', 'Reading Comprehension', '', '', 'reading', 0, 'paket 1'),
-(69, '1-10', 'Photograps', '', '', 'listening', 2, 'mmmmmmm'),
-(70, '11-40', 'Question-Response', '', '', 'listening', 1, 'mmmmmmm'),
-(71, '41-70', 'Conversation', '', '', 'listening', 1, 'mmmmmmm'),
-(72, '71-100', 'Short Talks', '', '', 'listening', 4, 'mmmmmmm'),
-(73, '101-140', 'Incomplete Sentences', '', '', 'reading', 1, 'mmmmmmm'),
-(74, '141-152', 'Text Completion', '', '', 'reading', 1, 'mmmmmmm'),
-(75, '153-200', 'Reading Comprehension', '', '', 'reading', 0, 'mmmmmmm');
+(69, '1-10', 'Photograps', '', '', 'listening', 2, 'Paket 2'),
+(70, '11-40', 'Question-Response', '', '', 'listening', 1, 'Paket 2'),
+(71, '41-70', 'Conversation', '', '', 'listening', 1, 'Paket 2'),
+(72, '71-100', 'Short Talks', '', '', 'listening', 4, 'Paket 2'),
+(73, '101-140', 'Incomplete Sentences', '', '', 'reading', 1, 'Paket 2'),
+(74, '141-152', 'Text Completion', '', '', 'reading', 1, 'Paket 2'),
+(75, '153-200', 'Reading Comprehension', '', '', 'reading', 0, 'Paket 2');
 
 -- --------------------------------------------------------
 
@@ -1526,28 +1552,30 @@ CREATE TABLE `data_soal` (
 --
 
 INSERT INTO `data_soal` (`id_soal`, `nomer_soal`, `isi_soal`, `part_soal`, `jenis_soal`, `id_kelompok_soal`, `nama_paket`, `id_part`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `jawaban`, `tanggal_dibuat`) VALUES
-(58, 2, 'paket_1-part_62-Photograps-2.png', 'Photograps', 'listening', 0, 'paket 1', 62, '', '', '', '', 'a', '2019-04-24'),
+(58, 2, 'paket_1-part_62-Photograps-2.png', 'Photograps', 'listening', 0, 'paket 1', 62, '', '', '', '', 'c', '2019-04-24'),
 (61, 13, NULL, 'Question-Response', 'listening', 0, 'paket 1', 63, '', '', '', '', 'd', '2019-04-25'),
 (62, 14, NULL, 'Question-Response', 'listening', 0, 'paket 1', 63, '', '', '', '', 'd', '2019-04-25'),
 (66, 12, NULL, 'Question-Response', 'listening', 0, 'paket 1', 63, NULL, NULL, NULL, NULL, 'a', '2019-04-25'),
-(69, 1, 'paket_1-part_62-Photograps-1.jpg', 'Photograps', 'listening', 0, 'paket 1', 62, NULL, NULL, NULL, NULL, 'a', '2019-04-26'),
-(73, 41, 'ddddddddddddddd', 'Conversation', 'listening', 0, 'mmmmmmm', 71, 'aaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa', 'a', '2019-04-28'),
-(74, 1, 'mmmmmmm-part_69-Photograps-1.jpg', 'Photograps', 'listening', 0, 'mmmmmmm', 69, NULL, NULL, NULL, NULL, 'a', '2019-04-28'),
+(69, 1, 'paket_1-part_62-Photograps-1.jpg', 'Photograps', 'listening', 0, 'paket 1', 62, NULL, NULL, NULL, NULL, 'd', '2019-04-26'),
+(73, 41, 'ddddddddddddddd', 'Conversation', 'listening', 0, 'Paket 2', 71, 'aaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa', 'a', '2019-04-28'),
+(74, 1, 'mmmmmmm-part_69-Photograps-1.jpg', 'Photograps', 'listening', 0, 'Paket 2', 69, NULL, NULL, NULL, NULL, 'a', '2019-04-28'),
 (76, 44, 'muchsin ahasjhajs', 'Conversation', 'listening', 0, 'paket 1', 64, 'aaaaaaa', 'mmaaaaaa', 'ccccc ccc ccc ccc', 'iki bdener', 'd', '2019-04-28'),
-(77, 11, NULL, 'Question-Response', 'listening', 0, 'mmmmmmm', 70, NULL, NULL, NULL, NULL, 'a', '2019-04-28'),
-(78, 71, 'baca bacab acbacba cbacbaca', 'Short Talks', 'listening', 0, 'mmmmmmm', 72, 'aaaaaaaaaaa', 'mmaaaaaa', 'ccccc ccc ccc ccc', 'bbbbbbbbbbbb', 'a', '2019-04-28'),
-(79, 72, 'aaaaaaaa', 'Short Talks', 'listening', 0, 'mmmmmmm', 72, 'aaaaaaaaaaa', 'mmaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'cccccccccccccccc', 'a', '2019-04-28'),
-(80, 73, 'asasasasa', 'Short Talks', 'listening', 5, 'mmmmmmm', 72, 'aaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'ccccc ccc ccc ccc', 'cccccccccccccccc', 'b', '2019-04-28'),
-(81, 80, 'asasasa', 'Short Talks', 'listening', 0, 'mmmmmmm', 72, 'aaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'ccccc ccc ccc ccc', 'cccccccccccccccc', 'b', '2019-04-28'),
-(82, 101, 'sdasdasdsad saaaaaaaaaa', 'Incomplete Sentences', 'reading', 0, 'mmmmmmm', 73, 'salah', 'iki bener', 'salah', 'salah', 'b', '2019-04-28'),
-(84, 141, 'asasasasada', 'Text Completion', 'reading', 0, 'mmmmmmm', 74, 'aaaaaaa', 'mmaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'cccccccccccccccc', 'a', '2019-04-28'),
-(85, 2, 'mmmmmmm-part_69-Photograps-2.png', 'Photograps', 'listening', 0, 'mmmmmmm', 69, NULL, NULL, NULL, NULL, 'a', '2019-05-08'),
-(86, 11, NULL, 'Question-Response', 'listening', 0, 'paket 1', 63, NULL, NULL, NULL, NULL, 'c', '2019-05-09'),
+(77, 11, NULL, 'Question-Response', 'listening', 0, 'Paket 2', 70, NULL, NULL, NULL, NULL, 'a', '2019-04-28'),
+(78, 71, 'baca bacab acbacba cbacbaca', 'Short Talks', 'listening', 0, 'Paket 2', 72, 'aaaaaaaaaaa', 'mmaaaaaa', 'ccccc ccc ccc ccc', 'bbbbbbbbbbbb', 'a', '2019-04-28'),
+(79, 72, 'aaaaaaaa', 'Short Talks', 'listening', 0, 'Paket 2', 72, 'aaaaaaaaaaa', 'mmaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'cccccccccccccccc', 'a', '2019-04-28'),
+(80, 73, 'asasasasa', 'Short Talks', 'listening', 5, 'Paket 2', 72, 'aaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'ccccc ccc ccc ccc', 'cccccccccccccccc', 'b', '2019-04-28'),
+(81, 80, 'asasasa', 'Short Talks', 'listening', 0, 'Paket 2', 72, 'aaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'ccccc ccc ccc ccc', 'cccccccccccccccc', 'b', '2019-04-28'),
+(82, 101, 'sdasdasdsad saaaaaaaaaa', 'Incomplete Sentences', 'reading', 0, 'Paket 2', 73, 'salah', 'iki bener', 'salah', 'salah', 'b', '2019-04-28'),
+(84, 141, 'asasasasada', 'Text Completion', 'reading', 0, 'Paket 2', 74, 'aaaaaaa', 'mmaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'cccccccccccccccc', 'a', '2019-04-28'),
+(85, 2, 'mmmmmmm-part_69-Photograps-2.png', 'Photograps', 'listening', 0, 'Paket 2', 69, NULL, NULL, NULL, NULL, 'a', '2019-05-08'),
+(86, 11, NULL, 'Question-Response', 'listening', 0, 'paket 1', 63, NULL, NULL, NULL, NULL, 'b', '2019-05-09'),
 (87, 41, 'halloooo', 'Conversation', 'listening', 0, 'paket 1', 64, 'aaaaaaaaaaa', 'mmaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa', 'a', '2019-05-09'),
 (88, 42, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non ante semper, molestie nisi eu, aliquet nulla. Sed nec varius velit. Suspendisse enim quam, lobortis eget interdum sed, tincidunt nec erat. Proin ac vulputate magna. Maecenas eleifend et diam in lacinia. Ut gravida tincidunt aliquam. Etiam iaculis cursus commodo. Maecenas convallis, dolor et ornare ultricies, nunc ante dapibus dolor, ut pulvinar ipsum libero accumsan diam.', 'Conversation', 'listening', 0, 'paket 1', 64, 'entum diam ', 'm mi met', 'ra, odio vitae c', 'uam tincidunt, sed s', 'a', '2019-05-10'),
 (89, 71, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non ante semper, molestie nisi eu, aliquet nulla. Sed nec varius velit. Suspendisse enim quam, lobortis eget interdum sed, tincidunt nec erat. Proin ac vulputate magna. Maecenas eleifend et diam in lacinia. Ut gravida tincidunt aliquam. Etiam iaculis cursus commodo. Maecenas convallis, dolor et ornare ultricies, nunc ante dapibus dolor, ut pulvinar ipsum libero accumsan diam.', 'Short Talks', 'listening', 0, 'paket 1', 65, 'hahaha', 'mmaaaaaa', 'bbbbbbbbb', 'cccccccccccccccc', 'a', '2019-05-10'),
 (90, 72, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non ante semper, molestie nisi eu, aliquet nulla. Sed nec varius velit. Suspendisse enim quam, lobortis eget interdum sed, tincidunt nec erat. Proin ac vulputate magna. Maecenas eleifend et diam in lacinia. Ut gravida tincidunt aliquam. Etiam iaculis cursus commodo. Maecenas convallis, dolor et ornare ultricies, nunc ante dapibus dolor, ut pulvinar ipsum libero accumsan diam.', 'Short Talks', 'listening', 7, 'paket 1', 65, 'aaaaaaaaaaa', 'mmaaaaaa', 'bbbbbbbbb', 'cccccccccccccccc', 'a', '2019-05-10'),
-(91, 73, '        $(document).ready(function() {\r\n          $(\'#dataTable\').DataTable({\r\n            columnDefs: [ {\r\n              targets: [1],\r\n              render: function ( data, type, row ) {\r\n                return data.length > 5 ?\r\n                data.substr( 0, 5 ) +\'…\' :\r\n                data;\r\n              }\r\n            } ]\r\n          });\r\n        });', 'Short Talks', 'listening', 7, 'paket 1', 65, 'aaaaaaaaaaa', 'mmaaaaaa', 'salah', 'iki bdener', 'a', '2019-05-10');
+(91, 73, '        $(document).ready(function() {\r\n          $(\'#dataTable\').DataTable({\r\n            columnDefs: [ {\r\n              targets: [1],\r\n              render: function ( data, type, row ) {\r\n                return data.length > 5 ?\r\n                data.substr( 0, 5 ) +\'…\' :\r\n                data;\r\n              }\r\n            } ]\r\n          });\r\n        });', 'Short Talks', 'listening', 7, 'paket 1', 65, 'aaaaaaaaaaa', 'mmaaaaaa', 'salah', 'iki bdener', 'a', '2019-05-10'),
+(92, 101, 'adsadasaaaaaaaaaaaa', 'Incomplete Sentences', 'reading', 0, 'paket 1', 66, 'aaaaaaaaaaa', 'mmaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'bbbbbbbbbbbb', 'd', '2019-05-14'),
+(93, 102, '      &lt;?php if(!empty($paket->penjelasan_reading) ){ ?&gt; &lt;!-- penjelasan  --&gt;', 'Incomplete Sentences', 'reading', 0, 'paket 1', 66, 'aaaaaaaaaaa', 'mmaaaaaa', 'bbbbbbbbb', 'cccccccccccccccc', 'c', '2019-05-14');
 
 --
 -- Triggers `data_soal`
@@ -1629,11 +1657,8 @@ CREATE TABLE `data_ujian` (
 --
 
 INSERT INTO `data_ujian` (`id_data_ujian`, `id_mahasiswa_terdaftar`, `id_sesi_ujian`, `nama_paket`, `waktu_dimulai`, `waktu_berakhir`, `waktu_selesai`, `sisa_waktu`, `audio_curent_time`, `status_pengerjaan`) VALUES
-(48, 1, 43, 'paket 1', '2019-05-09 13:03:11', '2019-05-09 22:03:11', '0000-00-00 00:00:00', 7200, 0, 'mengerjakan'),
-(49, 4, 44, 'paket 1', '2019-05-10 13:43:09', '2019-05-10 16:43:09', '0000-00-00 00:00:00', 7200, 0, 'mengerjakan'),
-(50, 1, 44, 'mmmmmmm', '2019-05-10 22:31:38', '2019-05-21 00:31:38', '0000-00-00 00:00:00', 7200, 0, 'mengerjakan'),
-(51, 1, 45, 'paket 1', '2019-05-12 12:06:17', '2019-06-12 14:06:17', '0000-00-00 00:00:00', 7200, 0, 'mengerjakan'),
-(52, 3, 45, 'paket 1', '2019-05-12 20:29:36', '2019-05-12 22:29:36', '0000-00-00 00:00:00', 7200, 0, 'mengerjakan');
+(62, 1, 54, 'paket 1', '2019-05-20 21:22:20', '2019-05-20 23:22:20', '2019-05-20 21:24:09', 7200, 0, 'selesai'),
+(63, 1, 55, 'paket 1', '2019-05-20 21:29:44', '2019-05-20 21:30:11', '2019-05-20 21:30:14', 27, 0, 'selesai');
 
 --
 -- Triggers `data_ujian`
@@ -1670,24 +1695,6 @@ CREATE TABLE `jawaban_mahasiswa` (
   `id_data_ujian` int(11) NOT NULL,
   `jawaban` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `jawaban_mahasiswa`
---
-
-INSERT INTO `jawaban_mahasiswa` (`id_jawaban_mahasiswa`, `id_mahasiswa_terdaftar`, `nomer_soal`, `jenis_soal`, `id_data_ujian`, `jawaban`) VALUES
-(32, 1, 11, 'listening', 51, 'd'),
-(33, 1, 12, 'listening', 51, 'c'),
-(34, 1, 1, 'listening', 51, 'b'),
-(35, 1, 2, 'listening', 51, 'a'),
-(36, 1, 41, 'listening', 51, 'c'),
-(37, 1, 42, 'listening', 51, 'a'),
-(38, 1, 13, 'listening', 51, 'd'),
-(39, 1, 14, 'listening', 51, 'd'),
-(40, 3, 1, 'listening', 52, 'b'),
-(41, 3, 2, 'listening', 52, 'c'),
-(42, 3, 11, 'listening', 52, 'c'),
-(43, 3, 12, 'listening', 52, 'c');
 
 -- --------------------------------------------------------
 
@@ -1766,9 +1773,9 @@ CREATE TABLE `sesi_ujian` (
 --
 
 INSERT INTO `sesi_ujian` (`id_sesi_ujian`, `nama_sesi_ujian`, `waktu_dimulai`, `waktu_berakhir`, `durasi`, `id_admin`, `status`, `jumlah_peserta`) VALUES
-(43, 'UJIAN TOEIC 2', '2019-05-09 12:29:57', '2019-05-10 12:29:59', 7200, 1, 'tersedia', 1),
-(44, 'UJIAN TOEIC 3', '2019-05-10 13:38:45', '2019-05-11 13:38:47', 7200, 1, 'tersedia', 2),
-(45, 'UJIAN TOEIC 1', '2019-05-12 12:05:48', '2019-05-13 12:05:45', 7200, 1, 'tersedia', 2);
+(54, 'UJIAN TOEIC 1', '2019-05-20 21:22:04', '2019-05-21 21:22:07', 7200, 1, 'tersedia', 1),
+(55, 'haha', '2019-05-20 21:29:29', '2019-05-20 21:30:11', 7200, 1, 'tersedia', 1),
+(56, 'UJIAN TOEIC 2', '2019-05-20 21:47:56', '2019-05-21 21:47:58', 7200, 1, 'tersedia', 0);
 
 -- --------------------------------------------------------
 
@@ -1845,7 +1852,8 @@ ALTER TABLE `data_mahasiswa_terdaftar`
 --
 ALTER TABLE `data_nilai`
   ADD PRIMARY KEY (`id_data_nilai`),
-  ADD KEY `id_mahasisa_terdaftar` (`id_mahasisa_terdaftar`);
+  ADD KEY `id_mahasisa_terdaftar` (`id_mahasiswa_terdaftar`),
+  ADD KEY `id_data_ujian` (`id_data_ujian`);
 
 --
 -- Indexes for table `data_paket`
@@ -1933,7 +1941,7 @@ ALTER TABLE `data_mahasiswa_terdaftar`
 -- AUTO_INCREMENT for table `data_nilai`
 --
 ALTER TABLE `data_nilai`
-  MODIFY `id_data_nilai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_data_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `data_paket`
@@ -1951,19 +1959,19 @@ ALTER TABLE `data_part_soal`
 -- AUTO_INCREMENT for table `data_soal`
 --
 ALTER TABLE `data_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `data_ujian`
 --
 ALTER TABLE `data_ujian`
-  MODIFY `id_data_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_data_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `jawaban_mahasiswa`
 --
 ALTER TABLE `jawaban_mahasiswa`
-  MODIFY `id_jawaban_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_jawaban_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `kelompok_soal`
@@ -1975,7 +1983,7 @@ ALTER TABLE `kelompok_soal`
 -- AUTO_INCREMENT for table `sesi_ujian`
 --
 ALTER TABLE `sesi_ujian`
-  MODIFY `id_sesi_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_sesi_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `token_lupa_password`
@@ -2003,7 +2011,8 @@ ALTER TABLE `data_mahasiswa_terdaftar`
 -- Constraints for table `data_nilai`
 --
 ALTER TABLE `data_nilai`
-  ADD CONSTRAINT `data_nilai_ibfk_1` FOREIGN KEY (`id_mahasisa_terdaftar`) REFERENCES `data_mahasiswa_terdaftar` (`id_mahasiswa_terdaftar`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `data_nilai_ibfk_1` FOREIGN KEY (`id_mahasiswa_terdaftar`) REFERENCES `data_mahasiswa_terdaftar` (`id_mahasiswa_terdaftar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `data_nilai_ibfk_2` FOREIGN KEY (`id_data_ujian`) REFERENCES `data_ujian` (`id_data_ujian`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `data_part_soal`

@@ -5,7 +5,8 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
 
 <!-- Page Heading -->
 <div class="container">
-	<h1 class="h3 mb-4 text-gray-800"><?php echo $page_title ?></h1>
+  <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
+  <h1 class="h3 mb-4 text-gray-800"><?php echo $page_title ?></h1>
   <div class="card shadow mb-4">
     <div class="card-body">
       <div class="table-responsive">
@@ -52,6 +53,8 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
                       if($status_pengerjaan == 'mengerjakan' &&  $data_ujian[0]->waktu_berakhir > date('Y-m-d H:i:s')){
                         ?>
                         <a href="<?php echo base_url(). 'mahasiswa/ujian/pengerjaan/' . $id_data_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-secondary text-gray-100 shadow-sm"  ><i class="fas fa-angle-double-right  text-white-50"></i> Lanjutkan Ujian</a>
+                      <?php }elseif($status_pengerjaan == 'selesai'){ ?>
+                        <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Kirim Hasil Ke Email</a>
                         <?php } ?>
                         <?php } ?>
                       </center></td>
@@ -75,3 +78,6 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
         <?php 
         $this->load->view('v_mahasiswa/v_mahasiswa_footer');
         ?> 	
+        <script>   
+          $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+        </script>

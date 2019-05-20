@@ -48,7 +48,7 @@ class login extends CI_Controller {
 						'logged_in' => true,
 						);
 					$this->session->set_userdata($session_data);
-					redirect('mahasiswa/dashboard');
+					redirect('mahasiswa/ujian');
 				}
 			}
 

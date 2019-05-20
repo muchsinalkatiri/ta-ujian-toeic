@@ -43,7 +43,6 @@ class Ujian_model extends CI_Model {
     return $query->row();
   }
   public function get_data_ujian_by_id_mahasiswa_and_id_ujian($id_data_ujian, $id_mahasiswa_terdaftar){      
-    // $query = $this->db->join('sesi_ujian','sesi_ujian.id_sesi_ujian = data_ujian.id_sesi_ujian', 'left')->get_where('data_ujian', array('data_ujian.id_data_ujian' => $id_data_ujian, 'id_mahasiswa_terdaftar' => $id_mahasiswa_terdaftar));
     $query = $this->db->query("SELECT id_data_ujian, id_mahasiswa_terdaftar, du.id_sesi_ujian as id_sesi_ujian, nama_paket, du.waktu_dimulai as waktu_dimulai, du.waktu_berakhir AS waktu_berakhir, waktu_selesai, sisa_waktu, audio_curent_time, status_pengerjaan, nama_sesi_ujian FROM  data_ujian du LEFT JOIN sesi_ujian su ON su.id_sesi_ujian = du.id_sesi_ujian WHERE id_data_ujian like ".$id_data_ujian." AND id_mahasiswa_terdaftar like ".$id_mahasiswa_terdaftar." ");
 
     return $query->row();
@@ -88,4 +87,9 @@ class Ujian_model extends CI_Model {
     }
   }
 
+  public function get_jawaban($id_data_ujian, $nomor) {
+    $data_jawaban = $this->db->get_where('jawaban_mahasiswa', array('id_data_ujian' => $id_data_ujian, 'nomer_soal' => $nomor))->result();
+
+    return (count($data_jawaban) > 0 ? strtoupper($data_jawaban[0]->jawaban) : "");
+  }
 }

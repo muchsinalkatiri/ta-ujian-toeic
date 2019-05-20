@@ -14,10 +14,12 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
     </div>
   </div>
   <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
-  <div style="height: 50px; padding: 0.75rem 1rem;  margin-bottom: 1rem;  list-style: none; border-radius: 0.35rem;" class="bg-gray-200">
+  <div style="height: 55px; padding: 0.75rem 1rem;  margin-bottom: 1rem;  list-style: none; border-radius: 0.35rem;" class="bg-gray-200">
     <div class="row ">
       <div class="col-md-8">
-        <p class="">Nama Paket Ujian TOEIC : <?php echo $ujian->nama_paket; ?></p>
+        <a type="submit"   class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" href="#" data-toggle="modal" data-target="#ModalBerhenti">
+          <i class="fa fa-stop"></i> Hentikan Ujian 
+        </a>
       </div>
       <div class="col-md-4" >
         <div class=" small"><i class="fa fa-fw fa-volume-up"></i> Audio Listening - <span id="currentTime"></span> / <span id="duration"></span>
@@ -29,22 +31,45 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
       </div>
     </div>
   </div>
-    <iframe src="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$this->uri->segment('4').'4_51') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"  frameborder="0"></iframe>
-</div>
-<!-- Display the countdown timer in an element -->
+  <iframe src="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$this->uri->segment('4').'4_51') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"  frameborder="0">Browser Anda Tidak Mendukung  Iframe, Silahkan Perbaharui Browser Anda.</iframe>
+  </div>
+  <!-- Display the countdown timer in an element -->
 
 
 
+  <!-- MODAL berhenti -->
+  <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalBerhenti">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><?php echo $ujian->nama_sesi_ujian; ?></h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Apakah kamu yakin ingin menghentikan ujian? ?</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a id="hentikan" href="<?php echo base_url('mahasiswa/nilai/penilaian/'.$ujian->id_data_ujian) ?>" class="btn btn-danger btn-icon-split">
+            <span class="icon text-white-50">
+              <i class="fas fa-stop"></i>
+            </span>
+            <span class="text">Hentikan</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--END MODAL Hapus-->
 
 
-
-<?php 
-$this->load->view('v_mahasiswa/v_mahasiswa_footer');
-?>  
-<script>   
-  $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
-</script>
-<script>
+  <?php 
+  $this->load->view('v_mahasiswa/v_mahasiswa_footer');
+  ?>  
+  <script>   
+    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+  </script>
+  <script>
   // audio.removeAttribute('controls');
 // Set the date we're counting down to
 var audio = document.getElementById("audio");
@@ -70,7 +95,9 @@ var x = setInterval(function() {
     audio.pause();
     clearInterval(x);
     alert('Waktu Ujian Telah Berakhir');
-    window.location.href = '<?php echo base_url(); ?>mahasiswa/ujian/penilaian';
+    // window.location.href = '<?php echo base_url(); ?>mahasiswa/ujian/penilaian';
+
+    document.getElementById('hentikan').click();
   }
 }, 1000);
 </script>
@@ -138,5 +165,7 @@ var startTimer = function(duration, element){
 
     return min + ':' + sec;
   }
+
+
 </script>
 
