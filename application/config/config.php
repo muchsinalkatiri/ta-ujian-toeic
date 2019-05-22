@@ -25,7 +25,7 @@ date_default_timezone_set('Asia/Jakarta');
 |
 */
 $config['base_url'] = "http://".$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-// $config['base_url'] = 'http://localhost/ta-ujian-toeic/';
+// $config['base_url'] = 'http://192.168.1.22/ta-ujian-toeic/';
 
 /*
 |--------------------------------------------------------------------------

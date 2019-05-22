@@ -173,10 +173,46 @@
                 Ujian
               </div>
               <!-- Nav Item - Jawaban -->
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('admin/sesi_ujian') ?>">
+        <?php 
+          if( $this->uri->segment('3') == 'sesi_ujian' ){?>
+          <li class="nav-item active">
+          <?php }elseif($this->uri->segment('3') != 'sesi_ujian' ) { 
+          ?>
+          <li class="nav-item">
+          <?php  
+          }
+          ?>
+                <a class="nav-link" href="<?php echo base_url('admin/ujian/sesi_ujian') ?>">
                   <i class="fas fa-fw fa-reply"></i>
                   <span>Sesi Ujian</span></a>
+                </li>
+
+        <?php 
+          if( $this->uri->segment('3') == 'data_ujian' ){?>
+          <li class="nav-item active">
+          <?php }elseif($this->uri->segment('3') != 'data_ujian' ) { 
+          ?>
+          <li class="nav-item">
+          <?php  
+          }
+          ?>
+                <a class="nav-link" href="<?php echo base_url('admin/ujian/data_ujian') ?>">
+                  <i class="fas fa-fw fa-database"></i>
+                  <span>Data Ujian</span></a>
+                </li>
+
+        <?php 
+          if( $this->uri->segment('3') == 'data_nilai' ){?>
+          <li class="nav-item active">
+          <?php }elseif($this->uri->segment('3') != 'data_nilai' ) { 
+          ?>
+          <li class="nav-item">
+          <?php  
+          }
+          ?>
+                <a class="nav-link" href="<?php echo base_url('admin/ujian/data_nilai') ?>">
+                  <i class="fas fa-fw fa-calculator"></i>
+                  <span>Data Nilai</span></a>
                 </li>
 
                 <!-- Divider -->

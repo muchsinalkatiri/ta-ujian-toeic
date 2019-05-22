@@ -8,7 +8,7 @@ $this->load->view('v_admin/v_admin_header');
 <nav aria-label="breadcrumb"> <!-- buka breadcumb -->
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard') ?>">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Paket Soal</li>
+    <li class="breadcrumb-item active" aria-current="page">Data Sesi Ujian</li>
   </ol>
 </nav> <!-- tutup breadcumb -->
 
@@ -16,7 +16,7 @@ $this->load->view('v_admin/v_admin_header');
 <div class="card shadow mb-4">
 
   <div class="card-body">
-    <form class="user" action="<?php echo base_url('admin/sesi_ujian') ?>" method="post" enctype="multipart/form-data">
+    <form class="user" action="<?php echo base_url('admin/ujian/sesi_ujian') ?>" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="col-sm-12">
           <div class="row" > 
@@ -97,7 +97,7 @@ $this->load->view('v_admin/v_admin_header');
                 }
                 ?>
                 <tr>
-                  <td><a href="<?php echo base_url(). 'admin/sesi_ujian/peserta/' . $sesi->id_sesi_ujian?>" class="btn-sm text-gray-100 bg-gray-900" ><?php echo $sesi->nama_sesi_ujian ?></a></td>
+                  <td><a href="<?php echo base_url(). 'admin/ujian/sesi_ujian/peserta/' . $sesi->id_sesi_ujian?>" class="btn-sm text-gray-100 bg-gray-900" ><?php echo $sesi->nama_sesi_ujian ?></a></td>
                   <td><?php echo $sesi->waktu_dimulai ?></td>
                   <td><?php echo $sesi->waktu_berakhir ?></td>
                   <td><?php echo $sesi->nama_admin ?></td>
@@ -126,7 +126,7 @@ $this->load->view('v_admin/v_admin_header');
                         <div class="modal-body">Apakah kamu yakin ingin hentikan sesi <?php echo $sesi->nama_sesi_ujian; ?> ?</div>
                         <div class="modal-footer">
                           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                          <a href="<?php echo base_url(). 'admin/sesi_ujian/berhenti/'.$sesi->id_sesi_ujian?>" class="btn btn-danger btn-icon-split">
+                          <a href="<?php echo base_url(). 'admin/ujian/sesi_ujian/berhenti/'.$sesi->id_sesi_ujian?>" class="btn btn-danger btn-icon-split">
                             <span class="icon text-white-50">
                               <i class="fas fa-trash"></i>
                             </span>
@@ -150,7 +150,7 @@ $this->load->view('v_admin/v_admin_header');
                         <div class="modal-body">Apakah kamu yakin ingin menghapus <?php echo $sesi->id_sesi_ujian; ?> ?</div>
                         <div class="modal-footer">
                           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                          <a href="<?php echo base_url(). 'admin/sesi_ujian/delete/' . $sesi->id_sesi_ujian?>" class="btn btn-danger btn-icon-split">
+                          <a href="<?php echo base_url(). 'admin/ujian/sesi_ujian/delete/' . $sesi->id_sesi_ujian?>" class="btn btn-danger btn-icon-split">
                             <span class="icon text-white-50">
                               <i class="fas fa-trash"></i>
                             </span>

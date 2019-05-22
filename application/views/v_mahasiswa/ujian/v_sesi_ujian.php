@@ -46,15 +46,19 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
                   ?>
                   <?php if($status == 'tersedia' && $check == 0){ ?>
                     <a href="<?php echo base_url(). 'mahasiswa/ujian/konfirmasi/' . $sesi->id_sesi_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-primary text-gray-100 shadow-sm"  ><i class="fas fa-play  text-white-50"></i> Kerjakan Ujian</a>
-                    <?php }elseif($status == 'tersedia' && $check != 0){
+                    <?php }elseif(($status == 'tersedia' && $check != 0) || ($status == 'berakhir' && $check != 0)){
                       $data_ujian = $query->result();
                       $id_data_ujian = $data_ujian[0]->id_data_ujian;
                       $status_pengerjaan = $data_ujian[0]->status_pengerjaan;
+                      if($status == 'tersedia' && $check != 0){
                       if($status_pengerjaan == 'mengerjakan' &&  $data_ujian[0]->waktu_berakhir > date('Y-m-d H:i:s')){
                         ?>
                         <a href="<?php echo base_url(). 'mahasiswa/ujian/pengerjaan/' . $id_data_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-secondary text-gray-100 shadow-sm"  ><i class="fas fa-angle-double-right  text-white-50"></i> Lanjutkan Ujian</a>
                       <?php }elseif($status_pengerjaan == 'selesai'){ ?>
                         <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Kirim Hasil Ke Email</a>
+                        <?php }}elseif(($status == 'berakhir' && $check != 0 && $status_pengerjaan == 'selesai' && $check != 0)){?>
+                        <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Kirim Hasil Ke Email</a>
+                          
                         <?php } ?>
                         <?php } ?>
                       </center></td>

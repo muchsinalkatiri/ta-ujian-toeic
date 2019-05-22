@@ -211,8 +211,6 @@ class Ujian extends CI_Controller {
 			redirect('mahasiswa/ujian/frameujian_'.$jenis_soal.'/'.$id_data_ujian."4_5".$rdr);
 		}
 	}
-	public function penilaian(){
-		echo "string";
-	}
+
 	
 }

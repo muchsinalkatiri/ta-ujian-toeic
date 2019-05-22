@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2019 at 05:27 PM
+-- Generation Time: May 22, 2019 at 05:13 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -63,19 +63,6 @@ CREATE TABLE `data_admin` (
 INSERT INTO `data_admin` (`id_admin`, `nama`, `username`, `password`, `tanggal_pendaftaran`, `foto`, `level`, `email`) VALUES
 (1, 'muchsin', 'muchsin', '6ff2ffe81a84b635088de7d2ac5b1321', '0000-00-00 00:00:00', 'muchsin-img-user.png', 0, 'pohonhidayah@gmail.com'),
 (3, 'istna', 'istna', '0a8a0238dc52c18f74ebc78fcca0c037', '2019-04-23 05:47:56', 'istna-img-admin.jpg', 1, 'luthfiistna@gmail.com');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `data_kunci_jawaban`
---
-
-CREATE TABLE `data_kunci_jawaban` (
-  `id_kunci_jawaban` int(11) NOT NULL,
-  `jawaban` varchar(50) NOT NULL,
-  `status_jawaban` varchar(50) NOT NULL,
-  `id_soal` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1394,6 +1381,29 @@ INSERT INTO `data_mahasiswa` (`nim`, `nama`, `ttl`, `alamat`, `jurusan`, `notlp`
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `data_mahasiswa_lengkap`
+-- (See below for the actual view)
+--
+CREATE TABLE `data_mahasiswa_lengkap` (
+`nim` varchar(10)
+,`nama` varchar(50)
+,`ttl` varchar(50)
+,`alamat` varchar(250)
+,`jurusan` varchar(20)
+,`notlp` varchar(20)
+,`id_mahasiswa_terdaftar` int(11)
+,`username` varchar(50)
+,`password` varchar(50)
+,`notlp2` varchar(20)
+,`tanggal_pendaftaran` datetime
+,`angkatan` year(4)
+,`email` varchar(30)
+,`foto` varchar(40)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `data_mahasiswa_terdaftar`
 --
 
@@ -1416,8 +1426,8 @@ CREATE TABLE `data_mahasiswa_terdaftar` (
 INSERT INTO `data_mahasiswa_terdaftar` (`id_mahasiswa_terdaftar`, `username`, `password`, `nim`, `notlp2`, `tanggal_pendaftaran`, `angkatan`, `email`, `foto`) VALUES
 (1, 'muchsin', '6ff2ffe81a84b635088de7d2ac5b1321', '1000000001', '888888', '2019-04-28 13:32:56', 2019, 'pohonhidayah@gmail.com', '1000000001-img-user.png'),
 (2, 'sopoiki', '6ff2ffe81a84b635088de7d2ac5b1321', '1631710003', '087756', '2019-04-30 01:41:21', 2016, 'kudus@g.com', 'default-user.png'),
-(3, 'istna', '0a8a0238dc52c18f74ebc78fcca0c037', '1631710031', '12121', '2019-04-30 07:51:55', 2016, 'luthfiistna@gmail.com', '1631710031-img-user.jpg'),
-(4, 'didin', '6ff2ffe81a84b635088de7d2ac5b1321', '1631710004', '888888', '2019-05-10 13:35:53', 2016, 'kudus@g.com', 'default-user.png');
+(4, 'didin', '6ff2ffe81a84b635088de7d2ac5b1321', '1631710004', '888888', '2019-05-10 13:35:53', 2016, 'kudus@g.com', 'default-user.png'),
+(5, 'IstnaLuthfi ', '6ff2ffe81a84b635088de7d2ac5b1321', '1631710031', '0895411024105', '2019-05-22 15:18:47', 2016, 'luthfiistna@gmail.com', 'default-user.png');
 
 -- --------------------------------------------------------
 
@@ -1444,8 +1454,7 @@ CREATE TABLE `data_nilai` (
 --
 
 INSERT INTO `data_nilai` (`id_data_nilai`, `id_mahasiswa_terdaftar`, `id_data_ujian`, `terjawab_listening`, `terjawab_reading`, `benar_listening`, `benar_reading`, `score_listening`, `score_reading`, `total_score`, `level_of_competent`) VALUES
-(11, 1, 62, 0, 0, 0, 0, 5, 5, 10, 'Beginner 1'),
-(12, 1, 63, 0, 0, 0, 0, 5, 5, 10, 'Beginner 1');
+(25, 1, 77, 2, 0, 1, 0, 5, 5, 10, 'Beginner 1');
 
 --
 -- Triggers `data_nilai`
@@ -1657,8 +1666,7 @@ CREATE TABLE `data_ujian` (
 --
 
 INSERT INTO `data_ujian` (`id_data_ujian`, `id_mahasiswa_terdaftar`, `id_sesi_ujian`, `nama_paket`, `waktu_dimulai`, `waktu_berakhir`, `waktu_selesai`, `sisa_waktu`, `audio_curent_time`, `status_pengerjaan`) VALUES
-(62, 1, 54, 'paket 1', '2019-05-20 21:22:20', '2019-05-20 23:22:20', '2019-05-20 21:24:09', 7200, 0, 'selesai'),
-(63, 1, 55, 'paket 1', '2019-05-20 21:29:44', '2019-05-20 21:30:11', '2019-05-20 21:30:14', 27, 0, 'selesai');
+(77, 1, 67, 'paket 1', '2019-05-22 21:58:58', '2019-05-22 23:58:58', '2019-05-22 21:59:19', 7200, 0, 'selesai');
 
 --
 -- Triggers `data_ujian`
@@ -1773,9 +1781,8 @@ CREATE TABLE `sesi_ujian` (
 --
 
 INSERT INTO `sesi_ujian` (`id_sesi_ujian`, `nama_sesi_ujian`, `waktu_dimulai`, `waktu_berakhir`, `durasi`, `id_admin`, `status`, `jumlah_peserta`) VALUES
-(54, 'UJIAN TOEIC 1', '2019-05-20 21:22:04', '2019-05-21 21:22:07', 7200, 1, 'tersedia', 1),
-(55, 'haha', '2019-05-20 21:29:29', '2019-05-20 21:30:11', 7200, 1, 'tersedia', 1),
-(56, 'UJIAN TOEIC 2', '2019-05-20 21:47:56', '2019-05-21 21:47:58', 7200, 1, 'tersedia', 0);
+(63, 'UJIAN TOEIC 2', '2019-05-21 22:26:51', '2019-05-21 22:27:53', 7200, 1, 'tersedia', 0),
+(67, 'UJIAN TOEIC 1', '2019-05-22 15:18:17', '2019-05-23 15:18:21', 7200, 1, 'tersedia', 1);
 
 -- --------------------------------------------------------
 
@@ -1817,6 +1824,15 @@ DROP TABLE IF EXISTS `cocokan_jawaban`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cocokan_jawaban`  AS  select `jm`.`id_jawaban_mahasiswa` AS `id_jawaban_mahasiswa`,`jm`.`id_mahasiswa_terdaftar` AS `id_mahasiswa_terdaftar`,`jm`.`id_data_ujian` AS `id_data_ujian`,`du`.`nama_paket` AS `nama_paket`,`jm`.`nomer_soal` AS `nomer_soal`,`jm`.`jawaban` AS `jawaban_mahasiswa`,`ds`.`jawaban` AS `jawaban_kunci`,`jm`.`jenis_soal` AS `jenis_soal` from ((`jawaban_mahasiswa` `jm` left join `data_ujian` `du` on((`jm`.`id_data_ujian` = `du`.`id_data_ujian`))) left join `data_soal` `ds` on(((`ds`.`nama_paket` = `du`.`nama_paket`) and (`ds`.`nomer_soal` = `jm`.`nomer_soal`)))) order by `jm`.`id_data_ujian`,`jm`.`nomer_soal` ;
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `data_mahasiswa_lengkap`
+--
+DROP TABLE IF EXISTS `data_mahasiswa_lengkap`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `data_mahasiswa_lengkap`  AS  select `data_mahasiswa`.`nim` AS `nim`,`data_mahasiswa`.`nama` AS `nama`,`data_mahasiswa`.`ttl` AS `ttl`,`data_mahasiswa`.`alamat` AS `alamat`,`data_mahasiswa`.`jurusan` AS `jurusan`,`data_mahasiswa`.`notlp` AS `notlp`,`data_mahasiswa_terdaftar`.`id_mahasiswa_terdaftar` AS `id_mahasiswa_terdaftar`,`data_mahasiswa_terdaftar`.`username` AS `username`,`data_mahasiswa_terdaftar`.`password` AS `password`,`data_mahasiswa_terdaftar`.`notlp2` AS `notlp2`,`data_mahasiswa_terdaftar`.`tanggal_pendaftaran` AS `tanggal_pendaftaran`,`data_mahasiswa_terdaftar`.`angkatan` AS `angkatan`,`data_mahasiswa_terdaftar`.`email` AS `email`,`data_mahasiswa_terdaftar`.`foto` AS `foto` from (`data_mahasiswa` join `data_mahasiswa_terdaftar` on((`data_mahasiswa`.`nim` = `data_mahasiswa_terdaftar`.`nim`))) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -1826,13 +1842,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `data_admin`
   ADD PRIMARY KEY (`id_admin`);
-
---
--- Indexes for table `data_kunci_jawaban`
---
-ALTER TABLE `data_kunci_jawaban`
-  ADD PRIMARY KEY (`id_kunci_jawaban`),
-  ADD KEY `id_soal` (`id_soal`);
 
 --
 -- Indexes for table `data_mahasiswa`
@@ -1926,22 +1935,16 @@ ALTER TABLE `data_admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `data_kunci_jawaban`
---
-ALTER TABLE `data_kunci_jawaban`
-  MODIFY `id_kunci_jawaban` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `data_mahasiswa_terdaftar`
 --
 ALTER TABLE `data_mahasiswa_terdaftar`
-  MODIFY `id_mahasiswa_terdaftar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_mahasiswa_terdaftar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `data_nilai`
 --
 ALTER TABLE `data_nilai`
-  MODIFY `id_data_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_data_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `data_paket`
@@ -1965,13 +1968,13 @@ ALTER TABLE `data_soal`
 -- AUTO_INCREMENT for table `data_ujian`
 --
 ALTER TABLE `data_ujian`
-  MODIFY `id_data_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_data_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `jawaban_mahasiswa`
 --
 ALTER TABLE `jawaban_mahasiswa`
-  MODIFY `id_jawaban_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id_jawaban_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `kelompok_soal`
@@ -1983,7 +1986,7 @@ ALTER TABLE `kelompok_soal`
 -- AUTO_INCREMENT for table `sesi_ujian`
 --
 ALTER TABLE `sesi_ujian`
-  MODIFY `id_sesi_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_sesi_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `token_lupa_password`
@@ -1994,12 +1997,6 @@ ALTER TABLE `token_lupa_password`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `data_kunci_jawaban`
---
-ALTER TABLE `data_kunci_jawaban`
-  ADD CONSTRAINT `data_kunci_jawaban_ibfk_1` FOREIGN KEY (`id_soal`) REFERENCES `data_soal` (`id_soal`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `data_mahasiswa_terdaftar`
