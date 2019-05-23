@@ -22,6 +22,11 @@ class Nilai_model extends CI_Model {
     return $query->row();
   }
 
+  public function get_data_nilai_by_id($id_data_nilai){      
+    $query = $this->db->get_where('data_nilai', array('data_nilai.id_data_nilai' => $id_data_nilai)); 
+    return $query->row();
+  }
+
   public function create($table, $data){
     if ($this->db->insert($table,$data)) {
       return true;

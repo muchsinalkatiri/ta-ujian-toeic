@@ -146,6 +146,30 @@ class Sesi_ujian extends CI_Controller {
 			redirect('admin/sesi_ujian/peserta/'.$id_sesi_ujian);
 		}
 	}
+	public function delete_nilai($id_data_nilai=null){
+		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
+			redirect('user/login/admin');
+		$data['ujian'] = $this->sesi_ujian_model->get_data_by_id('data_nilai_ujian','id_data_nilai', $id_data_nilai);
+		$id_sesi_ujian = $data['ujian']->id_sesi_ujian;
+
+
+		$where = array('id_data_nilai' => $id_data_nilai);
+		$delete = $this->sesi_ujian_model->delete($where,'data_nilai');
+		if ($delete) {
+			$this->session->set_flashdata('msg',
+				'<div class="alert alert-success">
+				<h5> <span class=" fa fa-check" ></span> Data Berhasil Dihapus.</h5>
+			</div>');    
+			redirect('admin/ujian/sesi_ujian/peserta/'.$id_sesi_ujian);
+
+		}else{
+			$this->session->set_flashdata('msg',
+				'<div class="alert alert-danger">
+				<h5> <span class=" fa fa-cross" ></span> Data Gagal Dihapus.</h5>
+			</div>');    
+			redirect('admin/sesi_ujian/peserta/'.$id_sesi_ujian);
+		}
+	}
 	public function peserta($id_sesi_ujian=null){
 
 		$data['page_title'] = 'Data Ujian';
@@ -153,6 +177,7 @@ class Sesi_ujian extends CI_Controller {
 			redirect('user/login/admin');
 
 		$data['data_ujian']=$this->sesi_ujian_model->get_data_ujian_join_data_mahasiswa_join_data_nilai_lengkap_by_id($id_sesi_ujian)->result();
+		$data['data_nilai']=$this->sesi_ujian_model->get_data_nilai_join_data_mahasiswa_join_data_ujian_lengkap_by_id($id_sesi_ujian)->result();
 		if ( empty($id_sesi_ujian)  ) redirect('admin/sesi_ujian');
 
 		$this->load->view('v_admin/sesi_ujian/read_data_ujian',$data);

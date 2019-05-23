@@ -14,7 +14,7 @@ $this->load->view('v_admin/v_admin_header');
 <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 <div class="card shadow mb-4">
 	<div class="card-body">
-		<table class="table table-bordered text-xs" id="dataTable2"  cellspacing="0">
+		<table class="table table-bordered text-xs text-center" id="dataTable2"  cellspacing="0">
 			<button onclick="printdatanilai()" class="mb-2 btn-sm btn btn-warning" type="button"><span class="fa fa-print"></span> Cetak Pdf</button>
 			<thead>
 				<tr >
@@ -25,6 +25,7 @@ $this->load->view('v_admin/v_admin_header');
 					<th>SCORE</th>
 					<th>TOTAL SCORE</th>
 					<th>LEVEL OF COMPETENT</th>
+					<th>KIRIM</th>
 					<th>ACTION</th>
 				</tr>
 			</thead>
@@ -39,6 +40,10 @@ $this->load->view('v_admin/v_admin_header');
 						<td>Listening : <?php echo $nilai->score_listening ?> & <br>Reading : <?php echo $nilai->score_reading ?></td>
 						<td><?php echo $nilai->total_score ?></td>
 						<td><?php echo $nilai->level_of_competent ?></td>
+						<td><center>
+							<a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm mb-1" style="width: 100px;"  href="<?php echo base_url('kirim/admin_kirim_email/'.$nilai->id_data_nilai)?>" ><i class="fas fa-envelope  text-white"></i> Email</a><br>
+							<a  class="d-none d-sm-inline-block btn btn-sm bg-success text-gray-100 shadow-sm" style="width: 100px;"  href="<?php echo base_url('kirim/admin_kirim_whatsapp/'.$nilai->id_data_nilai)?>" ><i class="fab fa-whatsapp  text-white"></i> Whatsapp</a>
+						</center></td>
 						<td><center>
 							<a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#ModalHapus<?php echo $nilai->id_data_nilai; ?>" ><i class="fa fa-trash"></i></a>
 						</center></td>

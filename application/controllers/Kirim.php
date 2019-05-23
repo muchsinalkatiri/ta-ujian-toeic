@@ -65,6 +65,59 @@ class kirim extends CI_Controller {
 
     }
 
+    public function admin_kirim_email($id_data_nilai=null){
+
+        $data['nilai']=$this->nilai_model->get_data_nilai_by_id($id_data_nilai);
+        $id_mahasiswa_terdaftar = $data['nilai']->id_mahasiswa_terdaftar;
+
+        $data['mahasiswa_terdaftar']=$this->user_model->get_data_mahasiswa_by_id($id_mahasiswa_terdaftar);
+
+        $nama = $data['mahasiswa_terdaftar']->nama;
+        $email = $data['mahasiswa_terdaftar']->email;
+
+        $terjawab_listening = $data['nilai']->terjawab_listening;
+        $terjawab_reading = $data['nilai']->terjawab_reading;
+        $benar_listening = $data['nilai']->benar_listening;
+        $benar_reading = $data['nilai']->benar_reading;
+        $score_listening = $data['nilai']->score_listening;
+        $score_reading = $data['nilai']->score_reading;
+        $total_score = $data['nilai']->total_score;
+        $level_of_competent = $data['nilai']->level_of_competent;
+
+        $message = '';             
+        $message .= '<strong>Hai '.$nama.', Terimakasih Telah Melakukan Ujian TOEIC.</strong><br>';  
+        $message .= '<br><br>Anda berhasil mengerjakan '.$terjawab_listening.' soal dari 100 soal listening dan ' .$terjawab_listening.' soal dari 100 soal listening. <br> '; 
+        $message .=   'Anda Berhasil Menjawab dengan benar ' .$benar_listening.' soal listening dan '.$benar_reading.' soal reading. <br><br> '; 
+        $message .=   'Score Listening : '.$score_listening.'  <br> '; 
+        $message .=   'Score Reading : '.$score_reading.'  <br> '; 
+        $message .=   'Total Score : '.$total_score.'  <br> '; 
+        $message .=   'Level Of Competent : '.$level_of_competent.'  <br> '; 
+
+        // echo $message;
+        $send_email = $this->send_email($message,$email); //dikirim ke email
+        if ($send_email) {
+            $this->session->set_flashdata('msg','
+                <div id="notifications">
+                    <div class="alert alert-success">
+                        <center><h5><span class=" fa fa-check" ></span> Hasil Ujian Anda telah Dikirim Ke Email</h5></center>
+                    </div>
+                </div>
+                '); 
+        }else{
+            $this->session->set_flashdata('msg','
+                <div id="notifications">
+                    <div class="alert alert-danger">
+                        <center><h5><span class=" fa fa-ban" ></span> Hasil Ujian Anda Gagal Dikirim Ke Email</h5></center>
+                    </div>
+                </div>
+                ');  
+        }
+        redirect('admin/ujian/data_nilai');
+
+
+        
+    }
+
     public function send_email($message,$email)
     {
       // Konfigurasi email

@@ -31,45 +31,71 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
       </div>
     </div>
   </div>
-  <iframe src="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$this->uri->segment('4').'4_51') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"  frameborder="0">Browser Anda Tidak Mendukung  Iframe, Silahkan Perbaharui Browser Anda.</iframe>
-  </div>
-  <!-- Display the countdown timer in an element -->
-
-
-
-  <!-- MODAL berhenti -->
-  <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalBerhenti">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><?php echo $ujian->nama_sesi_ujian; ?></h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Apakah kamu yakin ingin menghentikan ujian? ?</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a id="hentikan" href="<?php echo base_url('mahasiswa/nilai/penilaian/'.$ujian->id_data_ujian) ?>" class="btn btn-danger btn-icon-split">
-            <span class="icon text-white-50">
-              <i class="fas fa-stop"></i>
-            </span>
-            <span class="text">Hentikan</span>
-          </a>
-        </div>
+  <iframe  id="frame" src="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$this->uri->segment('4').'4_51') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"  frameborder="0">Browser Anda Tidak Mendukung  Iframe, Silahkan Perbaharui Browser Anda.</iframe>
+    <!-- <iframe   id="frame" src="<?php echo base_url('admin/mahasiswa') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"   frameborder="0">Browser Anda Tidak Mendukung  Iframe, Silahkan Perbaharui Browser Anda.</iframe> -->
+  <div id="loading"  class="card shadow mb-4">
+    <div style="height: 500px; " class=" card-body">
+      <div class="row">
+        <div class="col-md-5">
+        </div> 
+        <div class="col-md-2">
+          <div class="ball ball-1"></div>
+          <div class="ball ball-2"></div>
+          <div class="ball ball-3"></div><br><br><br><br>
+          <h2>Loading...</h2>
+        </div> 
+        <div class="col-md-5">
+        </div>  
       </div>
     </div>
   </div>
-  <!--END MODAL Hapus-->
+</div>
+<!-- Display the countdown timer in an element -->
 
 
-  <?php 
-  $this->load->view('v_mahasiswa/v_mahasiswa_footer');
-  ?>  
-  <script>   
-    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
-  </script>
-  <script>
+
+<!-- MODAL berhenti -->
+<div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalBerhenti">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><?php echo $ujian->nama_sesi_ujian; ?></h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Apakah kamu yakin ingin menghentikan ujian? ?</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a id="hentikan" href="<?php echo base_url('mahasiswa/nilai/penilaian/'.$ujian->id_data_ujian) ?>" class="btn btn-danger btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="fas fa-stop"></i>
+          </span>
+          <span class="text">Hentikan</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END MODAL Hapus-->
+
+
+<?php 
+$this->load->view('v_mahasiswa/v_mahasiswa_footer');
+?>  
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#frame').on('load', function () {
+            $('#frame').css({'display' : 'inline'});
+            $('#loading').hide();
+        });
+    });
+</script>
+<script>   
+  $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+</script>
+
+<script>
   // audio.removeAttribute('controls');
 // Set the date we're counting down to
 var audio = document.getElementById("audio");

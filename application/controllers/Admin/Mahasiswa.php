@@ -17,8 +17,8 @@ class mahasiswa extends CI_Controller {
 	{
 		$data['page_title'] = 'Data Mahasiswa';
 		// Must login
-		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-			redirect('user/login/admin');
+		// if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
+		// 	redirect('user/login/admin');
 
 		$data['mahasiswa']=$this->mahasiswa_model->get_all_mahasiswa()->result();
 

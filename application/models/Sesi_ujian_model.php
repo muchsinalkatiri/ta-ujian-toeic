@@ -49,9 +49,17 @@ class Sesi_ujian_model extends CI_Model {
   }
 
   public function get_data_ujian_join_data_mahasiswa_join_data_nilai_lengkap_by_id($id_sesi_ujian){      
-    $this->db->select(' data_ujian.*,data_nilai.*, data_mahasiswa_lengkap.nim,  data_mahasiswa_lengkap.nama');
+    $this->db->select(' data_ujian.*, data_mahasiswa_lengkap.nim,  data_mahasiswa_lengkap.nama');
     $this->db->from('data_ujian');
-    $this->db->join('data_nilai', 'data_nilai.id_data_ujian = data_ujian.id_data_ujian', 'left');
+    $this->db->join('data_mahasiswa_lengkap', 'data_ujian.id_mahasiswa_terdaftar = data_mahasiswa_lengkap.id_mahasiswa_terdaftar', 'left');
+    $this->db->where('data_ujian.id_sesi_ujian', $id_sesi_ujian);
+    return $this->db->get();
+  }
+    
+  public function get_data_nilai_join_data_mahasiswa_join_data_ujian_lengkap_by_id($id_sesi_ujian){      
+    $this->db->select(' data_ujian.*,data_nilai.*, data_mahasiswa_lengkap.nim,  data_mahasiswa_lengkap.nama');
+    $this->db->from('data_nilai');
+    $this->db->join('data_ujian', 'data_nilai.id_data_ujian = data_ujian.id_data_ujian', 'left');
     $this->db->join('data_mahasiswa_lengkap', 'data_ujian.id_mahasiswa_terdaftar = data_mahasiswa_lengkap.id_mahasiswa_terdaftar', 'left');
     $this->db->where('data_ujian.id_sesi_ujian', $id_sesi_ujian);
     return $this->db->get();

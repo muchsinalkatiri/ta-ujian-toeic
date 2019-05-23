@@ -16,89 +16,93 @@ $this->load->view('v_admin/v_admin_header');
 <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-ujian-tab" data-toggle="tab" href="#nav-ujian" role="tab" aria-controls="nav-ujian" aria-selected="true">Data Ujian</a>
-    <a class="nav-item nav-link" id="nav-nilai-tab" data-toggle="tab" href="#nav-nilai" role="tab" aria-controls="nav-nilai" aria-selected="false">Data Nilai</a>
+    <a class="nav-item nav-link active" id="nav-nilai-tab" data-toggle="tab" href="#nav-nilai" role="tab" aria-controls="nav-nilai" aria-selected="false">Data Nilai</a>
+    <a class="nav-item nav-link " id="nav-ujian-tab" data-toggle="tab" href="#nav-ujian" role="tab" aria-controls="nav-ujian" aria-selected="true">Data Ujian</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-ujian" role="tabpanel" aria-labelledby="nav-ujian-tab">
+  <div class="tab-pane fade show active" id="nav-nilai" role="tabpanel" aria-labelledby="nav-nilai-tab">
     <br>
     <div class="card shadow mb-4">
       <div class="card-body">
-        <table class="table table-bordered" id="dataTable"  cellspacing="0">
-          <button onclick="printdataujian()" class="mb-2 btn-sm btn btn-warning" type="button"><span class="fa fa-print"></span> Cetak Pdf</button>
+        <table class="table table-bordered text-xs text-center" id="dataTable2"  cellspacing="0">
+          <button onclick="printdatanilai()" class="mb-2 btn-sm btn btn-warning" type="button"><span class="fa fa-print"></span> Cetak Pdf</button>
           <thead>
-            <tr class="text-xs ">
+            <tr >
               <th>NIM</th>
-              <th>NAMA</th>
-              <th>PAKET</th>
-              <th>WAKTU MULAI</th>
-              <th>WAKTU BERAKHIR</th>
-              <th>WAKTU SELESAI</th>
-              <th>STATUS</th>
+              <th>SOAL TERJAWAB</th>
+              <th>JAWABAN BENAR</th>
+              <th>SCORE</th>
+              <th>TOTAL SCORE</th>
+              <th>LEVEL OF COMPETENT</th>
+              <th>KIRIM</th>
               <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($data_ujian as $ujian ) {
+            <?php foreach ($data_nilai as $nilai ) {
               ?>
               <tr>
-                <td><?php echo $ujian->nim ?></td>
-                <td><?php echo $ujian->nama ?></td>
-                <td><?php echo $ujian->nama_paket ?></td>
-                <td><?php echo $ujian->waktu_dimulai ?></td>
-                <td><?php echo $ujian->waktu_berakhir ?></td>
-                <td><?php echo $ujian->waktu_selesai ?></td>
-                <td><?php echo $ujian->status_pengerjaan ?></td>
+                <td><?php echo $nilai->nim ?></td>
+                <td><?php echo $nilai->terjawab_listening ?> Listening & <br> <?php echo $nilai->terjawab_reading ?> Reading</td>
+                <td><?php echo $nilai->benar_listening ?> Listening & <br> <?php echo $nilai->benar_reading ?> Reading</td>
+                <td>Listening : <?php echo $nilai->score_listening ?> & <br>Reading : <?php echo $nilai->score_reading ?></td>
+                <td><?php echo $nilai->total_score ?></td>
+                <td><?php echo $nilai->level_of_competent ?></td>
                 <td><center>
-                  <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#ModalHapus<?php echo $ujian->id_data_ujian; ?>" ><i class="fa fa-trash"></i></a>
+                <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm mb-1" style="width: 100px;"  href="<?php echo base_url('kirim/admin_kirim_email/'.$nilai->id_data_nilai)?>" ><i class="fas fa-envelope  text-white"></i> Email</a><br>
+                  <a  class="d-none d-sm-inline-block btn btn-sm bg-success text-gray-100 shadow-sm" style="width: 100px;"  href="<?php echo base_url('kirim/admin_kirim_whatsapp/'.$nilai->id_data_nilai)?>" ><i class="fab fa-whatsapp  text-white"></i> Whatsapp</a>
+                </center></td>
+                <td><center>
+                  <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#ModalHapus<?php echo $nilai->id_data_nilai; ?>" ><i class="fa fa-trash"></i></a>
                 </center></td>
               </tr>
-
               <!-- MODAL Hapus -->
-              <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalHapus<?php echo $ujian->id_data_ujian; ?>">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Delete this data?</h5>
-                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">Apakah kamu yakin ingin menghapus <?php echo $ujian->id_data_ujian; ?> ?</div>
-                    <div class="modal-footer">
-                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                      <a href="<?php echo base_url(). 'admin/ujian/sesi_ujian/delete_ujian/' . $ujian->id_data_ujian?>" class="btn btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
-                          <i class="fas fa-trash"></i>
-                        </span>
-                        <span class="text">Delete</span>
-                      </a>
-                    </div>
-                  </div>
+          <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalHapus<?php echo $nilai->id_data_nilai; ?>">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete this data?</h5>
+                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">Apakah kamu yakin ingin menghapus <?php echo $nilai->id_data_nilai; ?> ?</div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                  <a href="<?php echo base_url(). 'admin/ujian/sesi_ujian/delete_nilai/' . $nilai->id_data_nilai?>" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Delete</span>
+                  </a>
                 </div>
               </div>
-              <!--END MODAL Hapus-->
+            </div>
+          </div>
+          <!--END MODAL Hapus-->
               <?php } ?>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="nav-nilai" role="tabpanel" aria-labelledby="nav-nilai-tab">
+    <div class="tab-pane fade" id="nav-ujian" role="tabpanel" aria-labelledby="nav-ujian-tab">
       <br>
       <div class="card shadow mb-4">
         <div class="card-body">
-          <table class="table table-bordered text-xs" id="dataTable2"  cellspacing="0">
-            <button onclick="printdatanilai()" class="mb-2 btn-sm btn btn-warning" type="button"><span class="fa fa-print"></span> Cetak Pdf</button>
+          <table class="table table-bordered" id="dataTable"  cellspacing="0">
+            <button onclick="printdataujian()" class="mb-2 btn-sm btn btn-warning" type="button"><span class="fa fa-print"></span> Cetak Pdf</button>
             <thead>
-              <tr >
+              <tr class="text-xs ">
                 <th>NIM</th>
-                <th>SOAL TERJAWAB</th>
-                <th>JAWABAN BENAR</th>
-                <th>SCORE</th>
-                <th>TOTAL SCORE</th>
-                <th>LEVEL OF COMPETENT</th>
+                <th>NAMA</th>
+                <th>PAKET</th>
+                <th>WAKTU MULAI</th>
+                <th>WAKTU BERAKHIR</th>
+                <th>WAKTU SELESAI</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -106,21 +110,49 @@ $this->load->view('v_admin/v_admin_header');
                 ?>
                 <tr>
                   <td><?php echo $ujian->nim ?></td>
-                  <td><?php echo $ujian->terjawab_listening ?> Listening & <br> <?php echo $ujian->terjawab_reading ?> Reading</td>
-                  <td><?php echo $ujian->benar_listening ?> Listening & <br> <?php echo $ujian->benar_reading ?> Reading</td>
-                  <td>Listening : <?php echo $ujian->score_listening ?> & <br>Reading : <?php echo $ujian->score_reading ?></td>
-                  <td><?php echo $ujian->total_score ?></td>
-                  <td><?php echo $ujian->level_of_competent ?></td>
+                  <td><?php echo $ujian->nama ?></td>
+                  <td><?php echo $ujian->nama_paket ?></td>
+                  <td><?php echo $ujian->waktu_dimulai ?></td>
+                  <td><?php echo $ujian->waktu_berakhir ?></td>
+                  <td><?php echo $ujian->waktu_selesai ?></td>
+                  <td><?php echo $ujian->status_pengerjaan ?></td>
+                  <td><center>
+                    <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#ModalHapus<?php echo $ujian->id_data_ujian; ?>" ><i class="fa fa-trash"></i></a>
+                  </center></td>
                 </tr>
+
+                <!-- MODAL Hapus -->
+                <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalHapus<?php echo $ujian->id_data_ujian; ?>">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete this data?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">Apakah kamu yakin ingin menghapus <?php echo $ujian->id_data_ujian; ?> ?</div>
+                      <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a href="<?php echo base_url(). 'admin/ujian/sesi_ujian/delete_ujian/' . $ujian->id_data_ujian?>" class="btn btn-danger btn-icon-split">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                          </span>
+                          <span class="text">Delete</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <!--END MODAL Hapus-->
                 <?php } ?>
               </tbody>
             </table>
+
           </div>
         </div>
       </div>
     </div>
-
 
 
 

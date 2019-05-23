@@ -51,6 +51,7 @@ $this->load->view('v_admin/v_admin_header');
 						<div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="ModalHapus<?php echo $ujian->id_data_ujian; ?>">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
+									<?php echo $ujian->id_data_ujian; ?>	
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Delete this data?</h5>
 										<button class="close" type="button" data-dismiss="modal" aria-label="Close">
