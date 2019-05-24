@@ -83,5 +83,5 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
         $this->load->view('v_mahasiswa/v_mahasiswa_footer');
         ?> 	
         <script>   
-          $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+          $('#notifications').slideDown('slow').delay(10000).slideUp('slow');
         </script>

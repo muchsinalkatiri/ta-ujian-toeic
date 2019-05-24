@@ -14,7 +14,7 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
     </div>
   </div>
   <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
-  <div style="height: 55px; padding: 0.75rem 1rem;  margin-bottom: 1rem;  list-style: none; border-radius: 0.35rem;" class="bg-gray-200">
+  <div style="height: 55px; padding: 0.75rem 1rem;  margin-bottom: 1rem;  list-style: none; border-radius: 0.35rem; " class="bg-gray-200">
     <div class="row ">
       <div class="col-md-8">
         <a type="submit"   class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" href="#" data-toggle="modal" data-target="#ModalBerhenti">
@@ -31,24 +31,8 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
       </div>
     </div>
   </div>
+    
   <iframe  id="frame" src="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$this->uri->segment('4').'4_51') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"  frameborder="0">Browser Anda Tidak Mendukung  Iframe, Silahkan Perbaharui Browser Anda.</iframe>
-    <!-- <iframe   id="frame" src="<?php echo base_url('admin/mahasiswa') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"   frameborder="0">Browser Anda Tidak Mendukung  Iframe, Silahkan Perbaharui Browser Anda.</iframe> -->
-  <div id="loading"  class="card shadow mb-4">
-    <div style="height: 500px; " class=" card-body">
-      <div class="row">
-        <div class="col-md-5">
-        </div> 
-        <div class="col-md-2">
-          <div class="ball ball-1"></div>
-          <div class="ball ball-2"></div>
-          <div class="ball ball-3"></div><br><br><br><br>
-          <h2>Loading...</h2>
-        </div> 
-        <div class="col-md-5">
-        </div>  
-      </div>
-    </div>
-  </div>
 </div>
 <!-- Display the countdown timer in an element -->
 
@@ -86,9 +70,11 @@ $this->load->view('v_mahasiswa/v_mahasiswa_footer');
 <script type="text/javascript">
     $(document).ready(function () {
         $('#frame').on('load', function () {
-            $('#frame').css({'display' : 'inline'});
+            $('#divIframe').css({'display' : 'none'}); 
             $('#loading').hide();
         });
+
+        // $('#loading').hide();
     });
 </script>
 <script>   

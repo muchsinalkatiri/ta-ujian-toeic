@@ -19,10 +19,23 @@ class nilai extends CI_Controller {
 
 	public function penilaian($id_data_ujian=null)
 	{
+		$this->load->model('user_model');
+
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') != '2' ) 
 			redirect('user/login');
 
+		$query = $this->db->get('pengiriman_whatsapp')->row();
+		$data['pengiriman'] = $query;
+
+		$isi_token = $data['pengiriman']->token;
+
 		$id_mahasiswa_terdaftar = $this->session->userdata('id_mahasiswa_terdaftar');
+
+		$data['mahasiswa_terdaftar']=$this->user_model->get_data_mahasiswa_by_id($id_mahasiswa_terdaftar);
+
+		$nama = $data['mahasiswa_terdaftar']->nama;
+		$email = $data['mahasiswa_terdaftar']->email;
+		$nomor = $data['mahasiswa_terdaftar']->notlp2;
 
 		$data['ujian']=$this->nilai_model->get_data_ujian_by_id_mahasiswa_and_id_ujian($id_data_ujian,$id_mahasiswa_terdaftar);
 
@@ -58,6 +71,14 @@ class nilai extends CI_Controller {
 		$total_score = $score_listening + $score_reading;
 		$level_of_competent = $this->level($total_score);
 
+		$message = '';             
+		$message .= '*Hai '.$nama.', Terimakasih Telah Melakukan Ujian TOEIC.* ';  
+		$message .= '\n2 Anda berhasil mengerjakan '.$terjawab_listening.' soal dari 100 soal listening dan ' .$terjawab_reading.' soal dari 100 soal listening. '; 
+		$message .=   '\n Anda Berhasil Menjawab dengan benar ' .$benar_listening.' soal listening dan '.$benar_reading.' soal reading. \n2 '; 
+		$message .=   'Score Listening : '.$score_listening.'  \n '; 
+		$message .=   'Score Reading : '.$score_reading.'  \n '; 
+		$message .=   'Total Score : '.$total_score.'  \n '; 
+		$message .=   'Level Of Competent : '.$level_of_competent; 
 
 		$data = array(
 			'id_mahasiswa_terdaftar' => $id_mahasiswa_terdaftar,
@@ -71,12 +92,36 @@ class nilai extends CI_Controller {
 			'total_score' => $total_score,
 			'level_of_competent' => $level_of_competent
 			);
-		$insert = $this->nilai_model->create('data_nilai',$data);
 
-		if ($insert) {
+		$insert = $this->nilai_model->create('data_nilai',$data);
+		$curl = curl_init();
+		$token = $isi_token;
+		$data = [
+		'phone' => $nomor,
+		'message' => $message,
+		];
+
+		curl_setopt($curl, CURLOPT_HTTPHEADER,
+			array(
+				"Authorization: $token",
+				)
+			);
+		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+		curl_setopt($curl, CURLOPT_URL, "https://wablas.com/api/send-message");
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+		$result = curl_exec($curl);
+		curl_close($curl);
+
+		echo "<pre>";
+		print_r($result);
+
+		if ($result && $insert) {
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-success">
-				<h5> <span class=" fa fa-check" ></span> Terimakasih telah melakukan ujian TOEIC, Nilai kamu akan segera dikirim.</h5>
+				<h5> <span class=" fa fa-check" ></span> Terimakasih telah melakukan ujian TOEIC, Nilai kamu akan segera dikirim ke nomor whatsapp. Kirim ke Email atau hubungi admin jika nilai belum diterima di whatsapp.</h5>
 			</div>');    
 			redirect('mahasiswa/ujian');
 		}else{

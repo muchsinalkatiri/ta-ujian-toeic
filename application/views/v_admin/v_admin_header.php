@@ -187,32 +187,62 @@
                   <span>Sesi Ujian</span></a>
                 </li>
 
-        <?php 
+    <?php 
+    if( $this->uri->segment('3') == 'data_ujian' || $this->uri->segment('3') == 'data_nilai' ){?>
+      <li class="nav-item active">
+    <?php }elseif($this->uri->segment('3') != 'data_ujian' ) { ?>
+      <li class="nav-item ">
+    <?php  
+       }
+    ?>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-database"></i>
+          <span>Ujian</span>
+        </a>
+    <?php 
+    if( $this->uri->segment('3') == 'data_ujian' || $this->uri->segment('3') == 'data_nilai' ){?>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+    <?php }elseif($this->uri->segment('3') != 'data_ujian' ) { ?>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+    <?php  
+       }
+    ?>
+          <div class="bg-white py-2 collapse-inner rounded">
+          <?php 
           if( $this->uri->segment('3') == 'data_ujian' ){?>
-          <li class="nav-item active">
+            <a class="collapse-item active" href="<?php echo base_url('admin/ujian/data_ujian') ?>">Data Ujian</a>
           <?php }elseif($this->uri->segment('3') != 'data_ujian' ) { 
           ?>
-          <li class="nav-item">
+            <a class="collapse-item " href="<?php echo base_url('admin/ujian/data_ujian') ?>">Data Ujian</a>
           <?php  
           }
           ?>
-                <a class="nav-link" href="<?php echo base_url('admin/ujian/data_ujian') ?>">
-                  <i class="fas fa-fw fa-database"></i>
-                  <span>Data Ujian</span></a>
-                </li>
-
         <?php 
           if( $this->uri->segment('3') == 'data_nilai' ){?>
+            <a class="collapse-item active" href="<?php echo base_url('admin/ujian/data_nilai') ?>">Data Nilai</a>
+        <?php }elseif($this->uri->segment('3') != 'data_nilai' ) { 
+          ?>
+            <a class="collapse-item" href="<?php echo base_url('admin/ujian/data_nilai') ?>">Data Nilai</a>
+        <?php  
+          }
+          ?>
+          </div>
+        </div>
+      </li>
+
+
+        <?php 
+          if( $this->uri->segment('2') == 'pengiriman' ){?>
           <li class="nav-item active">
-          <?php }elseif($this->uri->segment('3') != 'data_nilai' ) { 
+          <?php }elseif($this->uri->segment('2') != 'pengiriman' ) { 
           ?>
           <li class="nav-item">
           <?php  
           }
           ?>
-                <a class="nav-link" href="<?php echo base_url('admin/ujian/data_nilai') ?>">
-                  <i class="fas fa-fw fa-calculator"></i>
-                  <span>Data Nilai</span></a>
+                <a class="nav-link" href="<?php echo base_url('admin/pengiriman') ?>">
+                  <i class="fas fa-fw fa-paper-plane"></i>
+                  <span>Pengiriman</span></a>
                 </li>
 
                 <!-- Divider -->

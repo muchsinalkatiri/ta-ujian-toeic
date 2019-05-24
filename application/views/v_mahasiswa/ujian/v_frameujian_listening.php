@@ -6,9 +6,28 @@
 	<?php $split = explode('4_5', $this->uri->segment('4')); $id_data_ujian = $split[0];//ambil data id ujian dari link  ?> 
 	<?php $split = explode('4_5', $this->uri->segment('4')); $nomer_soal = $split[1];//ambil data id ujian dari link  ?> 
 
-	<body id="page-top" class="bg-gray-100">
+	<body id="page-top" class="bg-gray-100" onload="myFunction()">
+	<div id="loading" style="opacity: 1; position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 99; ">
 		<div class="card shadow mb-4">
-			<div class="card-body">
+		    <div style="height: 700px; "  class=" card-body">
+		      <div class="row">
+		        <div class="col-md-5">
+		        </div> 
+		        <div class="col-md-2">
+		          <div class="ball ball-1"></div>
+		          <div class="ball ball-2"></div>
+		          <div class="ball ball-3"></div><br><br><br><br>
+		          <h2>Loading...</h2>
+		        </div> 
+		        <div class="col-md-5">
+		        </div>  
+		      </div>
+		    </div>
+		  </div>
+	</div>
+	  <div id="page" style="opacity: 0; " >
+		<div  class="card shadow mb-4" >
+			<div class="card-body" >
 				<div class="row">
 					<div class="col-sm-8">
 					<?php if(!empty($soal->nomer_soal) ){ ?> <!-- jika soal belum dimasukan -->
@@ -139,6 +158,7 @@
 				</div>
 		</div>
 	</div>
+	</div>
 </body>
 
 
@@ -149,3 +169,11 @@
 	<script src="<?php echo base_url(); ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<script src="<?php echo base_url(); ?>assets/js/sb-admin-2.min.js"></script>
+	    <script>
+        function myFunction()
+        {
+            document.getElementById("page").style.opacity = 1;
+            document.getElementById("loading").style.opacity = 0;
+            document.getElementById("loading").style.display = "none";
+        }
+    </script>
