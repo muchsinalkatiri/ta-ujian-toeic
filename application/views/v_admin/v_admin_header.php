@@ -30,18 +30,15 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <?php if($this->session->userdata('level')=='0') { ?>
     <ul class="navbar-nav  bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar">
-    <?php }elseif($this->session->userdata('level')=='1'){ ?>
-    <ul class="navbar-nav  bg-gray-700 sidebar sidebar-dark accordion" id="accordionSidebar">
-    <?php } ?>
+
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('admin/dashboard') ?>">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url() ?>">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-pen"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">UJIAN TOEIC</div>
+        <div class="sidebar-brand-text mx-3">JTI.TOEIC</div>
       </a>
 
       <!-- Divider -->

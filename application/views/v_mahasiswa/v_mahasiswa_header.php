@@ -26,11 +26,11 @@
 		<nav class="navbar navbar-expand navbar-light bg-gray-900 text-white topbar mb-4 static-top shadow">
 			<ul class="nav navbar-nav">
 				<li class="nav-item ">
-					<a class="nav-link  text-gray-100" href="<?php echo base_url('mahasiswa/dashboard') ?>">
+					<a class="nav-link  text-gray-100" href="<?php echo base_url() ?>">
 						<div class="sidebar-brand-icon rotate-n-15">
 							<i class=" fa fa-pen fa-2x"></i>
 						</div>
-						<div class="sidebar-brand-text mx-1">UJIAN TOEIC</div>
+						<div class="sidebar-brand-text mx-1">JTI.TOEIC</div>
 					</a>
 				</li>
 			</ul>

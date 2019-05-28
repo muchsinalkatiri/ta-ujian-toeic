@@ -61,22 +61,22 @@ class Incomplete_sentences extends CI_Controller {
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Soal kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_a','Opsi A','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_a','Opsi A','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_b','Opsi B','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_b','Opsi B','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_c','Opsi C','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_c','Opsi C','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_d','Opsi D','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_d','Opsi D','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'
@@ -164,22 +164,22 @@ class Incomplete_sentences extends CI_Controller {
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Soal kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_a','Opsi A','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_a','Opsi A','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_b','Opsi B','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_b','Opsi B','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_c','Opsi C','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_c','Opsi C','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'
 				));
-		$this->form_validation->set_rules('opsi_d','Opsi D','required|min_length[3]',
+		$this->form_validation->set_rules('opsi_d','Opsi D','required|min_length[1]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
 				'min_length' => 'Isi Jawaban yang dimasukan kurang panjang'

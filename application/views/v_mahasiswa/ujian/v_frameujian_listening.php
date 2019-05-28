@@ -29,7 +29,7 @@
 		<div  class="card shadow mb-4" >
 			<div class="card-body" >
 				<div class="row">
-					<div class="col-sm-8">
+					<div class="col-sm-8" style="color: #000000; ">
 					<?php if(!empty($soal->nomer_soal) ){ ?> <!-- jika soal belum dimasukan -->
 						<?php if($soal->nomer_soal == 1 ){ ?> <!-- untuk soal nomer 1, khusus, pembukaan section listening  -->
 							<h3 class="text-center" style=" font-weight: bold; ">Section 1</h3>

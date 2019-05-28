@@ -6,7 +6,7 @@ $this->load->view('v_admin/v_admin_header');
 
 <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 <div class="row ">
-	<div class="col-lg-10">
+	<div class="col-lg-12">
 		<div class="card shadow mb-7">
 			<div class="card-header py-1 ">
 				<nav class="navbar">

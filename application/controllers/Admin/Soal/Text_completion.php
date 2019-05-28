@@ -56,11 +56,6 @@ class Text_completion extends CI_Controller {
 			array(
 				'required'=>'Form Ini Wajib di isi.'
 				));
-		$this->form_validation->set_rules('isi_soal','Isi Soal','required|min_length[3]',
-			array(
-				'required'=>'Form Ini Wajib di isi.',
-				'min_length' => 'Isi Soal kurang panjang'
-				));
 		$this->form_validation->set_rules('opsi_a','Opsi A','required|min_length[3]',
 			array(
 				'required'=>'Form Ini Wajib di isi.',
@@ -158,11 +153,6 @@ class Text_completion extends CI_Controller {
 		$this->form_validation->set_rules('jawaban','Jawaban','required',
 			array(
 				'required'=>'Form Ini Wajib di isi.'
-				));
-		$this->form_validation->set_rules('isi_soal','Isi Soal','required|min_length[3]',
-			array(
-				'required'=>'Form Ini Wajib di isi.',
-				'min_length' => 'Isi Soal kurang panjang'
 				));
 		$this->form_validation->set_rules('opsi_a','Opsi A','required|min_length[3]',
 			array(
