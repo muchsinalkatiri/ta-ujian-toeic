@@ -39,12 +39,12 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-2"><?php echo $page_title ?></h1>
-                    <p class="mb-4">Silahkan masukan email anda, kami akan mengirim permintaan reset password ke email anda</p>
+                    <p class="mb-4">Please enter your email, we will send a request to reset the password to your email</p>
                   </div>
                   <?php echo $this->session->flashdata('emailMsg'); ?>
-                  <?php if ($page_title == 'Lupa Password - Admin') {?>
+                  <?php if ($page_title == 'Forgot the password - Admin') {?>
                    <form class="user" action="<?php echo base_url('user/forgot_password') ?>" method="post" enctype="multipart/form-data" >
-                  <?php }elseif($page_title == 'Lupa Password - Mahasiswa') {?>
+                  <?php }elseif($page_title == 'Forgot the password - Mahasiswa') {?>
                     <form class="user" action="<?php echo base_url('user/forgotpassword') ?>" method="post" enctype="multipart/form-data" >
                   <?php } ?>
                     <div class="row" id="notifications1"> <!-- open validasi -->
@@ -58,16 +58,16 @@
                     </button>
                   </form>
                   <hr>
-                  <?php if ($page_title == 'Lupa Password - Admin') { ?>
+                  <?php if ($page_title == 'Forgot the password - Admin') { ?>
                   <div class="text-center">
                     <a class="small" href="<?php echo base_url('user/login/admin') ?>">Login!</a>
                   </div>
-                  <?php }elseif ($page_title == 'Lupa Password - Mahasiswa') { ?>
+                  <?php }elseif ($page_title == 'Forgot the password - Mahasiswa') { ?>
                     <div class="text-center">
-                    <a class="small" href="<?php echo base_url('user/register') ?>">Buat Akun! (Khusus Akun Mahasiswa)</a>
+                    <a class="small" href="<?php echo base_url('user/register') ?>">Create an account! (Student Account Only)</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="<?php echo base_url('user/login') ?>">Sudah Punya akun (mahasiswa)? Login!</a>
+                    <a class="small" href="<?php echo base_url('user/login') ?>">Have an account (student)? Login!</a>
                   </div>
                   <?php } ?>
                 </div>

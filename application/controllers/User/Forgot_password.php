@@ -21,7 +21,7 @@ class forgot_password extends CI_Controller {
 
 	public function index()
 	{
-		$data['page_title'] = 'Lupa Password - Admin';
+		$data['page_title'] = 'Forgot the password - Admin';
 
 		if($this->session->userdata('logged_in') || $this->session->userdata('level') == '0'|| $this->session->userdata('level') == '1' ){ 
 			redirect('admin/dashboard');

@@ -26,7 +26,7 @@ class Ujian extends CI_Controller {
 	}
 	public function konfirmasi($id=null)
 	{
-		$data['page_title'] = 'Konfirmasi Ujian';
+		$data['page_title'] = 'Exam Confirmation';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') != '2' ) 
 			redirect('user/login');
@@ -83,14 +83,14 @@ class Ujian extends CI_Controller {
 		if (!$insert) {
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-danger">
-				<h5> <span class=" fa fa-cross" ></span> Ujian gagal ditambahkan.</h5>
+				<h5> <span class=" fa fa-cross" ></span> Failed test added.</h5>
 			</div>');    
 			redirect('mahasiswa/ujian');
 		}else{
 			echo $insert;
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-success">
-				<h5> <span class=" fa fa-child" ></span> Selamat Mengerjakan.</h5>
+				<h5> <span class=" fa fa-child" ></span> Have a great time doing it.</h5>
 			</div>');    
 			redirect('mahasiswa/ujian/pengerjaan/'.$insert);
 		}	

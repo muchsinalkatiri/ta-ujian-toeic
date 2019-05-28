@@ -55,7 +55,7 @@
           <ul class="nav-menu">
             <li class="menu-active"><a href="#body">Home</a></li>
             <li><a href="#about">About </a></li>
-            <li><a href="#services">Fitur</a></li>
+            <li><a href="#services">Feature</a></li>
             <li><a href="#portfolio">Table Convertion</a></li>
             <li><a href="#team">Level of competent</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -120,12 +120,12 @@
 
             <div class="col-lg-6 content">
               <h2>Sistem Informasi Ujian TOEIC JTI</h2>
-              <h3>Merupakan sebuah sistem penilaian dan pelaksanaan ujian online TOEIC untuk mencapai mutu,dan efisiensi ujian. </h3>
+              <h3>Is a system of assessing and implementing TOEIC online exams to achieve quality, and test efficiency. </h3>
 
               <ul>
-                <li><i class="fa fa-check-circle"></i> Tidak lagi menggunakan media kertas atau alat tulis sebagai ujian.</li>
-                <li><i class="fa fa-check-circle"></i> Sistem langsung melakukan pengkoreksian jawaban dan menconversi nilai secara otomatis.</li>
-                <li><i class="fa fa-check-circle"></i> Mahasiswa akan langsung mendapatkan hasil ujian ketika ujian selesai dikerjakan.</li>
+                <li><i class="fa fa-check-circle"></i> No longer using paper or stationery as a test.</li>
+                <li><i class="fa fa-check-circle"></i> The system immediately corrects the answer and converts the value automatically.</li>
+                <li><i class="fa fa-check-circle"></i> Students will immediately get the results of the exam when the exam is finished.</li>
               </ul>
 
             </div>
@@ -140,7 +140,7 @@
       <section id="services">
         <div class="container">
           <div class="section-header">
-            <h2>Fitur Utama</h2>
+            <h2>MAIN FEATURE</h2>
           </div>
 
           <div class="row">
@@ -148,16 +148,16 @@
             <div class="col-lg-6">
               <div class="box wow fadeInLeft">
                 <div class="icon"><i class="fab fa-whatsapp"></i></div>
-                <h4 class="title"><a href="">Pengiriman Whatsapp</a></h4>
-                <p class="description">Setelah user melakukan ujian online, maka sistem akan langsung mengirimkan hasil ujian ke akun whatsapp masing-masing mahasiswa.</p>
+                <h4 class="title"><a href="">Shipping by Whatsapp</a></h4>
+                <p class="description">After the user conducts an online exam, the system will immediately send the test results to the WhatsApp account of each student.</p>
               </div>
             </div>
 
             <div class="col-lg-6">
               <div class="box wow fadeInRight">
                 <div class="icon"><i class="fa fa-envelope"></i></div>
-                <h4 class="title"><a href="">Pengiriman Email</a></h4>
-                <p class="description">Jika user belum mendapatkan hasil ujianya melalui pesan whatsappnya maka user bisa melakukan pengiriman melalui email.</p>
+                <h4 class="title"><a href="">Shipping by Email</a></h4>
+                <p class="description">If the user has not received the test results via whatsapp message, the user can send via email.</p>
               </div>
             </div>
 
@@ -165,15 +165,15 @@
               <div class="box wow fadeInLeft" data-wow-delay="0.2s">
                 <div class="icon"><i class="fa fa-map"></i></div>
                 <h4 class="title"><a href="">User Friendly</a></h4>
-                <p class="description">Sistem Informasi ini di buat dengan design yang semenarik dan semudah mungkin untuk user yang mengerjakan ujian.</p>
+                <p class="description">This Information System is made with a design that is as attractive and easy as possible for users who take the exam.</p>
               </div>
             </div>
 
             <div class="col-lg-6">
               <div class="box wow fadeInRight" data-wow-delay="0.2s">
                 <div class="icon"><i class="fa fa-lock"></i></div>
-                <h4 class="title"><a href="">Aman</a></h4>
-                <p class="description">Saat terjadi hal yang tidak di inginkan, seperti lampu mati atau internet putus, user bisa melanjutkan pengerjaan ujian.</p>
+                <h4 class="title"><a href="">Secure</a></h4>
+                <p class="description">When things happen that are not desired, such as the lights are off or the internet is broken, the user can continue the test.</p>
               </div>
             </div>
 
@@ -190,7 +190,7 @@
         <div class="container">
           <div class="section-header">
             <h2>Table Convertion</h2>
-            <p>Jawaban yang berhasil dijawab dengan benar oleh user akan langsung diconversi oleh sistem ke dalam standart scoring TOEIC.</p>
+            <p>Answers that have been answered correctly by the user will be directly converted by the system into the TOEIC scoring standard.</p>
           </div>
         </div>
 
@@ -201,7 +201,7 @@
               <table class="table table-striped table-bordered text-center" id="dataTable"  cellspacing="0">
                 <thead>
                  <tr>
-                  <th>Jawaban Benar</th>
+                  <th>Correct Answer</th>
                   <th>Listening Score</th>
                   <th>Reading Score</th>
                 </tr>
@@ -241,7 +241,7 @@
           <table class="table table-striped table-bordered text-center" id="dataTable"  cellspacing="0">
             <thead>
              <tr>
-              <th>Jawaban Benar</th>
+              <th>Correct Answer</th>
               <th>Listening Score</th>
               <th>Reading Score</th>
             </tr>
@@ -280,7 +280,7 @@
             <table class="table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
               <thead>
                <tr>
-                <th>Jawaban Benar</th>
+                <th>Correct Answer</th>
                 <th>Listening Score</th>
                 <th>Reading Score</th>
               </tr>
@@ -321,7 +321,7 @@
         <table class="table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
               <thead>
                <tr>
-                <th>Jawaban Benar</th>
+                <th>Correct Answer</th>
                 <th>Listening Score</th>
                 <th>Reading Score</th>
               </tr>

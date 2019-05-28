@@ -18,7 +18,7 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
     <div class="row ">
       <div class="col-md-8">
         <a type="submit"   class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" href="#" data-toggle="modal" data-target="#ModalBerhenti">
-          <i class="fa fa-stop"></i> Hentikan Ujian 
+          <i class="fa fa-stop"></i> Stop Exam
         </a>
       </div>
       <div class="col-md-4" >
@@ -48,14 +48,14 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">Apakah kamu yakin ingin menghentikan ujian? ?</div>
+      <div class="modal-body">Are you sure you want to stop the exam?</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
         <a id="hentikan" href="<?php echo base_url('mahasiswa/nilai/penilaian/'.$ujian->id_data_ujian) ?>" class="btn btn-danger btn-icon-split">
           <span class="icon text-white-50">
             <i class="fas fa-stop"></i>
           </span>
-          <span class="text">Hentikan</span>
+          <span class="text">Stop</span>
         </a>
       </div>
     </div>

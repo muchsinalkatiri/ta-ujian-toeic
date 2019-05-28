@@ -121,13 +121,13 @@ class nilai extends CI_Controller {
 		if ($result && $insert) {
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-success">
-				<h5> <span class=" fa fa-check" ></span> Terimakasih telah melakukan ujian TOEIC, Nilai kamu akan segera dikirim ke nomor whatsapp. Kirim ke Email atau hubungi admin jika nilai belum diterima di whatsapp.</h5>
+				<h5> <span class=" fa fa-check" ></span> Thank you for taking the TOEIC exam, your score will be sent to whatsapp number immediately. Send to Email or contact admin if the value has not been received on WhatsApp.</h5>
 			</div>');    
 			redirect('mahasiswa/ujian');
 		}else{
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-danger">
-				<h5> <span class=" fa fa-cross" ></span> Nilai Kamu Gagal di simpan.</h5>
+				<h5> <span class=" fa fa-cross" ></span> Your value failed saved.</h5>
 			</div>');    
 			redirect('mahasiswa/ujian');
 		}
