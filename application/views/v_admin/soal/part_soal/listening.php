@@ -67,9 +67,9 @@ $this->load->view('v_admin/v_admin_header');
             </thead>
             <tbody>
               <?php foreach ($part_soal as $data_part_soal ) {
-                if($data_part_soal->nama_part == 'Photograps'){
+                if($data_part_soal->nama_part == 'Photographs'){
                   $max_soal = 10;
-                  $nama_part = 'photograps';
+                  $nama_part = 'photographs';
                 }elseif($data_part_soal->nama_part == 'Question-Response'){
                   $max_soal = 30;
                   $nama_part = 'question_response';

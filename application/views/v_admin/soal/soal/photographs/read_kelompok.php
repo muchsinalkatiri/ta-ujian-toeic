@@ -10,7 +10,7 @@ $this->load->view('v_admin/v_admin_header');
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard') ?>">Home</a></li>
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/paket_soal') ?>">Data Paket Soal</a></li>
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/part_soal/'.$paket_dan_part_soal->jenis_soal).'/'.$paket_dan_part_soal->nama_paket ?>">Data Part Soal</a></li>
-    <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/photograps/data_soal').'/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part ?>">Data Soal</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo base_url('admin/soal/photographs/data_soal').'/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part ?>">Data Soal</a></li>
     <li class="breadcrumb-item active" aria-current="page">Data Soal Kelompok</li>
   </ol>
 </nav> <!-- tutup breadcumb -->
@@ -22,7 +22,7 @@ $this->load->view('v_admin/v_admin_header');
   </div>
   <div class="col-lg-2" style="text-align: right;  ">
     <?php $split = explode('4_5', $this->uri->segment('5')); $id_kelompok_soal = $split[2];//ambil data id kelompok dari link  ?> 
-    <a href="<?php echo base_url(). 'admin/soal/photograps/tambah/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part.'4_5'.$id_kelompok_soal ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Soal</a>
+    <a href="<?php echo base_url(). 'admin/soal/photographs/tambah/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part.'4_5'.$id_kelompok_soal ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Soal</a>
   </div>
 </div>
 <div class="card shadow mb-4">
@@ -46,16 +46,16 @@ $this->load->view('v_admin/v_admin_header');
           ?>
           <tr>
             <td><?php echo $soal->nomer_soal ?></td>
-            <td><center><img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:66px;height:44px; border-radius: 5%;  ' src="<?php echo base_url()."uploads/img-soal/photograps/".$soal->isi_soal ?>"></center></td> 
+            <td><center><img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:66px;height:44px; border-radius: 5%;  ' src="<?php echo base_url()."uploads/img-soal/photographs/".$soal->isi_soal ?>"></center></td> 
             <td><?php echo $soal->jawaban ?></td>
             <td><?php echo $soal->tanggal_dibuat ?></td>
             <td>
               <?php if($soal->id_kelompok_soal == 0) {echo 'Individu';}else{  ?>
-                <a href="<?php echo base_url().'admin/soal/photograps/data_kelompok_soal/'.$soal->nama_paket.'4_5'.$soal->id_part.'4_5'.$soal->id_kelompok_soal ?>">Kelompok</a>
+                <a href="<?php echo base_url().'admin/soal/photographs/data_kelompok_soal/'.$soal->nama_paket.'4_5'.$soal->id_part.'4_5'.$soal->id_kelompok_soal ?>">Kelompok</a>
                 <?php } ?>
               </td>
               <td><center>
-                <a href="<?php echo base_url(). 'admin/soal/photograps/edit/' . $soal->id_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
+                <a href="<?php echo base_url(). 'admin/soal/photographs/edit/' . $soal->id_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
                 <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#ModalHapus<?php echo $soal->id_soal; ?>" ><i class="fa fa-trash"></i></a>
               </center></td>
             </tr>
@@ -73,7 +73,7 @@ $this->load->view('v_admin/v_admin_header');
                   <div class="modal-body">Apakah kamu yakin ingin menghapus data ini ?</div>
                   <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a href="<?php echo base_url(). 'admin/soal/photograps/delete/' . $soal->id_soal?>" class="btn btn-danger btn-icon-split">
+                    <a href="<?php echo base_url(). 'admin/soal/photographs/delete/' . $soal->id_soal?>" class="btn btn-danger btn-icon-split">
                       <span class="icon text-white-50">
                         <i class="fas fa-trash"></i>
                       </span>

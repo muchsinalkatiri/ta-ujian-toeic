@@ -68,7 +68,7 @@
 							<p>
 								<ol> 
 									<li value="<?php echo $soal->nomer_soal ?>">									
-										<img class="card shadow mb-7"  alt="Preview Gambar" style=' border-radius: 5%;  ' src="<?php echo base_url()."uploads/img-soal/photograps/".$soal->isi_soal?>"> 
+										<img class="card shadow mb-7"  alt="Preview Gambar" style=' border-radius: 5%;  ' src="<?php echo base_url()."uploads/img-soal/photographs/".$soal->isi_soal?>"> 
 									</li>
 								</ol>
 							</p>

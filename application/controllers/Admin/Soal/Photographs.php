@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Photograps extends CI_Controller {
+class Photographs extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();		
@@ -15,7 +15,7 @@ class Photograps extends CI_Controller {
 
 	public function data_soal($nama_paket_id_part=null)
 	{
-		$data['page_title'] = 'Data Soal : Photograps';
+		$data['page_title'] = 'Data Soal : Photographs';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ){ 
 			redirect('user/login/admin');
@@ -23,7 +23,7 @@ class Photograps extends CI_Controller {
 
 		list($nama_paket, $id_part) = explode('4_5', $nama_paket_id_part); //split
 		$nama_paket = str_replace('%20', ' ', $nama_paket); //replace
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 
 		$data['paket_dan_part_soal']=$this->soal_model->cek_paket_dan_part($nama_paket, $id_part, $nama_part); //ambil data paket untuk dicek ada apa endak
 
@@ -32,18 +32,18 @@ class Photograps extends CI_Controller {
 
 		if ( empty($nama_paket_id_part) || !$data['paket_dan_part_soal'] ) redirect('admin/soal/paket_soal');
 
-		$this->load->view('v_admin/soal/soal/photograps/read',$data);
+		$this->load->view('v_admin/soal/soal/photographs/read',$data);
 
 	}
 	public function tambah($nama_paket_id_part=null){
-		$data['page_title'] = 'Tambah Data Soal : Photograps';
+		$data['page_title'] = 'Tambah Data Soal : Photographs';
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ){ 
 			redirect('user/login/admin');
 		}
 
 		list($nama_paket, $id_part, $id_kelompok_soal) = explode('4_5', $nama_paket_id_part, 3); //split
 		$nama_paket = str_replace('%20', ' ', $nama_paket); //replace
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 		$data['paket_dan_part_soal']=$this->soal_model->cek_paket_dan_part($nama_paket, $id_part, $nama_part); //ambil data paket untuk dicek ada apa endak
 
 		if ( empty($nama_paket_id_part) || !$data['paket_dan_part_soal'] ) redirect('admin/soal/paket_soal');
@@ -68,27 +68,27 @@ class Photograps extends CI_Controller {
 		$nomer_soal = $this->input->post('nomer_soal');
 
 		if ($this->form_validation->run() == FALSE){
-			$this->load->view('v_admin/soal/soal/photograps/tambah',$data);
+			$this->load->view('v_admin/soal/soal/photographs/tambah',$data);
 		}
 		else{
 			// Apakah user upload gambar?
 			if ($nomer_soal < 1 || $nomer_soal >10) { //cek nomer soal bener ta gak
 				$this->session->set_flashdata('nomer_soal_msg','nomer soal harus antara 1-10');    
-				redirect('admin/soal/photograps/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
+				redirect('admin/soal/photographs/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
 			}
 			else{//nomer soal bener
 				$query = $this->db->get_where('data_soal', array('nomer_soal' => $nomer_soal,'part_soal'=> $nama_part, 'nama_paket' => $nama_paket, 'id_part'=> $id_part));
 				$check = $query->num_rows();
 				if($check != 0){ //cek nomer soal di paket itu sudah ada apa belum
 					$this->session->set_flashdata('nomer_soal_msg','nomer soal ' .$nomer_soal.' sudah ada ');    
-					redirect('admin/soal/photograps/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
+					redirect('admin/soal/photographs/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
 				}
 				else{//nomer soal di paket belum ada
 					if ( isset($_FILES['gambar_soal']) && $_FILES['gambar_soal']['size'] > 0 )//cek gambar dimasukan ndak
 					{
     			// Konfigurasi folder upload & file yang diijinkan
     			// Jangan lupa buat folder uploads di dalam ci3-course
-						$config['upload_path']          = './uploads/img-soal/photograps/';
+						$config['upload_path']          = './uploads/img-soal/photographs/';
 						$config['allowed_types']        = 'jpg|png';
 						$config['max_size']             = 1024;
 						$config['max_width']            = 1024;
@@ -106,7 +106,7 @@ class Photograps extends CI_Controller {
     	        	// Kita passing pesan error upload ke view supaya user mencoba upload ulang
 
 							$this->session->set_flashdata('gambar_soal_msg',$this->upload->display_errors()); 
-							redirect('admin/soal/photograps/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
+							redirect('admin/soal/photographs/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
 
 						} else { //upload berhasil & langsung insert
 							$img_data = $this->upload->data();
@@ -129,32 +129,32 @@ class Photograps extends CI_Controller {
 									'<div class="alert alert-success">
 									<h5> <span class=" fa fa-check" ></span> Nomer '.$nomer_soal.' berhasil ditambahkan.</h5>
 								</div>');    
-								if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-								else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+								if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+								else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 							}else{
 								$this->session->set_flashdata('msg',
 									'<div class="alert alert-danger">
 									<h5> <span class=" fa fa-cross" ></span>Nomer '.$nomer_soal.' gagal ditambahkan.</h5>
 								</div>');    
-								if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-								else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+								if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+								else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 							}	
 
 						}
 					} else {//ndak masukan gambar
 						$this->session->set_flashdata('gambar_soal_msg','Silahkan masukan gambar dahulu'); 
-						redirect('admin/soal/photograps/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
+						redirect('admin/soal/photographs/tambah/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);
 					}
 				}
 			}
 		}
 	}
 	public function edit($id_soal = null){
-		$data['page_title'] = 'Edit Data Soal : Photograps';
+		$data['page_title'] = 'Edit Data Soal : Photographs';
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ){ 
 			redirect('user/login/admin');
 		}
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 
 		$data['soal'] = $this->soal_model->get_data_by_id($id_soal, $nama_part);
 		if ( empty($id_soal) || !$data['soal'] ) redirect('admin/soal/paket_soal');
@@ -173,7 +173,7 @@ class Photograps extends CI_Controller {
 		$old_image = $data['soal']->isi_soal;
 
 		if ($this->form_validation->run() == FALSE){
-			$this->load->view('v_admin/soal/soal/photograps/update',$data);
+			$this->load->view('v_admin/soal/soal/photographs/update',$data);
 		}
 		else{
 			// Apakah user upload gambar?
@@ -181,7 +181,7 @@ class Photograps extends CI_Controller {
 			{
 		// Konfigurasi folder upload & file yang diijinkan
 		// Jangan lupa buat folder uploads di dalam ci3-course
-				$config['upload_path']          = './uploads/img-soal/photograps/';
+				$config['upload_path']          = './uploads/img-soal/photographs/';
 				$config['allowed_types']        = 'jpg|png';
 				$config['max_size']             = 1024;
 				$config['max_width']            = 1024;
@@ -199,12 +199,12 @@ class Photograps extends CI_Controller {
         	// Kita passing pesan error upload ke view supaya user mencoba upload ulang
 
 					$this->session->set_flashdata('gambar_soal_msg',$this->upload->display_errors()); 
-					redirect('admin/soal/photograps/edit/'.$id_soal);
+					redirect('admin/soal/photographs/edit/'.$id_soal);
 
 				} else { //upload berhasil & langsung insert
 					if( !empty($old_image) ) {
-						if ( file_exists( './uploads/img-soal/photograps/'.$old_image ) ){
-							unlink( './uploads/img-soal/photograps/'.$old_image );
+						if ( file_exists( './uploads/img-soal/photographs/'.$old_image ) ){
+							unlink( './uploads/img-soal/photographs/'.$old_image );
 						} 
 					}
 					$img_data = $this->upload->data();
@@ -224,15 +224,15 @@ class Photograps extends CI_Controller {
 							'<div class="alert alert-success">
 							<h5> <span class=" fa fa-check" ></span> Nomer '.$nomer_soal.' berhasil diupdate.</h5>
 						</div>');    
-						if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-						else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+						if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+						else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 					}else{
 						$this->session->set_flashdata('msg',
 							'<div class="alert alert-danger">
 							<h5> <span class=" fa fa-cross" ></span>Nomer '.$nomer_soal.' gagal diupdate.</h5>
 						</div>');    
-						if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-						else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+						if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+						else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 					}	
 
 				}
@@ -251,15 +251,15 @@ class Photograps extends CI_Controller {
 						'<div class="alert alert-success">
 						<h5> <span class=" fa fa-check" ></span> Nomer '.$nomer_soal.' berhasil diupdate.</h5>
 					</div>');
-					if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-					else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+					if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+					else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 				}else{
 					$this->session->set_flashdata('msg',
 						'<div class="alert alert-danger">
 						<h5> <span class=" fa fa-cross" ></span>Nomer '.$nomer_soal.' gagal diupdate.</h5>
 					</div>');    
-					if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-					else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+					if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+					else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 				}
 			}
 		}
@@ -270,7 +270,7 @@ class Photograps extends CI_Controller {
 
 		$data['page_title'] = 'Delete soal';
 
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 		// Get data dari model berdasarkan $id
 		$data['soal'] = $this->soal_model->get_data_by_id($id_soal, $nama_part);
 		$nomer_soal = $data['soal']->nomer_soal;
@@ -286,8 +286,8 @@ class Photograps extends CI_Controller {
 
     	// Hapus file image yang lama jika ada
 		if( !empty($old_image) ) {
-			if ( file_exists( './uploads/img-soal/photograps/'.$old_image ) ){
-				unlink( './uploads/img-soal/photograps/'.$old_image );
+			if ( file_exists( './uploads/img-soal/photographs/'.$old_image ) ){
+				unlink( './uploads/img-soal/photographs/'.$old_image );
 			} 
 		}
 
@@ -299,21 +299,21 @@ class Photograps extends CI_Controller {
 				'<div class="alert alert-success">
 				<h5> <span class=" fa fa-check" ></span> Nomer '.$nomer_soal.' berhasil hapus.</h5>
 			</div>');    
-			if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-			else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+			if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+			else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 
 		}else{
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-danger">
 				<h5> <span class=" fa fa-cross" ></span>Nomer '.$nomer_soal.' Gagal Dihapus.</h5>
 			</div>');    
-			if($id_kelompok_soal == 0){redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);}
-			else{redirect('admin/soal/photograps/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
+			if($id_kelompok_soal == 0){redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);}
+			else{redirect('admin/soal/photographs/data_kelompok_soal/'.$nama_paket.'4_5'.$id_part.'4_5'.$id_kelompok_soal);}
 		}
 	}
 	public function data_kelompok_soal($nama_paket_id_part=null)
 	{
-		$data['page_title'] = 'Data Kelompok Soal : Photograps';
+		$data['page_title'] = 'Data Kelompok Soal : Photographs';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ){ 
 			redirect('user/login/admin');
@@ -321,7 +321,7 @@ class Photograps extends CI_Controller {
 
 		list($nama_paket, $id_part, $id_kelompok_soal) = explode('4_5', $nama_paket_id_part); //split
 		$nama_paket = str_replace('%20', ' ', $nama_paket); //replace
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 
 		$data['paket_dan_part_soal']=$this->soal_model->cek_paket_dan_part($nama_paket, $id_part, $nama_part); //ambil data paket untuk dicek ada apa endak
 
@@ -329,18 +329,18 @@ class Photograps extends CI_Controller {
 
 		if ( empty($nama_paket_id_part) || !$data['paket_dan_part_soal'] ) redirect('admin/soal/paket_soal');
 
-		$this->load->view('v_admin/soal/soal/photograps/read_kelompok',$data);
+		$this->load->view('v_admin/soal/soal/photographs/read_kelompok',$data);
 
 	}
 	public function tambah_kelompok($nama_paket_id_part=null){
-		$data['page_title'] = 'Tambah Data Soal : Photograps';
+		$data['page_title'] = 'Tambah Data Soal : Photographs';
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ){ 
 			redirect('user/login/admin');
 		}
 
 		list($nama_paket, $id_part, $id_kelompok_soal) = explode('4_5', $nama_paket_id_part, 3); //split
 		$nama_paket = str_replace('%20', ' ', $nama_paket); //replace
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 
 		$bacaan = $this->input->post('bacaan', FALSE);
 
@@ -359,13 +359,13 @@ class Photograps extends CI_Controller {
 				'<div class="alert alert-success">
 				<h5> <span class=" fa fa-check" ></span> Kelompok Soal berhasil ditambahkan.</h5>
 			</div>');    
-			redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);
+			redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);
 		}else{
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-danger">
 				<h5> <span class=" fa fa-cross" ></span>Kelompok Soal gagal ditambahkan.</h5>
 			</div>');    
-			redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);
+			redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);
 
 		}	
 	}
@@ -375,7 +375,7 @@ class Photograps extends CI_Controller {
 
 		$data['page_title'] = 'Edit Kelompok soal';
 
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 		// Get data dari model berdasarkan $id
 		$data['kelompok'] = $this->soal_model->get_data_kelompok_by_id($id_kelompok_soal, $nama_part);
 		$id_part = $data['kelompok']->id_part;
@@ -390,7 +390,7 @@ class Photograps extends CI_Controller {
 				));
 
 		if ($this->form_validation->run() == FALSE){
-			$this->load->view('v_admin/soal/soal/photograps/update_kelompok',$data);
+			$this->load->view('v_admin/soal/soal/photographs/update_kelompok',$data);
 		}
 		else{
 		// Hapus data sesuai id-nya
@@ -406,14 +406,14 @@ class Photograps extends CI_Controller {
 					'<div class="alert alert-success">
 					<h5> <span class=" fa fa-check" ></span> Kelompok Soal berhasil diupdate.</h5>
 				</div>');    
-				redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);
+				redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);
 
 			}else{
 				$this->session->set_flashdata('msg',
 					'<div class="alert alert-danger">
 					<h5> <span class=" fa fa-cross" ></span>Kelompok Soal Gagal diupdate.</h5>
 				</div>');    
-				redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);
+				redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);
 			}
 		}
 	}
@@ -423,7 +423,7 @@ class Photograps extends CI_Controller {
 
 		$data['page_title'] = 'Delete Kelompok soal';
 
-		$nama_part = 'Photograps';
+		$nama_part = 'Photographs';
 		// Get data dari model berdasarkan $id
 		$data['kelompok'] = $this->soal_model->get_data_kelompok_by_id($id_kelompok_soal, $nama_part);
 		$id_part = $data['kelompok']->id_part;
@@ -440,14 +440,14 @@ class Photograps extends CI_Controller {
 				'<div class="alert alert-success">
 				<h5> <span class=" fa fa-check" ></span> Kelompok Soal berhasil hapus.</h5>
 			</div>');    
-			redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);
+			redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);
 
 		}else{
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-danger">
 				<h5> <span class=" fa fa-cross" ></span>Kelompok Soal Gagal Dihapus.</h5>
 			</div>');    
-			redirect('admin/soal/photograps/data_soal/'.$nama_paket.'4_5'.$id_part);
+			redirect('admin/soal/photographs/data_soal/'.$nama_paket.'4_5'.$id_part);
 		}
 	}
 }

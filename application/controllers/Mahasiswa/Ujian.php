@@ -14,7 +14,7 @@ class Ujian extends CI_Controller {
 
 	public function index()
 	{
-		$data['page_title'] = 'List Ujian';
+		$data['page_title'] = 'List Exam';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') != '2' ) 
 			redirect('user/login');

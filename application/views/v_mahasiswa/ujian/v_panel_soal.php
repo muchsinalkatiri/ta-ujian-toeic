@@ -6,7 +6,7 @@
 	</div>
 </nav>
 <table class="table-sm text-center " id="dataTable"  cellspacing="0">
-	<span class="text-xs mr-2"><i class="fas fa-circle mr-1 mb-2 mt-1 text-primary"></i>Photograps</span>
+	<span class="text-xs mr-2"><i class="fas fa-circle mr-1 mb-2 mt-1 text-primary"></i>Photographs</span>
 	<span class="text-xs mr-2"><i class="fas fa-circle mr-1 mb-2 mt-1 text-danger"></i>Question-Response</span>
 	<span class="text-xs mr-2"><i class="fas fa-circle mr-1 mb-2 mt-1 text-warning"></i>Converstations</span>
 	<span class="text-xs mr-2"><i class="fas fa-circle mr-1 mb-2 mt-1 text-success"></i>Short Talks</span>

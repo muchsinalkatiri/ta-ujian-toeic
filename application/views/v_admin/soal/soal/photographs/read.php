@@ -29,7 +29,7 @@ $this->load->view('v_admin/v_admin_header');
         <h1 class="h3 mb-3 text-gray-800">Data Soal Paket : <?php echo $paket_dan_part_soal->nama_paket ?></h1>
       </div>
       <div class="col-lg-2" style="text-align: right;  ">
-        <a href="<?php echo base_url(). 'admin/soal/photograps/tambah/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part.'4_50' ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Soal</a>
+        <a href="<?php echo base_url(). 'admin/soal/photographs/tambah/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part.'4_50' ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Soal</a>
       </div>
     </div>
     <div class="card shadow mb-4">
@@ -53,16 +53,16 @@ $this->load->view('v_admin/v_admin_header');
               ?>
               <tr>
                 <td><?php echo $soal->nomer_soal ?></td>
-                <td><center><img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:66px;height:44px; border-radius: 5%;  ' src="<?php echo base_url()."uploads/img-soal/photograps/".$soal->isi_soal ?>"></center></td> 
+                <td><center><img class="card shadow mb-7" id="gambar_nodin"  alt="Preview Gambar" style='width:66px;height:44px; border-radius: 5%;  ' src="<?php echo base_url()."uploads/img-soal/photographs/".$soal->isi_soal ?>"></center></td> 
                 <td><?php echo $soal->jawaban ?></td>
                 <td><?php echo $soal->tanggal_dibuat ?></td>
                 <td>
                 <?php if($soal->id_kelompok_soal == 0) {echo 'Individu';}else{  ?>
-                  <a href="<?php echo base_url().'admin/soal/photograps/data_kelompok_soal/'.$soal->nama_paket.'4_5'.$soal->id_part.'4_5'.$soal->id_kelompok_soal ?>">Kelompok</a>
+                  <a href="<?php echo base_url().'admin/soal/photographs/data_kelompok_soal/'.$soal->nama_paket.'4_5'.$soal->id_part.'4_5'.$soal->id_kelompok_soal ?>">Kelompok</a>
                   <?php } ?>
                 </td>
                 <td><center>
-                  <a href="<?php echo base_url(). 'admin/soal/photograps/edit/' . $soal->id_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
+                  <a href="<?php echo base_url(). 'admin/soal/photographs/edit/' . $soal->id_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
                   <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#ModalHapus<?php echo $soal->id_soal; ?>" ><i class="fa fa-trash"></i></a>
                 </center></td>
               </tr>
@@ -80,7 +80,7 @@ $this->load->view('v_admin/v_admin_header');
                     <div class="modal-body">Apakah kamu yakin ingin menghapus data ini ?</div>
                     <div class="modal-footer">
                       <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                      <a href="<?php echo base_url(). 'admin/soal/photograps/delete/' . $soal->id_soal?>" class="btn btn-danger btn-icon-split">
+                      <a href="<?php echo base_url(). 'admin/soal/photographs/delete/' . $soal->id_soal?>" class="btn btn-danger btn-icon-split">
                         <span class="icon text-white-50">
                           <i class="fas fa-trash"></i>
                         </span>
@@ -108,7 +108,7 @@ $this->load->view('v_admin/v_admin_header');
             Tambah Kelompok
           </div>
           <div class="card-body">
-            <form class="user" action="<?php echo base_url('admin/soal/photograps/tambah_kelompok/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part ) ?>" method="post" enctype="multipart/form-data">
+            <form class="user" action="<?php echo base_url('admin/soal/photographs/tambah_kelompok/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part ) ?>" method="post" enctype="multipart/form-data">
               <div class="row mb-3">
                 <div id="notifications4" class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('bacaan'); ?></div>
                 <textarea  required=""  type="text"  id="bacaan" placeholder="Tulis Bacaan Kelompok Soal Disini" name="bacaan"></textarea>
@@ -148,8 +148,8 @@ $this->load->view('v_admin/v_admin_header');
                         <td><?php echo $kelompok->id_kelompok_soal ?></td>
                         <td><?php echo $kelompok->bacaan ?></td> 
                         <td><center>
-                          <a href="<?php echo base_url(). 'admin/soal/photograps/data_kelompok_soal/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part.'4_5'.$kelompok->id_kelompok_soal ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Detail Kelompok Soal</a>
-                          <a href="<?php echo base_url(). 'admin/soal/photograps/edit_kelompok/' . $kelompok->id_kelompok_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
+                          <a href="<?php echo base_url(). 'admin/soal/photographs/data_kelompok_soal/'.$paket_dan_part_soal->nama_paket.'4_5'.$paket_dan_part_soal->id_part.'4_5'.$kelompok->id_kelompok_soal ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Detail Kelompok Soal</a>
+                          <a href="<?php echo base_url(). 'admin/soal/photographs/edit_kelompok/' . $kelompok->id_kelompok_soal ?>" class="btn btn-primary btn-circle"  ><i class="fa fa-edit"></i></a>
                           <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#ModalHapus<?php echo $kelompok->id_kelompok_soal; ?>" ><i class="fa fa-trash"></i></a>
                         </center></td>
                       </tr>
@@ -167,7 +167,7 @@ $this->load->view('v_admin/v_admin_header');
                             <div class="modal-body">Apakah kamu yakin ingin menghapus data ini ?</div>
                             <div class="modal-footer">
                               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                              <a href="<?php echo base_url(). 'admin/soal/photograps/delete_kelompok/' . $kelompok->id_kelompok_soal?>" class="btn btn-danger btn-icon-split">
+                              <a href="<?php echo base_url(). 'admin/soal/photographs/delete_kelompok/' . $kelompok->id_kelompok_soal?>" class="btn btn-danger btn-icon-split">
                                 <span class="icon text-white-50">
                                   <i class="fas fa-trash"></i>
                                 </span>

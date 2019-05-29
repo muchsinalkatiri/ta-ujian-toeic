@@ -121,7 +121,7 @@ class nilai extends CI_Controller {
 		if ($result && $insert) {
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-success">
-				<h5> <span class=" fa fa-check" ></span> Thank you for taking the TOEIC exam, your score will be sent to whatsapp number immediately. Send to Email or contact admin if the value has not been received on WhatsApp.</h5>
+				<h5> <span class=" fa fa-check" ></span> Thank you for taking the TOEIC exam, your detail score will be sent to whatsapp number immediately. Send to Email or contact admin if the value has not been received on WhatsApp.</h5>
 			</div>');    
 			redirect('mahasiswa/ujian');
 		}else{

@@ -22,7 +22,7 @@ $this->load->view('v_admin/v_admin_header');
         Edit Kelompok
       </div>
       <div class="card-body">
-        <form class="user" action="<?php echo base_url('admin/soal/photograps/edit_kelompok/'.$kelompok->id_kelompok_soal ) ?>" method="post" enctype="multipart/form-data">
+        <form class="user" action="<?php echo base_url('admin/soal/photographs/edit_kelompok/'.$kelompok->id_kelompok_soal ) ?>" method="post" enctype="multipart/form-data">
           <div class="row mb-3">
             <div id="notifications4" class="text-xs font-weight-bold text-danger text-uppercase mb-1"><?php echo form_error('bacaan'); ?></div>
             <textarea  required=""  type="text"  id="bacaan" placeholder="Tulis Bacaan Kelompok Soal Disini" name="bacaan"><?php echo $kelompok->bacaan ?></textarea>

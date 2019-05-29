@@ -99,7 +99,7 @@ class kirim extends CI_Controller {
             $this->session->set_flashdata('msg','
                 <div id="notifications">
                     <div class="alert alert-success">
-                        <center><h5><span class=" fa fa-check" ></span> Hasil Ujian Anda telah Dikirim Ke Email</h5></center>
+                        <center><h5><span class=" fa fa-check" ></span> Your score details have been sent to email.</h5></center>
                     </div>
                 </div>
                 '); 
@@ -107,7 +107,7 @@ class kirim extends CI_Controller {
             $this->session->set_flashdata('msg','
                 <div id="notifications">
                     <div class="alert alert-danger">
-                        <center><h5><span class=" fa fa-ban" ></span> Hasil Ujian Anda Gagal Dikirim Ke Email. Periksa koneksimu dan silahkan coba lagi.</h5></center>
+                        <center><h5><span class=" fa fa-ban" ></span> Your score details failed to be sent to email.</h5></center>
                     </div>
                 </div>
                 ');  

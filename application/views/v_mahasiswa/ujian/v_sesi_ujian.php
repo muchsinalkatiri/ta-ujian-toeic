@@ -22,15 +22,21 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
           </thead>
           <tbody>
             <?php foreach ($sesi_ujian as $sesi ) {
+              $query_nilai = $this->db->get_where('data_nilai_ujian', array('data_nilai_ujian.id_sesi_ujian' => $sesi->id_sesi_ujian, 'id_mahasiswa_terdaftar' => $this->session->userdata('id_mahasiswa_terdaftar')));
+              $check_nilai = $query_nilai->num_rows();
               if ($sesi->status == 'dihentikan') {
                 $status = 'stopped';
               }else{                  
-                if ($sesi->waktu_berakhir > date('Y-m-d H:i:s') && $sesi->waktu_dimulai < date('Y-m-d H:i:s')) {
+                if ($sesi->waktu_berakhir > date('Y-m-d H:i:s') && $sesi->waktu_dimulai < date('Y-m-d H:i:s') && $check_nilai == 0) {
                   $status = 'available';
-                }elseif ($sesi->waktu_berakhir < date('Y-m-d H:i:s') ){
+                }elseif ($sesi->waktu_berakhir < date('Y-m-d H:i:s') && $check_nilai == 0 ){
                   $status = 'is over';
-                }elseif ($sesi->waktu_dimulai > date('Y-m-d H:i:s')){
+                }elseif ($sesi->waktu_dimulai > date('Y-m-d H:i:s') && $check_nilai == 0){
                   $status = 'not opened yet';
+                }elseif ($check_nilai != 0) {
+                  $data_nilai_ujian = $query_nilai->result();
+                  $total_score = $data_nilai_ujian[0]->total_score;
+                  $status = 'Total Score : '.$total_score;
                 }
               }
               ?>
@@ -51,37 +57,39 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
                       $id_data_ujian = $data_ujian[0]->id_data_ujian;
                       $status_pengerjaan = $data_ujian[0]->status_pengerjaan;
                       if($status == 'available' && $check != 0){
-                      if($status_pengerjaan == 'mengerjakan' &&  $data_ujian[0]->waktu_berakhir > date('Y-m-d H:i:s')){
-                        ?>
-                        <a href="<?php echo base_url(). 'mahasiswa/ujian/pengerjaan/' . $id_data_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-secondary text-gray-100 shadow-sm"  ><i class="fas fa-angle-double-right  text-white-50"></i> Continue the test</a>
-                      <?php }elseif($status_pengerjaan == 'selesai'){ ?>
-                        <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Results to Email</a>
-                        <?php }}elseif(($status == 'is over' && $status_pengerjaan == 'available' && $check != 0)){?>
-                        <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Results to Email</a>
-                          
-                        <?php } ?>
-                        <?php } ?>
-                      </center></td>
-                    </tr>
+                        if($status_pengerjaan == 'mengerjakan' &&  $data_ujian[0]->waktu_berakhir > date('Y-m-d H:i:s')){
+                          ?>
+                          <a href="<?php echo base_url(). 'mahasiswa/ujian/pengerjaan/' . $id_data_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-secondary text-gray-100 shadow-sm"  ><i class="fas fa-angle-double-right  text-white-50"></i> Continue the test</a>
+                          <?php }elseif($status_pengerjaan == 'selesai'){ ?>
+                            <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
+                            <?php }}elseif(($status == 'is over'  && $check != 0)){?>
+                              <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
+
+                              <?php } ?>
+                              <?php }elseif ($check_nilai != 0 && $total_score = $data_nilai_ujian[0]->total_score) {?>
+                              <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
+                              <?php } ?>
+                            </center></td>
+                          </tr>
 
 
 
-                    <?php } ?>
-                  </tbody>
-                </table>
+                          <?php } ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
-            </div>
-          </div>
-
-
-        </div>
 
 
 
 
-        <?php 
-        $this->load->view('v_mahasiswa/v_mahasiswa_footer');
-        ?> 	
-        <script>   
-          $('#notifications').slideDown('slow').delay(10000).slideUp('slow');
-        </script>
+              <?php 
+              $this->load->view('v_mahasiswa/v_mahasiswa_footer');
+              ?> 	
+              <script>   
+                $('#notifications').slideDown('slow').delay(10000).slideUp('slow');
+              </script>
