@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class forgot_password extends CI_Controller {
+class Forgot_password extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();		

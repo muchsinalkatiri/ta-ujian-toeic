@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class mahasiswa_terdaftar extends CI_Controller {
+class Mahasiswa_terdaftar extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();		
@@ -17,8 +17,8 @@ class mahasiswa_terdaftar extends CI_Controller {
 	{
 		$data['page_title'] = 'Data Mahasiswa Terdaftar';
 		// Must login
-		// if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
-		// 	redirect('user/login/admin');
+		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') == '2' ) 
+			redirect('user/login/admin');
 
 		$data['mahasiswa_terdaftar']=$this->mahasiswa_terdaftar_model->get_all_mahasiswa_terdaftar()->result();
 

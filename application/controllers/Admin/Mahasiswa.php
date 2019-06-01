@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class mahasiswa extends CI_Controller {
+class Mahasiswa extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();		

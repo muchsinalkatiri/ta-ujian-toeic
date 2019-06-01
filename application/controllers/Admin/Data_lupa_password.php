@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class data_lupa_password extends CI_Controller {
+class Data_lupa_password extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();		

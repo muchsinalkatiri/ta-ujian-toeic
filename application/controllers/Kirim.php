@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class kirim extends CI_Controller {
+class Kirim extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();		
@@ -10,37 +10,38 @@ class kirim extends CI_Controller {
 		// $this->load->helper('MY');
 		$this->load->model('user_model');
 		$this->load->model('nilai_model');
+        $this->load->library('MyPHPMailer'); // load library
 
-	}
+    }
 
 
-	public function kirim_email($id_sesi_ujian){
+    public function kirim_email($id_sesi_ujian){
 
-		$id_mahasiswa_terdaftar = $this->session->userdata('id_mahasiswa_terdaftar');
+      $id_mahasiswa_terdaftar = $this->session->userdata('id_mahasiswa_terdaftar');
 
-		$data['mahasiswa_terdaftar']=$this->user_model->get_data_mahasiswa_by_id($id_mahasiswa_terdaftar);
-		$data['nilai']=$this->nilai_model->get_data_nilai($id_sesi_ujian, $id_mahasiswa_terdaftar);
+      $data['mahasiswa_terdaftar']=$this->user_model->get_data_mahasiswa_by_id($id_mahasiswa_terdaftar);
+      $data['nilai']=$this->nilai_model->get_data_nilai($id_sesi_ujian, $id_mahasiswa_terdaftar);
 
-		$nama = $data['mahasiswa_terdaftar']->nama;
-		$email = $data['mahasiswa_terdaftar']->email;
+      $nama = $data['mahasiswa_terdaftar']->nama;
+      $email = $data['mahasiswa_terdaftar']->email;
 
-		$terjawab_listening = $data['nilai']->terjawab_listening;
-		$terjawab_reading = $data['nilai']->terjawab_reading;
-		$benar_listening = $data['nilai']->benar_listening;
-		$benar_reading = $data['nilai']->benar_reading;
-		$score_listening = $data['nilai']->score_listening;
-		$score_reading = $data['nilai']->score_reading;
-		$total_score = $data['nilai']->total_score;
-		$level_of_competent = $data['nilai']->level_of_competent;
+      $terjawab_listening = $data['nilai']->terjawab_listening;
+      $terjawab_reading = $data['nilai']->terjawab_reading;
+      $benar_listening = $data['nilai']->benar_listening;
+      $benar_reading = $data['nilai']->benar_reading;
+      $score_listening = $data['nilai']->score_listening;
+      $score_reading = $data['nilai']->score_reading;
+      $total_score = $data['nilai']->total_score;
+      $level_of_competent = $data['nilai']->level_of_competent;
 
-		$message = '';             
-		$message .= '<strong>Hai '.$nama.', Terimakasih Telah Melakukan Ujian TOEIC.</strong><br>';  
-		$message .= '<br><br>Anda berhasil mengerjakan '.$terjawab_listening.' soal dari 100 soal listening dan ' .$terjawab_reading.' soal dari 100 soal listening. <br> '; 
-		$message .=   'Anda Berhasil Menjawab dengan benar ' .$benar_listening.' soal listening dan '.$benar_reading.' soal reading. <br><br> '; 
-		$message .=   'Score Listening : '.$score_listening.'  <br> '; 
-		$message .=   'Score Reading : '.$score_reading.'  <br> '; 
-		$message .=   'Total Score : '.$total_score.'  <br> '; 
-		$message .=   'Level Of Competent : '.$level_of_competent.'  <br> '; 
+      $message = '';             
+      $message .= '<strong>Hai '.$nama.', Terimakasih Telah Melakukan Ujian TOEIC.</strong><br>';  
+      $message .= '<br><br>Anda berhasil mengerjakan '.$terjawab_listening.' soal dari 100 soal listening dan ' .$terjawab_reading.' soal dari 100 soal listening. <br> '; 
+      $message .=   'Anda Berhasil Menjawab dengan benar ' .$benar_listening.' soal listening dan '.$benar_reading.' soal reading. <br><br> '; 
+      $message .=   'Score Listening : '.$score_listening.'  <br> '; 
+      $message .=   'Score Reading : '.$score_reading.'  <br> '; 
+      $message .=   'Total Score : '.$total_score.'  <br> '; 
+      $message .=   'Level Of Competent : '.$level_of_competent.'  <br> '; 
 
 		// echo $message;
         $send_email = $this->send_email($message,$email); //dikirim ke email
@@ -196,7 +197,7 @@ class kirim extends CI_Controller {
         redirect('admin/ujian/data_nilai');
     }
 
-    public function send_email($message,$email)
+    public function send_email($message = 'aa',$email='pohonhidayah@gmail.com')
     {
       // Konfigurasi email
     	$config = [
@@ -205,7 +206,7 @@ class kirim extends CI_Controller {
     	'protocol'  => 'smtp',
     	'smtp_host' => 'ssl://smtp.gmail.com',
                'smtp_user' => 'tugasakhirtoeic@gmail.com',    // Ganti dengan email gmail kamu
-               'smtp_pass' => 'aremania123',      // Password gmail kamu
+               'smtp_pass' => 'cinaro36',      // Password gmail kamu
                'smtp_port' => 465,
                'crlf'      => "\r\n",
                'newline'   => "\r\n"
@@ -234,5 +235,31 @@ class kirim extends CI_Controller {
         	return false;
         }
     }
+
+    function send(){
+        $fromEmail = "tugasakhirtoeic@gmail.com";
+     $isiEmail = "Isi email tulis disini";
+     $mail = new PHPMailer();
+        $mail->IsHTML(true);    // set email format to HTML
+        $mail->IsSMTP();   // we are going to use SMTP
+        $mail->SMTPAuth   = true; // enabled SMTP authentication
+        $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
+        $mail->Host       = "smtp.gmail.com";      // setting GMail as our SMTP server
+        $mail->Port       = 465;                   // SMTP port to connect to GMail
+        $mail->Username   = $fromEmail;  // alamat email kamu
+        $mail->Password   = "cinaro36";            // password GMail
+        $mail->SetFrom('tugasakhirtoeic@gmail.com', 'noreply');  //Siapa yg mengirim email
+        $mail->Subject    = "Subjek email";
+        $mail->Body       = $isiEmail;
+        $toEmail = "pohonhidayah@gmail.com"; // siapa yg menerima email ini
+        $mail->AddAddress($toEmail);
+
+        if(!$mail->Send()) {
+            echo "Eror: ".$mail->ErrorInfo;
+        } else {
+            echo "Email berhasil dikirim";
+        }
+    }
+
 }
 
