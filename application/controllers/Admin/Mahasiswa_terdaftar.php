@@ -383,9 +383,11 @@ class Mahasiswa_terdaftar extends CI_Controller {
 
     	// Hapus file image yang lama jika ada
 		if( !empty($old_image) ) {
-			if ( file_exists( './uploads/img-user/'.$old_image ) ){
-				unlink( './uploads/img-user/'.$old_image );
-			} 
+			if( $old_image != 'default-user.png' ) {
+				if ( file_exists( './uploads/img-user/'.$old_image ) ){
+					unlink( './uploads/img-user/'.$old_image );
+				} 
+			}	
 			// else {
 			// 	echo 'File tidak ditemukan.';
 			// }

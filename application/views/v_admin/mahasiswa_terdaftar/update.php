@@ -1,7 +1,7 @@
 <?php 
 $this->load->view('v_admin/v_admin_header');
 ?> 
-<link href="<?php echo base_url(); ?>assets/vendor/datetimepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/vendor/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"> 
 </div> <!-- TUTUP HEADER -->
 
 <nav aria-label="breadcrumb"> <!-- buka breadcumb -->
@@ -116,7 +116,7 @@ $this->load->view('v_admin/v_admin_header');
 	?>
 
 
-	<script src="<?php echo base_url(); ?>assets/vendor/datetimepicker/js/bootstrap-datepicker.js"></script>
+        <script src="<?php echo base_url(); ?>assets/vendor/datetimepicker/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$('.tanggal').datepicker({
@@ -157,4 +157,5 @@ $this->load->view('v_admin/v_admin_header');
 			});
 
 		});
+		
 	</script>

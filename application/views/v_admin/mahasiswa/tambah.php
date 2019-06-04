@@ -39,7 +39,7 @@ $this->load->view('v_admin/v_admin_header');
 							<input type="text" class="form-control form-control-user"  id="tempat_lahir" value="<?php echo set_value('tempat_lahir'); ?>" name="tempat_lahir" placeholder="Tempat Lahir">
 						</div>
 						<div class="col-sm-6" >
-							<input type="text"  name="tanggal_lahir" id="tanggal_lahir" value="<?php echo set_value('tanggal_lahir'); ?>" class="tanggal form-control-user form-control"  placeholder="Tanggal Lahir (dd-mm-yyyy)" />
+							<input type="text"  name="tanggal_lahir" id="tanggal_lahir" value="<?php echo set_value('tanggal_lahir'); ?>" class="time form-control-user form-control"  placeholder="Tanggal Lahir (dd-mm-yyyy)" />
 						</div>
 					</div>
 					<div class="row" id="notifications3"> <!-- open validasi -->
@@ -88,17 +88,15 @@ $this->load->view('v_admin/v_admin_footer');
 <script src="<?php echo base_url(); ?>assets/vendor/datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$('.tanggal').datetimepicker({
-			minView: 2,
-			format: 'dd-mm-yyyy',
+		$('.time').datetimepicker({format: 'dd-mm-yyyy', todayBtn: true,
 			autoclose: true,
 			pickerPosition: "top-left"});
 	});
-</script>
+	</script>
 
-<script>   
-	$('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications3').slideDown('slow').delay(5000).slideUp('slow');
-	$('#notifications4').slideDown('slow').delay(5000).slideUp('slow');
-</script>
+	<script>   
+		$('#notifications1').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications2').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications3').slideDown('slow').delay(5000).slideUp('slow');
+		$('#notifications4').slideDown('slow').delay(5000).slideUp('slow');
+	</script>

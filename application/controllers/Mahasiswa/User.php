@@ -26,22 +26,22 @@ class User extends CI_Controller {
 		$this->load->view('v_mahasiswa/user/v_user',$data);
 	}
 
-	public function edit()
+	public function edit($id_mahasiswa_terdaftar=null)
 	{
-		$data['page_title'] = 'Edit User';
+		$data['page_title'] = 'Update Profile';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') != '2' ){ 
 			redirect('user/login');
 		}
 
-		$id = $this->session->userdata('id_admin');
-		$data['data_mahasiswa_terdaftar'] = $this->user_model->get_data_mahasiswa_by_id($id);
+		$id_mahasiswa_terdaftar = $this->session->userdata('id_mahasiswa_terdaftar');
+		$data['data_mahasiswa'] = $this->user_model->get_data_mahasiswa_by_id($id_mahasiswa_terdaftar);
 
 				// Kita simpan dulu nama file yang lama
-		$old_image = $data['data_user']->foto;
+		$old_image = $data['data_mahasiswa']->foto;
 
 		// Jika id kosong atau tidak ada id yg dimaksud, lempar user ke halaman blog
-		if ( empty($id) || !$data['data_user'] ) redirect('admin/dashboard');
+		if ( empty($id_mahasiswa_terdaftar) || !$data['data_mahasiswa'] ) redirect('admin/dashboard');
 
 		//rule validasi
 		$this->form_validation->set_rules('nama','Nama','required|min_length[3]',
@@ -49,8 +49,8 @@ class User extends CI_Controller {
 				'required'=>'Form Nama Wajib di isi.',
 				'min_length'=>'Nama yang anda masukan kurang panjang.',
 				));
-		if($this->input->post('username') != $data['data_user']->username) {
-			$is_unique =  '|is_unique[data_admin.username]';
+		if($this->input->post('username') != $data['data_mahasiswa']->username) {
+			$is_unique =  '|is_unique[data_mahasiswa_lengkap.username]';
 		} else {
 			$is_unique =  '';
 		}
@@ -67,8 +67,8 @@ class User extends CI_Controller {
 				'min_length'=>'password yang anda masukan terlalu pendek.',
 				'max_length'=>'password yang anda masukan terlalu panjang.'
 				));
-		if($this->input->post('email') != $data['data_user']->email) {
-			$is_unique =  '|is_unique[data_admin.email]';
+		if($this->input->post('email') != $data['data_mahasiswa']->email) {
+			$is_unique =  '|is_unique[data_mahasiswa_lengkap.email]';
 		} else {
 			$is_unique =  '';
 		}
@@ -77,6 +77,28 @@ class User extends CI_Controller {
 				'required'=>'Form email Wajib di isi.',
 				'valid_email'=>'Masukan email yang benar',
 				'is_unique' =>'Email ini sudah ada'
+				));
+		$this->form_validation->set_rules('notlp2','No Telepon','required|numeric|min_length[3]|max_length[15]',
+			array(
+				'required'=>'Form No Telepon Wajib di isi.',
+				'numeric'=>'No Telepon harusx di isi dengan angka.',
+				'min_length'=>'No Telepon yang anda masukan terlalu pendek',
+				'max_length'=>'No Telepon yang anda masukan terlalu panjang',
+				));
+		$this->form_validation->set_rules('alamat','Alamat','required|min_length[3]',
+			array(
+				'required'=>'Form Alamat Wajib di isi.',
+				'min_length'=>'Alamat yang anda masukan kurang panjang.',
+				));
+		$this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required|min_length[3]|alpha',
+			array(
+				'required'=>'Form Tempat Lahir Wajib di isi.',
+				'min_length'=>'Tempat Lahir yang anda masukan kurang panjang.',
+				'alpha'=>'Tempat Lahir yang anda masukan harus berbentuk huruf.',
+				));
+		$this->form_validation->set_rules('tanggal_lahir','Tanggal Lahir','required',
+			array(
+				'required'=>'Form Tanggal Lahir Tanggal Lahir di isi.'
 				));
 
 		$this->form_validation->set_rules('confirm_password','Konfirmasi Password','required|matches[password]',
@@ -87,21 +109,25 @@ class User extends CI_Controller {
 
 
 		if ($this->form_validation->run() == FALSE){
-			$this->load->view('v_admin/user/v_edit_user',$data);
+			$this->load->view('v_mahasiswa/user/v_edit_user',$data);
 		}
 		else{
-			$id_admin= $this->input->post('id_admin');
+			$nim = $this->input->post('nim');
+			$id_mahasiswa_terdaftar = $this->session->userdata('id_mahasiswa_terdaftar');
 			$username = $this->input->post('username');
 			$nama = $this->input->post('nama');
-			$password = md5($this->input->post('password'));
+			$notlp2 = $this->input->post('notlp2');
+			$alamat = $this->input->post('alamat');
 			$email = $this->input->post('email');
+			$ttl = $this->input->post('tempat_lahir').", ".$this->input->post('tanggal_lahir');
+			$password = md5($this->input->post('password'));
 
 			// Apakah user upload gambar?
 			if ( isset($_FILES['foto']) && $_FILES['foto']['size'] > 0 ){//jika upload file
     			// Konfigurasi folder upload & file yang diijinkan
     			// Jangan lupa buat folder uploads di dalam ci3-course
-				$config['file_name'] 			= $this->input->post('username').'-img-user';
-				$config['upload_path']          = './uploads/img-user/admin/';
+				$config['file_name'] 			= $this->input->post('nim').'-img-user';
+				$config['upload_path']          = './uploads/img-user/';
 				$config['allowed_types']        = 'jpg|png';
 				$config['max_size']             = 1024;
 				$config['max_width']            = 1024;
@@ -123,8 +149,10 @@ class User extends CI_Controller {
 				}
 				else{//jika berhasil upload
 					if( !empty($old_image) ) {
-						if ( file_exists( './uploads/img-user/admin/'.$old_image ) ){
-							unlink( './uploads/img-user/admin/'.$old_image);
+						if ( file_exists( './uploads/img-user/'.$old_image ) ){
+							if( $old_image != 'default-user.png' ) {
+								unlink( './uploads/img-user/'.$old_image);
+							}
 						}else {
 							echo 'File tidak ditemukan.';
 						}
@@ -134,27 +162,33 @@ class User extends CI_Controller {
 					$img_data = $this->upload->data();
 					$post_image = $img_data['file_name'];
 					$data = array(
-						'username' => $username,
 						'nama' => $nama,
-						'password' => $password,
+						'alamat' => $alamat,
+						'ttl' => $ttl,
+						);
+					$data2 = array(
+						'username' => $username,
+						'notlp2' => $notlp2,
+						'email' => $email,
 						'foto' => $post_image,
-						'email' =>$email
+						'password' => $password,
 						);
 			//jika tidak ada error error
 					if( empty($data['upload_error']) ) {
 						$where = array(
-							'id_admin' => $id_admin
+							'nim' => $nim
 							);
 
-						$update = $this->user_model->update($where,$data,'data_admin');
+						$update = $this->user_model->update($where,$data,'data_mahasiswa');
+						$update2 = $this->user_model->update($where,$data2,'data_mahasiswa_terdaftar');
 
-						if ($update) {
+						if ($update && $update2) {
 							$this->session->set_flashdata('msg',
 								'<div class="alert alert-success">
 								<h5> <span class=" fa fa-check" ></span> '.$username.' berhasil diupdate.</h5>
 							</div>');    
 							$session_data = array(
-								'id_admin' => $id,
+								'id_mahasiswa_terdaftar' => $id_mahasiswa_terdaftar,
 								'username' => $username,
 								'password' => $password,
 								'foto' => $post_image,
@@ -162,40 +196,46 @@ class User extends CI_Controller {
 								'logged_in' => true,
 								);
 							$this->session->set_userdata($session_data);
-							redirect('admin/user');
+							redirect('mahasiswa/user');
 						}else{
 							$this->session->set_flashdata('msg',
 								'<div class="alert alert-danger">
 								<h5> <span class=" fa fa-cross" ></span> '.$username.' gagal diupdate.</h5>
 							</div>');    
-							redirect('admin/user');
+							redirect('mahasiswa/user');
 						}	
 					}
 
 				}
 			}
 			else{ //jika tidak upload file
-				$data = array(
-					'username' => $username,
-					'nama' => $nama,
-					'password' => $password,
-					'email' =>$email
-					);
+					$data = array(
+						'nama' => $nama,
+						'alamat' => $alamat,
+						'ttl' => $ttl,
+						);
+					$data2 = array(
+						'username' => $username,
+						'notlp2' => $notlp2,
+						'email' => $email,
+						'password' => $password,
+						);
 			//jika tidak ada error error
 				if( empty($data['upload_error']) ) {
 					$where = array(
-						'id_admin' => $id_admin
+						'nim' => $nim
 						);
 
-					$update = $this->user_model->update($where,$data,'data_admin');
+					$update = $this->user_model->update($where,$data,'data_mahasiswa');
+					$update2 = $this->user_model->update($where,$data2,'data_mahasiswa_terdaftar');
 
-					if ($update) {
+					if ($update && $update2) {
 						$this->session->set_flashdata('msg',
 							'<div class="alert alert-success">
 							<h5> <span class=" fa fa-check" ></span> '.$username.' berhasil diupdate.</h5>
 						</div>');    
 						$session_data = array(
-							'id_admin' => $id,
+							'id_mahasiswa_terdaftar' => $id_mahasiswa_terdaftar,
 							'username' => $username,
 							'password' => $password,
 							'foto' => $old_image,
@@ -203,13 +243,13 @@ class User extends CI_Controller {
 							'logged_in' => true,
 							);
 						$this->session->set_userdata($session_data);
-						redirect('admin/user');
+						redirect('mahasiswa/user');
 					}else{
 						$this->session->set_flashdata('msg',
 							'<div class="alert alert-danger">
 							<h5> <span class=" fa fa-cross" ></span> '.$username.' gagal diupdate.</h5>
 						</div>');    
-						redirect('admin/user');
+						redirect('mahasiswa/user');
 					}	
 				}
 			}

@@ -1,7 +1,7 @@
 <?php 
 $this->load->view('v_admin/v_admin_header');
 ?> 
-<link href="<?php echo base_url(); ?>assets/vendor/datetimepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/vendor/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"> 
 </div> <!-- TUTUP HEADER -->
 
 <nav aria-label="breadcrumb"> <!-- buka breadcumb -->
@@ -53,7 +53,7 @@ $this->load->view('v_admin/v_admin_header');
 							<input type="text" class="form-control form-control-user"  id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir"value="<?php echo $tempat_lahir; ?>" >
 						</div>
 						<div class="col-sm-6" >
-							<input type="text"  name="tanggal_lahir" id="tanggal_lahir" class="tanggal form-control-user form-control"  placeholder="Tanggal Lahir (dd-mm-yyyy)" value="<?php echo $tanggal_lahir; ?>" >
+							<input type="text"  name="tanggal_lahir" id="tanggal_lahir" class="form-control-user form-control time"  placeholder="Tanggal Lahir (dd-mm-yyyy)" value="<?php echo $tanggal_lahir; ?>" >
 						</div>
 					</div>
 					<div class="row" id="notifications3"> <!-- open validasi -->
@@ -105,15 +105,13 @@ $this->load->view('v_admin/v_admin_footer');
 ?>
 
 
-<script src="<?php echo base_url(); ?>assets/vendor/datetimepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('.tanggal').datepicker({
-			format: "dd-mm-yyyy",
-			autoclose:true
-		});
-	});
-</script>
+        <script src="<?php echo base_url(); ?>assets/vendor/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $('.time').datetimepicker({format: 'dd-mm-yyyy', todayBtn: true,
+              autoclose: true,
+              pickerPosition: "top-left"});
+          });
 
 <script>   
     $('#notifications1').slideDown('slow').delay(5000).slideUp('slow');

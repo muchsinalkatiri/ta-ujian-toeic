@@ -8,6 +8,7 @@ class Ujian extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('ujian_model');
 		$this->load->library('form_validation');
+
 		// $this->load->helper('MY');
 
 	}
@@ -26,6 +27,14 @@ class Ujian extends CI_Controller {
 	}
 	public function konfirmasi($id=null)
 	{
+
+		if($this->session->userdata('foto') == 'default-user.png'){
+			$this->session->set_flashdata('msg',
+				'<div class="alert alert-warning">
+				<h5> <span class=" fa fa-exclamation-triangle" ></span> Anda harus mengganti foto profil anda terlebih dahulu sebelum memulai ujian.</h5>
+			</div>');    
+			redirect('mahasiswa/user/edit');
+		}
 		$data['page_title'] = 'Exam Confirmation';
 		// Must login
 		if(!$this->session->userdata('logged_in') || $this->session->userdata('level') != '2' ) 
@@ -87,7 +96,7 @@ class Ujian extends CI_Controller {
 			</div>');    
 			redirect('mahasiswa/ujian');
 		}else{
-			echo $insert;
+			// echo $insert;
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-success">
 				<h5> <span class=" fa fa-child" ></span> Have a great time doing it.</h5>
