@@ -36,6 +36,16 @@
 			</ul>
 
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item dropdown no-arrow mx-1">
+					<a class="nav-link " href="<?php echo base_url('mahasiswa/ujian'); ?>"  aria-haspopup="true" aria-expanded="false">
+					<div style="font-size: 14px; ">
+						<i class="fas fa-list fa-sm fa-fw  "></i>
+							List Exam
+					</div>
+					</a>
+					<!-- Dropdown - Messages -->
+
+				</li>
 				<div class="topbar-divider bg-gray-400 d-none d-sm-block"></div>
 				<li class="nav-item dropdown no-arrow">
 					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,6 +74,5 @@
 				</li>
 			</ul>
 		</nav>
-                  <div class="container-fluid"  ">
-                  <!-- <div  style="min-height: 470px;">  -->
-                  
+		<div class="container-fluid"  ">
+			<!-- <div  style="min-height: 470px;">  -->

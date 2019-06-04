@@ -5,6 +5,7 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
 <div class="container ">
 	<div class="row ">
 		<div class="col-lg-12">
+		<!-- <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm mb-2"  href="<?php echo base_url('kirim/kirim_email/')?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a> -->
 			<div class="card shadow mb-7">
 				<div class="card-header py-3 ">
 					<nav class="navbar">
