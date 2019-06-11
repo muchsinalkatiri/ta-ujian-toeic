@@ -28,6 +28,7 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
           <div class="progress-bar bg-gray-800" role="progressbar" id="pgbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
           <audio onload='alert("haha")' ontimeupdate='updateTrackTime(this);'  id="audio" autoplay src="<?php echo base_url()."uploads/sound-ujian/".$paket->file_audio ?>"></audio>
         </div>
+          <input type="text" name="" value="" id="update_audio" >
       </div>
     </div>
   </div>
@@ -101,7 +102,7 @@ var x = setInterval(function() {
   // Display the result in the element with id="demo"
   document.getElementById("timer").innerHTML = "Time Left : "+ ("0"+hours).slice(-2) + ":"
   + ("0"+minutes).slice(-2) + ":" + ("0"+seconds).slice(-2);
-  // alert(countDownDate);
+  // alert(now);
 
   if (distance < 0) {
     audio.pause();
@@ -154,15 +155,20 @@ var startTimer = function(duration, element){
     } 
     else{
       durationDiv.innerHTML = formatSecondsAsTime(duration);
+      document.getElementById('update_audio').value = "" + currTime;
+      // // alert(currTime);
+      // setInterval(function(){
+      //   alert(currTime);
+      // }, 3000)
     }
   }  
-  function updateCurrentime(track){
+  // function updateCurrentime(track){
 
-    var currTime = Math.floor(track.currentTime).toString(); 
-    var duration = Math.floor(track.duration).toString();
+  //   var currTime = Math.floor(track.currentTime).toString(); 
+  //   var duration = Math.floor(track.duration).toString();
 
-    setInterval(function(){ alert(currTime); }, 1000);
-  }
+  //   setInterval(function(){ alert(currTime); }, 1000);
+  // }
   function formatSecondsAsTime(secs, format) {
     var hr  = Math.floor(secs / 3600);
     var min = Math.floor((secs - (hr * 3600))/60);
@@ -178,6 +184,15 @@ var startTimer = function(duration, element){
     return min + ':' + sec;
   }
 
+  var exec_php = function () { //untuk update audio
+    var xhttp = new XMLHttpRequest();
+    var cur = document.getElementById('update_audio').value;
+
+    xhttp.open("GET", '<?php echo base_url(); ?>'+"/mahasiswa/ujian/update_audio/" + cur + '/<?php echo $this->uri->segment('4'); ?>', true);
+    xhttp.send();
+  }
+
+  setInterval(exec_php, 6000);
 
 </script>
 

@@ -51,7 +51,7 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
                   $check = $query->num_rows();
                   ?>
                   <?php if($status == 'available' && $check == 0){ ?>
-                    <a href="<?php echo base_url(). 'mahasiswa/ujian/konfirmasi/' . $sesi->id_sesi_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-primary text-gray-100 shadow-sm"  ><i class="fas fa-play  text-white-50"></i> Do the exam</a>
+                    <a href="<?php echo base_url(). 'mahasiswa/ujian/konfirmasi/' . $sesi->id_sesi_ujian?>" class=" btn btn-sm bg-primary text-gray-100 shadow-sm"  ><i class="fas fa-play  text-white-50"></i> Do the exam</a>
                     <?php }elseif(($status == 'available' && $check != 0) || ($status == 'is over' && $check != 0)){
                       $data_ujian = $query->result();
                       $id_data_ujian = $data_ujian[0]->id_data_ujian;
@@ -59,15 +59,15 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
                       if($status == 'available' && $check != 0){
                         if($status_pengerjaan == 'mengerjakan' &&  $data_ujian[0]->waktu_berakhir > date('Y-m-d H:i:s')){
                           ?>
-                          <a href="<?php echo base_url(). 'mahasiswa/ujian/pengerjaan/' . $id_data_ujian?>" class="d-none d-sm-inline-block btn btn-sm bg-secondary text-gray-100 shadow-sm"  ><i class="fas fa-angle-double-right  text-white-50"></i> Continue the test</a>
+                          <a href="<?php echo base_url(). 'mahasiswa/ujian/pengerjaan/' . $id_data_ujian?>" class=" btn btn-sm bg-secondary text-gray-100 shadow-sm"  ><i class="fas fa-angle-double-right  text-white-50"></i> Continue the test</a>
                           <?php }elseif($status_pengerjaan == 'selesai'){ ?>
-                            <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
+                            <a  class=" btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
                             <?php }}elseif(($status == 'is over'  && $check != 0)){?>
-                              <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
+                              <a  class=" btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
 
                               <?php } ?>
                               <?php }elseif ($check_nilai != 0 && $total_score = $data_nilai_ujian[0]->total_score) {?>
-                              <a  class="d-none d-sm-inline-block btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
+                              <a  class=" btn btn-sm bg-danger text-gray-100 shadow-sm"  href="<?php echo base_url('kirim/kirim_email/'.$sesi->id_sesi_ujian)?>" ><i class="fas fa-envelope  text-white-50"></i> Send Detail Score to Email</a>
                               <?php } ?>
                             </center></td>
                           </tr>

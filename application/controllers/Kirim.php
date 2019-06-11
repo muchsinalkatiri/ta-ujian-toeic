@@ -10,8 +10,12 @@ class Kirim extends CI_Controller {
 		// $this->load->helper('MY');
 		$this->load->model('user_model');
 		$this->load->model('nilai_model');
-        $this->load->library('MyPHPMailer'); // load library
+        // $this->load->library('MyPHPMailer'); // load library
 
+    }
+
+    public function test() {
+        send_email(array('pohonhidayah@gmail.com'), 'subyek', 'pesan');
     }
 
 
@@ -43,13 +47,14 @@ class Kirim extends CI_Controller {
       $message .=   'Total Score : '.$total_score.'  <br> '; 
       $message .=   'Level Of Competent : '.$level_of_competent.'  <br> '; 
 
-		// echo $message;
-        $send_email = $this->send_email($message,$email); //dikirim ke email
+      $subyek = "Nilai Ujian TOEIC | Sistem Informasi Ujian Online Toiec JTI Polinema";
+
+        $send_email = send_email(array($email), $subyek, $message);
         if ($send_email) {
         	$this->session->set_flashdata('msg','
         		<div id="notifications">
         			<div class="alert alert-success">
-        				<center><h5><span class=" fa fa-check" ></span> Hasil Ujian Anda telah Dikirim Ke Email</h5></center>
+        				<center><h5><span class=" fa fa-check" ></span> Your score details have been sent to email.</h5></center>
         			</div>
         		</div>
         		'); 
@@ -57,13 +62,12 @@ class Kirim extends CI_Controller {
         	$this->session->set_flashdata('msg','
         		<div id="notifications">
         			<div class="alert alert-danger">
-        				<center><h5><span class=" fa fa-ban" ></span> Hasil Ujian Anda Gagal Dikirim Ke Email. Periksa koneksimu dan silahkan coba lagi.</h5></center>
+        				<center><h5><span class=" fa fa-ban" ></span> Your score details failed to be sent to email.</h5></center>
         			</div>
         		</div>
         		');  
         }
         redirect('mahasiswa/ujian');
-
     }
 
     public function admin_kirim_email($id_data_nilai=null){
@@ -95,7 +99,10 @@ class Kirim extends CI_Controller {
         $message .=   'Level Of Competent : '.$level_of_competent.'  <br> '; 
 
         // echo $message;
-        $send_email = $this->send_email($message,$email); //dikirim ke email
+        
+      $subyek = "Nilai Ujian TOEIC | Sistem Informasi Ujian Online Toiec JTI Polinema";
+
+        $send_email = send_email(array($email), $subyek, $message);
         if ($send_email) {
             $this->session->set_flashdata('msg','
                 <div id="notifications">
@@ -195,70 +202,6 @@ class Kirim extends CI_Controller {
                 ');  
         }
         redirect('admin/ujian/data_nilai');
-    }
-
-    public function send_email($message = 'aa',$email='pohonhidayah@gmail.com')
-    {
-      // Konfigurasi email
-    	$config = [
-    	'mailtype'  => 'html',
-    	'charset'   => 'utf-8',
-    	'protocol'  => 'smtp',
-    	'smtp_host' => 'ssl://smtp.gmail.com',
-               'smtp_user' => 'tugasakhirtoeic@gmail.com',    // Ganti dengan email gmail kamu
-               'smtp_pass' => 'cinaro36',      // Password gmail kamu
-               'smtp_port' => 465,
-               'crlf'      => "\r\n",
-               'newline'   => "\r\n"
-               ];
-
-        // Load library email dan konfigurasinya
-               $this->load->library('email', $config);
-
-        // Email dan nama pengirim
-               $this->email->from('tugasakhirtoeic@gmail.com', 'Sistem Informasi Ujian Toeic Online');
-
-        // Email penerima
-        $this->email->to($email); // Ganti dengan email tujuan kamu
-
-        // Lampiran email, isi dengan url/path file
-        // Subject email
-        $this->email->subject('Hasil Ujian | Sistem Informasi Ujian Toeic Online');
-
-        // Isi email
-        $this->email->message($message);
-
-        // Tampilkan pesan sukses atau error
-        if ($this->email->send()) {
-        	return true;
-        } else {
-        	return false;
-        }
-    }
-
-    function send(){
-        $fromEmail = "tugasakhirtoeic@gmail.com";
-     $isiEmail = "Isi email tulis disini";
-     $mail = new PHPMailer();
-        $mail->IsHTML(true);    // set email format to HTML
-        $mail->IsSMTP();   // we are going to use SMTP
-        $mail->SMTPAuth   = true; // enabled SMTP authentication
-        $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
-        $mail->Host       = "smtp.gmail.com";      // setting GMail as our SMTP server
-        $mail->Port       = 465;                   // SMTP port to connect to GMail
-        $mail->Username   = $fromEmail;  // alamat email kamu
-        $mail->Password   = "cinaro36";            // password GMail
-        $mail->SetFrom('tugasakhirtoeic@gmail.com', 'noreply');  //Siapa yg mengirim email
-        $mail->Subject    = "Subjek email";
-        $mail->Body       = $isiEmail;
-        $toEmail = "pohonhidayah@gmail.com"; // siapa yg menerima email ini
-        $mail->AddAddress($toEmail);
-
-        if(!$mail->Send()) {
-            echo "Eror: ".$mail->ErrorInfo;
-        } else {
-            echo "Email berhasil dikirim";
-        }
     }
 
 }

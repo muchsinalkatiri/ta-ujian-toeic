@@ -78,8 +78,10 @@ class Forgot_password extends CI_Controller {
             password anda.</strong><br>';  
             $message .= '<strong>Silakan klik link ini:</strong> ' . $link;         
 
-            $send_email = $this->send_email($message,$email); //dikirim ke email
-            if ($send_email) {
+      $subyek = "Kode Lupa Password | Sistem Informasi Ujian Online Toiec JTI Polinema";
+
+        $send_email = send_email(array($email), $subyek, $message);
+        if ($send_email) {
             	$this->session->set_flashdata('msg1','
             		<div id="notifications">
             			<div class="alert alert-success">

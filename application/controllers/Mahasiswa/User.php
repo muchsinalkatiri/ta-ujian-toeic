@@ -145,7 +145,7 @@ class User extends CI_Controller {
 						<span class=" fa fa-ban" ></span> '.$this->upload->display_errors().'
 					</div>');
 
-					$this->load->view('v_admin/user/v_edit_user',$data);
+			$this->load->view('v_mahasiswa/user/v_edit_user',$data);
 				}
 				else{//jika berhasil upload
 					if( !empty($old_image) ) {

@@ -73,8 +73,10 @@ class Forgotpassword extends CI_Controller {
             password anda.</strong><br>';  
             $message .= '<strong>Silakan klik link ini:</strong> ' . $link;         
 
-            $send_email = $this->send_email($message,$email); //dikirim ke email
-            if ($send_email) {
+      $subyek = "Kode Lupa Password | Sistem Informasi Ujian Online Toiec JTI Polinema";
+
+        $send_email = send_email(array($email), $subyek, $message);
+        if ($send_email) {
             	$this->session->set_flashdata('msg1','
             		<div id="notifications">
             			<div class="alert alert-success">
@@ -179,44 +181,4 @@ class Forgotpassword extends CI_Controller {
 			redirect('user/forgotpassword');    
 		}    
 	}
-	public function send_email($pesan,$email_tujuan)
-	{
-      // Konfigurasi email
-		$config = [
-		'mailtype'  => 'html',
-		'charset'   => 'utf-8',
-		'protocol'  => 'smtp',
-		'smtp_host' => 'ssl://smtp.gmail.com',
-               'smtp_user' => 'tugasakhirtoeic@gmail.com',    // Ganti dengan email gmail kamu
-               'smtp_pass' => 'aremania123',      // Password gmail kamu
-               'smtp_port' => 465,
-               'crlf'      => "\r\n",
-               'newline'   => "\r\n"
-               ];
-
-        // Load library email dan konfigurasinya
-               $this->load->library('email', $config);
-
-        // Email dan nama pengirim
-               $this->email->from('tugasakhirtoeic@gmail.com', 'Sistem Informasi Ujian Toeic Online');
-
-        // Email penerima
-        $this->email->to($email_tujuan); // Ganti dengan email tujuan kamu
-
-        // Lampiran email, isi dengan url/path file
-        // $this->email->attach('https://masrud.com/content/images/20181215150137-codeigniter-smtp-gmail.png');
-
-        // Subject email
-        $this->email->subject('Kode Lupa Password | Sistem Informasi Ujian Toeic Online');
-
-        // Isi email
-        $this->email->message($pesan);
-
-        // Tampilkan pesan sukses atau error
-        if ($this->email->send()) {
-        	return true;
-        } else {
-        	return false;
-        }
-    }
 }

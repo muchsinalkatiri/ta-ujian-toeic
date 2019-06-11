@@ -8,8 +8,6 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
@@ -47,6 +45,7 @@
 
         <div id="logo" style="float: left; ">
           <h1><a href="#body" class="scrollto">JTI.<span>TOEIC</span></a></h1>
+          <!-- <h3 class="mt-2 "><img src="<?php echo base_url(); ?>/assets/img/wablas2.png" alt="Smiley face" width="42" height="42" align="middle"> <?php echo $pengiriman->nama_api; ?></h3> -->
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
         </div>
@@ -60,30 +59,30 @@
             <li><a href="#team">Level of competent</a></li>
             <li><a href="#contact">Contact</a></li>
             <?php if($this->session->userdata('level') == '2' ){ ?>
-           	<li ><a href=""><?php echo $this->session->userdata('username') ?> <i class="fa fa-caret-down"></i></a>
-            	<ul>
-            		<li><a href="<?php echo base_url('mahasiswa/ujian'); ?>">Dashboard</a></li>
-            		<li><a href="<?php echo base_url('user/login/logout'); ?>">Logout</a></li>
-            	</ul>
-            </li>
-            <?php }elseif($this->session->userdata('level') == '1' || $this->session->userdata('level') == '0' ){ ?>
-           	<li ><a href=""><?php echo $this->session->userdata('username') ?></a>
-            	<ul>
-            		<li><a href="<?php echo base_url('mahasiswa/ujian'); ?>">Dashboard</a></li>
-            		<li><a href="<?php echo base_url('user/login/logout'); ?>">Logout</a></li>
-            	</ul>
-            </li>
-            <?php }else{ ?>	
-            <li ><a href="<?php echo base_url('user/login'); ?>">Login</a>
-              <ul>
-                <li><a href="<?php echo base_url('user/register'); ?>">Register</a></li>
+              <li ><a href=""><?php echo $this->session->userdata('username') ?> <i class="fa fa-caret-down"></i></a>
+               <ul>
+                <li><a href="<?php echo base_url('mahasiswa/ujian'); ?>">Dashboard</a></li>
+                <li><a href="<?php echo base_url('user/login/logout'); ?>">Logout</a></li>
               </ul>
             </li>
-            <?php } ?>
-          </ul>
-        </nav><!-- #nav-menu-container -->
-      </div>
-    </header><!-- #header -->
+            <?php }elseif($this->session->userdata('level') == '1' || $this->session->userdata('level') == '0' ){ ?>
+              <li ><a href=""><?php echo $this->session->userdata('username') ?></a>
+               <ul>
+                <li><a href="<?php echo base_url('mahasiswa/ujian'); ?>">Dashboard</a></li>
+                <li><a href="<?php echo base_url('user/login/logout'); ?>">Logout</a></li>
+              </ul>
+            </li>
+            <?php }else{ ?>	
+              <li ><a href="<?php echo base_url('user/login'); ?>">Login</a>
+                <ul>
+                  <li><a href="<?php echo base_url('user/register'); ?>">Register</a></li>
+                </ul>
+              </li>
+              <?php } ?>
+            </ul>
+          </nav><!-- #nav-menu-container -->
+        </div>
+      </header><!-- #header -->
 
   <!--==========================
     Intro Section
@@ -95,12 +94,12 @@
         <div>
           <a href="#about" class="btn-get-started scrollto">About</a>
           <?php if(!$this->session->userdata('logged_in')){ ?>
-	        <a href="<?php echo base_url('user/login'); ?>" class="btn-projects scrollto">Lets Start</a>
-        <?php } ?>
-        </div>
-      </div>
+           <a href="<?php echo base_url('user/login'); ?>" class="btn-projects scrollto">Lets Start</a>
+           <?php } ?>
+         </div>
+       </div>
 
-      <div id="intro-carousel" class="owl-carousel" >
+       <div id="intro-carousel" class="owl-carousel" >
         <div class="item" style="background-image: url('<?php echo base_url(); ?>img/intro-carousel/1.jpg');"></div>
         <div class="item" style="background-image: url('<?php echo base_url(); ?>img/intro-carousel/2.jpg');"></div>
         <div class="item" style="background-image: url('<?php echo base_url(); ?>img/intro-carousel/3.jpg');"></div>
@@ -241,8 +240,47 @@
           </div>
 
 
+          <div class="col-md-3">
+            <table class="table table-striped table-bordered text-center" id="dataTable"  cellspacing="0">
+              <thead>
+               <tr>
+                <th>Correct Answer</th>
+                <th>Listening Score</th>
+                <th>Reading Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>26</td><td>110</td><td>65</td></tr>
+              <tr><td>27</td><td>115</td><td>70</td></tr>
+              <tr><td>28</td><td>120</td><td>80</td></tr>
+              <tr><td>29</td><td>125</td><td>85</td></tr>
+              <tr><td>30</td><td>130</td><td>90</td></tr>
+              <tr><td>31</td><td>135</td><td>95</td></tr>
+              <tr><td>32</td><td>140</td><td>100</td></tr>
+              <tr><td>33</td><td>145</td><td>110</td></tr>
+              <tr><td>34</td><td>150</td><td>115</td></tr>
+              <tr><td>35</td><td>160</td><td>120</td></tr>
+              <tr><td>36</td><td>165</td><td>125</td></tr>
+              <tr><td>37</td><td>170</td><td>130</td></tr>
+              <tr><td>38</td><td>175</td><td>140</td></tr>
+              <tr><td>39</td><td>180</td><td>145</td></tr>
+              <tr><td>40</td><td>185</td><td>150</td></tr>
+              <tr><td>41</td><td>190</td><td>160</td></tr>
+              <tr><td>42</td><td>195</td><td>165</td></tr>
+              <tr><td>43</td><td>200</td><td>170</td></tr>
+              <tr><td>44</td><td>210</td><td>175</td></tr>
+              <tr><td>45</td><td>215</td><td>180</td></tr>
+              <tr><td>46</td><td>220</td><td>190</td></tr>
+              <tr><td>47</td><td>230</td><td>195</td></tr>
+              <tr><td>48</td><td>240</td><td>200</td></tr>
+              <tr><td>49</td><td>245</td><td>210</td></tr>
+              <tr><td>50</td><td>250</td><td>215</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="col-md-3">
-          <table class="table table-striped table-bordered text-center" id="dataTable"  cellspacing="0">
+          <table class="table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
             <thead>
              <tr>
               <th>Correct Answer</th>
@@ -250,117 +288,78 @@
               <th>Reading Score</th>
             </tr>
           </thead>
-          <tbody>
-            <tr><td>26</td><td>110</td><td>65</td></tr>
-            <tr><td>27</td><td>115</td><td>70</td></tr>
-            <tr><td>28</td><td>120</td><td>80</td></tr>
-            <tr><td>29</td><td>125</td><td>85</td></tr>
-            <tr><td>30</td><td>130</td><td>90</td></tr>
-            <tr><td>31</td><td>135</td><td>95</td></tr>
-            <tr><td>32</td><td>140</td><td>100</td></tr>
-            <tr><td>33</td><td>145</td><td>110</td></tr>
-            <tr><td>34</td><td>150</td><td>115</td></tr>
-            <tr><td>35</td><td>160</td><td>120</td></tr>
-            <tr><td>36</td><td>165</td><td>125</td></tr>
-            <tr><td>37</td><td>170</td><td>130</td></tr>
-            <tr><td>38</td><td>175</td><td>140</td></tr>
-            <tr><td>39</td><td>180</td><td>145</td></tr>
-            <tr><td>40</td><td>185</td><td>150</td></tr>
-            <tr><td>41</td><td>190</td><td>160</td></tr>
-            <tr><td>42</td><td>195</td><td>165</td></tr>
-            <tr><td>43</td><td>200</td><td>170</td></tr>
-            <tr><td>44</td><td>210</td><td>175</td></tr>
-            <tr><td>45</td><td>215</td><td>180</td></tr>
-            <tr><td>46</td><td>220</td><td>190</td></tr>
-            <tr><td>47</td><td>230</td><td>195</td></tr>
-            <tr><td>48</td><td>240</td><td>200</td></tr>
-            <tr><td>49</td><td>245</td><td>210</td></tr>
-            <tr><td>50</td><td>250</td><td>215</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-          <div class="col-md-3">
-            <table class="table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
-              <thead>
-               <tr>
-                <th>Correct Answer</th>
-                <th>Listening Score</th>
-                <th>Reading Score</th>
-              </tr>
-            </thead>
-          </thead>
-          <tbody>
-            <tr><td>51</td><td>255</td><td>220</td></tr>
-            <tr><td>52</td><td>260</td><td>225</td></tr>
-            <tr><td>53</td><td>265</td><td>230</td></tr>
-            <tr><td>54</td><td>270</td><td>235</td></tr>
-            <tr><td>55</td><td>275</td><td>240</td></tr>
-            <tr><td>56</td><td>280</td><td>250</td></tr>
-            <tr><td>57</td><td>290</td><td>255</td></tr>
-            <tr><td>58</td><td>295</td><td>260</td></tr>
-            <tr><td>59</td><td>300</td><td>265</td></tr>
-            <tr><td>60</td><td>305</td><td>270</td></tr>
-            <tr><td>61</td><td>315</td><td>280</td></tr>
-            <tr><td>62</td><td>320</td><td>285</td></tr>
-            <tr><td>63</td><td>325</td><td>290</td></tr>
-            <tr><td>64</td><td>330</td><td>300</td></tr>
-            <tr><td>65</td><td>335</td><td>305</td></tr>
-            <tr><td>66</td><td>340</td><td>310</td></tr>
-            <tr><td>67</td><td>345</td><td>320</td></tr>
-            <tr><td>68</td><td>350</td><td>325</td></tr>
-            <tr><td>69</td><td>355</td><td>330</td></tr>
-            <tr><td>70</td><td>360</td><td>335</td></tr>
-            <tr><td>71</td><td>365</td><td>340</td></tr>
-            <tr><td>72</td><td>370</td><td>350</td></tr>
-            <tr><td>73</td><td>375</td><td>355</td></tr>
-            <tr><td>74</td><td>380</td><td>360</td></tr>
-            <tr><td>75</td><td>380</td><td>365</td></tr>
-          </tbody>
-          </table>
-        </div>
-
-
-      <div class="col-md-3">
-        <table class="table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
-              <thead>
-               <tr>
-                <th>Correct Answer</th>
-                <th>Listening Score</th>
-                <th>Reading Score</th>
-              </tr>
-            </thead>
-          </thead>
-          <tbody>
-            <tr><td>76</td><td>390</td><td>370</td></tr>
-            <tr><td>77</td><td>395</td><td>380</td></tr>
-            <tr><td>78</td><td>400</td><td>385</td></tr>
-            <tr><td>79</td><td>405</td><td>390</td></tr>
-            <tr><td>80</td><td>410</td><td>395</td></tr>
-            <tr><td>81</td><td>415</td><td>400</td></tr>
-            <tr><td>82</td><td>420</td><td>405</td></tr>
-            <tr><td>83</td><td>425</td><td>410</td></tr>
-            <tr><td>84</td><td>430</td><td>415</td></tr>
-            <tr><td>85</td><td>435</td><td>420</td></tr>
-            <tr><td>86</td><td>440</td><td>425</td></tr>
-            <tr><td>87</td><td>445</td><td>430</td></tr>
-            <tr><td>88</td><td>450</td><td>435</td></tr>
-            <tr><td>89</td><td>460</td><td>445</td></tr>
-            <tr><td>90</td><td>465</td><td>450</td></tr>
-            <tr><td>91</td><td>470</td><td>455</td></tr>
-            <tr><td>92</td><td>475</td><td>465</td></tr>
-            <tr><td>93</td><td>480</td><td>470</td></tr>
-            <tr><td>94</td><td>485</td><td>480</td></tr>
-            <tr><td>95</td><td>390</td><td>485</td></tr>
-            <tr><td>96</td><td>495</td><td>490</td></tr>
-            <tr><td>97</td><td>495</td><td>495</td></tr>
-            <tr><td>98</td><td>495</td><td>495</td></tr>
-            <tr><td>99</td><td>495</td><td>495</td></tr>
-            <tr><td>100</td><td>495</td><td>495</td></tr>
-          </tbody>
-          </table>
+        </thead>
+        <tbody>
+          <tr><td>51</td><td>255</td><td>220</td></tr>
+          <tr><td>52</td><td>260</td><td>225</td></tr>
+          <tr><td>53</td><td>265</td><td>230</td></tr>
+          <tr><td>54</td><td>270</td><td>235</td></tr>
+          <tr><td>55</td><td>275</td><td>240</td></tr>
+          <tr><td>56</td><td>280</td><td>250</td></tr>
+          <tr><td>57</td><td>290</td><td>255</td></tr>
+          <tr><td>58</td><td>295</td><td>260</td></tr>
+          <tr><td>59</td><td>300</td><td>265</td></tr>
+          <tr><td>60</td><td>305</td><td>270</td></tr>
+          <tr><td>61</td><td>315</td><td>280</td></tr>
+          <tr><td>62</td><td>320</td><td>285</td></tr>
+          <tr><td>63</td><td>325</td><td>290</td></tr>
+          <tr><td>64</td><td>330</td><td>300</td></tr>
+          <tr><td>65</td><td>335</td><td>305</td></tr>
+          <tr><td>66</td><td>340</td><td>310</td></tr>
+          <tr><td>67</td><td>345</td><td>320</td></tr>
+          <tr><td>68</td><td>350</td><td>325</td></tr>
+          <tr><td>69</td><td>355</td><td>330</td></tr>
+          <tr><td>70</td><td>360</td><td>335</td></tr>
+          <tr><td>71</td><td>365</td><td>340</td></tr>
+          <tr><td>72</td><td>370</td><td>350</td></tr>
+          <tr><td>73</td><td>375</td><td>355</td></tr>
+          <tr><td>74</td><td>380</td><td>360</td></tr>
+          <tr><td>75</td><td>380</td><td>365</td></tr>
+        </tbody>
+      </table>
     </div>
-  </div>
+
+
+    <div class="col-md-3">
+      <table class="table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
+        <thead>
+         <tr>
+          <th>Correct Answer</th>
+          <th>Listening Score</th>
+          <th>Reading Score</th>
+        </tr>
+      </thead>
+    </thead>
+    <tbody>
+      <tr><td>76</td><td>390</td><td>370</td></tr>
+      <tr><td>77</td><td>395</td><td>380</td></tr>
+      <tr><td>78</td><td>400</td><td>385</td></tr>
+      <tr><td>79</td><td>405</td><td>390</td></tr>
+      <tr><td>80</td><td>410</td><td>395</td></tr>
+      <tr><td>81</td><td>415</td><td>400</td></tr>
+      <tr><td>82</td><td>420</td><td>405</td></tr>
+      <tr><td>83</td><td>425</td><td>410</td></tr>
+      <tr><td>84</td><td>430</td><td>415</td></tr>
+      <tr><td>85</td><td>435</td><td>420</td></tr>
+      <tr><td>86</td><td>440</td><td>425</td></tr>
+      <tr><td>87</td><td>445</td><td>430</td></tr>
+      <tr><td>88</td><td>450</td><td>435</td></tr>
+      <tr><td>89</td><td>460</td><td>445</td></tr>
+      <tr><td>90</td><td>465</td><td>450</td></tr>
+      <tr><td>91</td><td>470</td><td>455</td></tr>
+      <tr><td>92</td><td>475</td><td>465</td></tr>
+      <tr><td>93</td><td>480</td><td>470</td></tr>
+      <tr><td>94</td><td>485</td><td>480</td></tr>
+      <tr><td>95</td><td>390</td><td>485</td></tr>
+      <tr><td>96</td><td>495</td><td>490</td></tr>
+      <tr><td>97</td><td>495</td><td>495</td></tr>
+      <tr><td>98</td><td>495</td><td>495</td></tr>
+      <tr><td>99</td><td>495</td><td>495</td></tr>
+      <tr><td>100</td><td>495</td><td>495</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
 
 </div>
 </section><!-- #portfolio -->
@@ -374,17 +373,24 @@
             <h2>Level Of Competent</h2>
           </div>
           <center >
-            <table style="width: 500px; " class="table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
-          <tbody>
-            <tr><td>805-990</td><td>High Advance</td></tr>
-            <tr><td>655-800</td><td>Advance</td></tr>
-            <tr><td>555-650</td><td>High Intermediate</td></tr>
-            <tr><td>406-550</td><td>Intermediate</td></tr>
-            <tr><td>305-400</td><td>High Beginner</td></tr>
-            <tr><td>205-300</td><td>Beginner 2</td></tr>
-            <tr><td>10-200</td><td>Beginner 1</td></tr>
-          </tbody>
-          </table>
+            <style type="text/css">
+              @media only screen and (max-width: 600px) {
+                .tb_responsive {
+                  width: 100% !important;
+                }
+              }
+            </style>
+            <table style="width: 500px; " class="tb_responsive table table-bordered table-striped text-center" id="dataTable"  cellspacing="0">
+              <tbody>
+                <tr><td>805-990</td><td>High Advance</td></tr>
+                <tr><td>655-800</td><td>Advance</td></tr>
+                <tr><td>555-650</td><td>High Intermediate</td></tr>
+                <tr><td>406-550</td><td>Intermediate</td></tr>
+                <tr><td>305-400</td><td>High Beginner</td></tr>
+                <tr><td>205-300</td><td>Beginner 2</td></tr>
+                <tr><td>10-200</td><td>Beginner 1</td></tr>
+              </tbody>
+            </table>
           </center>
 
         </div>

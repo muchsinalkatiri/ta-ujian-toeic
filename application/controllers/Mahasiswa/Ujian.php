@@ -31,7 +31,7 @@ class Ujian extends CI_Controller {
 		if($this->session->userdata('foto') == 'default-user.png'){
 			$this->session->set_flashdata('msg',
 				'<div class="alert alert-warning">
-				<h5> <span class=" fa fa-exclamation-triangle" ></span> Anda harus mengganti foto profil anda terlebih dahulu sebelum memulai ujian.</h5>
+				<h5> <span class=" fa fa-exclamation-triangle" ></span> You must change your profile photo before starting the exam.</h5>
 			</div>');    
 			redirect('mahasiswa/user/edit');
 		}
@@ -221,5 +221,8 @@ class Ujian extends CI_Controller {
 		}
 	}
 
-	
+
+	public function update_audio($cur, $id_data_ujian) {
+		$this->db->update('data_ujian', array('audio_curent_time' => $cur), array('id_data_ujian' => $id_data_ujian));
+	}	
 }
