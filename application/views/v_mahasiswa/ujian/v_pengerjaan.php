@@ -28,11 +28,12 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
           <div class="progress-bar bg-gray-800" role="progressbar" id="pgbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
           <audio onload='alert("haha")' ontimeupdate='updateTrackTime(this);'  id="audio" autoplay src="<?php echo base_url()."uploads/sound-ujian/".$paket->file_audio ?>"></audio>
         </div>
-          <input type="text" name="" value="" id="update_audio" >
+        <input type="hidden" name="" value="" id="update_audio" >
+        <input type="hidden" name="" value="" id="durasi_audio" >
       </div>
     </div>
   </div>
-    
+
   <iframe  id="frame" src="<?php echo base_url('mahasiswa/ujian/frameujian_listening/'.$this->uri->segment('4').'4_51') ?>" width="100%" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"  frameborder="0">Browser Anda Tidak Mendukung  Iframe, Silahkan Perbaharui Browser Anda.</iframe>
 </div>
 <!-- Display the countdown timer in an element -->
@@ -69,20 +70,20 @@ $this->load->view('v_mahasiswa/v_mahasiswa_header');
 $this->load->view('v_mahasiswa/v_mahasiswa_footer');
 ?>  
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#frame').on('load', function () {
-            $('#divIframe').css({'display' : 'none'}); 
-            $('#loading').hide();
-        });
+  $(document).ready(function () {
+    $('#frame').on('load', function () {
+      $('#divIframe').css({'display' : 'none'}); 
+      $('#loading').hide();
+    });
 
         // $('#loading').hide();
-    });
-</script>
-<script>   
-  $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
-</script>
+      });
+    </script>
+    <script>   
+      $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+    </script>
 
-<script>
+    <script>
   // audio.removeAttribute('controls');
 // Set the date we're counting down to
 var audio = document.getElementById("audio");
@@ -156,19 +157,14 @@ var startTimer = function(duration, element){
     else{
       durationDiv.innerHTML = formatSecondsAsTime(duration);
       document.getElementById('update_audio').value = "" + currTime;
+      document.getElementById('durasi_audio').value = "" + duration;
       // // alert(currTime);
       // setInterval(function(){
       //   alert(currTime);
       // }, 3000)
     }
   }  
-  // function updateCurrentime(track){
 
-  //   var currTime = Math.floor(track.currentTime).toString(); 
-  //   var duration = Math.floor(track.duration).toString();
-
-  //   setInterval(function(){ alert(currTime); }, 1000);
-  // }
   function formatSecondsAsTime(secs, format) {
     var hr  = Math.floor(secs / 3600);
     var min = Math.floor((secs - (hr * 3600))/60);
@@ -187,12 +183,19 @@ var startTimer = function(duration, element){
   var exec_php = function () { //untuk update audio
     var xhttp = new XMLHttpRequest();
     var cur = document.getElementById('update_audio').value;
+    var dur = document.getElementById('durasi_audio').value;
 
-    xhttp.open("GET", '<?php echo base_url(); ?>'+"/mahasiswa/ujian/update_audio/" + cur + '/<?php echo $this->uri->segment('4'); ?>', true);
-    xhttp.send();
+    if(cur<dur){
+      console.log('test');
+      xhttp.open("GET", '<?php echo base_url(); ?>'+"/mahasiswa/ujian/update_audio/" + cur + '/<?php echo $this->uri->segment('4'); ?>', true);
+      xhttp.send();
+    }else{
+      console.log('test2');
+
+    }
   }
 
-  setInterval(exec_php, 6000);
+    setInterval(exec_php, 61000);
 
 </script>
 

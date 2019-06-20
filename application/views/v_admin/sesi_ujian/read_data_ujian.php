@@ -209,7 +209,7 @@ $this->load->view('v_admin/v_admin_header');
       });
 
       function printdataujian(){
-        $(".buttons-print")[0].click();
+        $(".buttons-print")[1].click();
       }
 
 
@@ -220,6 +220,9 @@ $this->load->view('v_admin/v_admin_header');
           buttons: [
           {
             extend: 'print',
+            exportOptions: {
+              columns: [ 0,1,2,3,4,5]
+            },
             footer: true,
             title: function(){
               var printTitle = 'Data Nilai';
@@ -246,7 +249,7 @@ $this->load->view('v_admin/v_admin_header');
       });
 
       function printdatanilai(){
-        $(".buttons-print")[1].click();
+        $(".buttons-print")[0].click();
       }
 
       $('#notifications').slideDown('slow').delay(5000).slideUp('slow');
