@@ -3,7 +3,17 @@
  ?>
   <link href="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">  
 
-            <a href="<?php echo base_url('admin/mahasiswa/create') ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+            <!-- <a href="<?php echo base_url('admin/mahasiswa/create') ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a> -->
+            <!-- <a href="<?php echo base_url('admin/mahasiswa/create') ?>" class="d-none d-sm-inline-block btn btn-sm bg-gray-900 text-gray-100 shadow-sm" ><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>  -->
+             <div class="dropdown mb-4">
+                    <button class="btn btn-sm bg-gray-900 text-gray-100 shadow-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data
+                    </button>
+                    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="<?php echo base_url('admin/mahasiswa/create') ?>"><i class="fas fa-plus fa-sm "></i> Tambah 1 Data</a>
+                      <a class="dropdown-item" href="<?php echo base_url('admin/mahasiswa/upload_excel') ?>"><i class="fas fa-upload fa-sm "></i> Upload Excel</a>
+                    </div>
+                  </div>
           </div> <!-- TUTUP HEADER -->
 
 <nav aria-label="breadcrumb"> <!-- buka breadcumb -->

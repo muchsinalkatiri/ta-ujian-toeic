@@ -85,7 +85,7 @@
 
 
           <!-- Nav Item - Pages USER -->
-          <?php if($page_title == 'Data Mahasiswa' || $page_title == 'Tambah Data Mahasiswa' || $page_title == 'Edit Data Mahasiswa' || $page_title == 'Data Mahasiswa Terdaftar' || $page_title == 'Tambah Data Mahasiswa Terdaftar' || $page_title == 'Edit Data Mahasiswa Terdaftar'){?>
+          <?php if($this->uri->segment('2') == 'mahasiswa' || $page_title == 'Data Mahasiswa' || $page_title == 'Tambah Data Mahasiswa' || $page_title == 'Edit Data Mahasiswa' || $page_title == 'Data Mahasiswa Terdaftar' || $page_title == 'Tambah Data Mahasiswa Terdaftar' || $page_title == 'Edit Data Mahasiswa Terdaftar'){?>
             <li class="nav-item active">
               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-users"></i>
@@ -93,7 +93,7 @@
               </a>
               <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                <?php if($page_title == 'Data Mahasiswa' || $page_title == 'Tambah Data Mahasiswa' || $page_title == 'Edit Data Mahasiswa'  ){?>
+                <?php if($this->uri->segment('2') == 'mahasiswa' || $page_title == 'Data Mahasiswa' || $page_title == 'Tambah Data Mahasiswa' || $page_title == 'Edit Data Mahasiswa'  ){?>
                   <a class="collapse-item active " href="<?php echo base_url('admin/mahasiswa') ?>">Data Mahasiswa</a>
                 <?php }elseif ($page_title != 'Data Mahasiswa' || $page_title != 'Tambah Data Mahasiswa' || $page_title != 'Edit Data Mahasiswa'){ ?>
                   <a class="collapse-item" href="<?php echo base_url('admin/mahasiswa') ?>">Data Mahasiswa</a>
@@ -106,7 +106,7 @@
                 </div>
               </div>
             </li>
-            <?php }elseif ($page_title != 'Data Mahasiswa' || $page_title != 'Tambah Data Mahasiswa' || $page_title != 'Edit Data Mahasiswa' || $page_title != 'Data Mahasiswa Terdaftar' || $page_title != 'Tambah Data Mahasiswa Terdaftar' || $page_title != 'Edit Data Mahasiswa Terdaftar'){ ?>
+            <?php }elseif ($this->uri->segment('2') != 'mahasiswa' || $page_title != 'Data Mahasiswa' || $page_title != 'Tambah Data Mahasiswa' || $page_title != 'Edit Data Mahasiswa' || $page_title != 'Data Mahasiswa Terdaftar' || $page_title != 'Tambah Data Mahasiswa Terdaftar' || $page_title != 'Edit Data Mahasiswa Terdaftar'){ ?>
               <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                   <i class="fas fa-fw fa-users"></i>
